@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { Cross1Icon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { cn } from "@/lib/utils";
 
@@ -20,7 +20,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       setInputValue('');
     }
 
-    const handleInput = (event) => {
+    const handleInput = (event : ChangeEvent<HTMLInputElement>) => {
       setInputValue(event.target.value);
     };
 
