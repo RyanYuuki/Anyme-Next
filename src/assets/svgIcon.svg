@@ -1,0 +1,17 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 100 100"
+  className="w-8 h-8"
+>
+  {/* Background Circle */}
+  <circle cx="50" cy="50" r="45" fill="black" />
+
+  {/* Star-like Letter "A" */}
+  <path
+    d="M 50 30 L 35 70 L 65 70 L 50 30 M 50 30 L 50 70 M 50 50 L 35 70"
+    stroke="white"
+    strokeWidth="3"
+    fill="none"
+    strokeLinecap="round"
+  />
+</svg>
