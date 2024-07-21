@@ -14,6 +14,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { Button } from "../ui/button";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
+import NavigationMenu from '../../components/NavigationItems';
 const Header = () => {
   const [isSearchBarToggled, setIsSearchBarToggled] = useState(false);
   return (
@@ -21,16 +22,7 @@ const Header = () => {
       <h1 className="text-2xl font-semibold">
         An<span className="text-4xl text-neutral-500">Y</span>meY
       </h1>
-      <div className="flex flex-row gap-8 px-5 max-md:hidden">
-        <h2 className="font-medium flex flex-row gap-2 hover:bg-white/30 items-center p-2 rounded-xl transition-all duration-500">
-          <FontAwesomeIcon icon={faFilm} />
-          Anime
-        </h2>
-        <h2 className="font-medium flex flex-row gap-2 items-center hover:bg-white/30 p-2 rounded-xl transition-all duration-500">
-          <FontAwesomeIcon icon={faBook} />
-          Manga
-        </h2>
-      </div>
+      <NavigationMenu />
       <Input className="w-2/5 bg-input rounded-lg max-md:hidden" />
       <div style={{ display: isSearchBarToggled ? 'flex' : 'none' }} className="absolute left-0 top-[100%] w-full flex items-center justify-center p-5 bg-primary-foreground">
         <Input className="bg-input w-full" />

@@ -13,10 +13,10 @@ export default function ReusableCarousel({ title, data = [] }) {
   }
 
   return (
-    <div className="">
-      <h2>{title}</h2>
+    <div className="flex flex-col p-10 gap-5">
+      <h2 className="text-3xl font-semibold border-l-8 border-l-neutral-800 px-5" >{title}</h2>
+      <div className="bg-neutral-700/30 rounded-lg box-shadow" >
       <Swiper
-        className="-z-50"
         breakpoints={{
           0: {
             slidesPerView: 1,
@@ -36,15 +36,15 @@ export default function ReusableCarousel({ title, data = [] }) {
           },
           768: {
             slidesPerView: 3,
-            spaceBetween: 30,
+            spaceBetween: 20,
           },
           992: {
             slidesPerView: 4,
-            spaceBetween: 30,
+            spaceBetween: 20,
           },
           1200: {
             slidesPerView: 5,
-            spaceBetween: 30,
+            spaceBetween: 20,
           },
         }}
         style={{ cursor: "grab" }}
@@ -52,9 +52,11 @@ export default function ReusableCarousel({ title, data = [] }) {
         {data.map((anime, index) => {
           const isManga = anime.type === 'MANGA';
           return (
-            <SwiperSlide key={index} className="">
+            <SwiperSlide key={index}>
+              <div className="flex flex-col p-8 text-center gap-3 aspect-[2/3]">
               <Link href={isManga ? `/manga/details/${anime.id}` : `/anime/${anime.id}`}>
                 <img
+                  className="rounded-lg"
                   src={anime.image || "/path/to/default-image.jpg"}
                   alt={
                     anime.title?.english ||
@@ -66,16 +68,18 @@ export default function ReusableCarousel({ title, data = [] }) {
                   onError={(e) => (e.target.src = "/path/to/default-image.jpg")} 
                 />
               </Link>
-              <h4>
+              <h4 className="font-semibold" >
                 {anime?.title?.english ||
                   anime?.title?.romaji ||
                   anime?.title?.userPreferred ||
                   "Unknown Title"}
               </h4>
+              </div>
             </SwiperSlide>
           );
         })}
       </Swiper>
+      </div>
     </div>
   );
 }

@@ -75,7 +75,7 @@ export default function BigCarousel({ data }) {
                   <FontAwesomeIcon icon={faPlay} /> Watch Now
                 </Button>
                 <Button
-                  className="flex flex-row gap-1 text-base px-[18px] py-[8px] max-md:px-[10px] max-md:py-[10px] bg-white/20 text-white rounded-3xl hover:bg-black hover:text-white transition-all duration-500 hover:scale-110 active:scale-75"
+                  className="flex flex-row gap-1 text-base px-[18px] py-[10px] max-md:px-[10px] max-md:py-[10px] bg-white/20 text-white rounded-3xl hover:bg-black hover:text-white transition-all duration-500 hover:scale-110 active:scale-75"
                 >
                   <FontAwesomeIcon icon={faInfoCircle} /> Detail
                 </Button>

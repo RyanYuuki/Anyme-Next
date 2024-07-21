@@ -75,4 +75,7 @@
   .custom-gradient {
     background: linear-gradient(40deg,#000000e6,#fff0);
   }
+  .box-shadow {
+    box-shadow: inset 0px 0px 1px rgb(255, 255, 255, 0.5);
+  }
 }
