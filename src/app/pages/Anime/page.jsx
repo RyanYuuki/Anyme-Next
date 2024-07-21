@@ -1,8 +1,9 @@
 'use client';
 import React, { useEffect, useState } from "react";
-import BigCarousel from "../../components/BigCarousel";
-import { FetchPopularAnime, FetchTrendingAnime } from '../../hooks/useApi.jsx';
-import ReusableCarousel from '../../components/ReusableCarousel';
+import BigCarousel from "../../../components/BigCarousel";
+import { FetchPopularAnime, FetchTrendingAnime } from '../../../hooks/useApi.jsx';
+import ReusableCarousel from '../../../components/ReusableCarousel';
+import ReusableStack from '../../../components/ReusableStack';
 const page = () => {
   const [data, setData] = useState(null);
   const [carouselData, setCarouselData] = useState(null);
@@ -19,14 +20,14 @@ const page = () => {
     loadData();
   }, []);
 
-  if (!data) return <div>Loading...</div>;
+  if (!data || !popularData) return <div>Loading...</div>;
 
   return (
     <div className="flex flex-col gap-5">
       <BigCarousel data={data} />
       <ReusableCarousel title={'Trending'} data={carouselData} />
       <ReusableCarousel title={'Popular'} data={popularData} />
-      
+      <ReusableStack data={popularData} />
     </div>
   );
 };

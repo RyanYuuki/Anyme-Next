@@ -27,9 +27,8 @@ const Header = () => {
       <div style={{ display: isSearchBarToggled ? 'flex' : 'none' }} className="absolute left-0 top-[100%] w-full flex items-center justify-center p-5 bg-primary-foreground">
         <Input className="bg-input w-full" />
       </div>
-
       <div className="flex flex-row gap-5 items-center max-md:gap-4">
-        <Button variant={"outline"} size={"icon"}>
+        <Button className="max-md:block hidden" variant={"outline"} size={"icon"}>
           <MagnifyingGlassIcon />
         </Button>
         <Button variant={"outline"} size={"icon"}>
