@@ -46,6 +46,10 @@ export default function ReusableCarousel({ title, data = [] }) {
             slidesPerView: 5,
             spaceBetween: 20,
           },
+          1300: {
+            slidesPerView: 6,
+            spaceBetween: 20,
+          },
         }}
         style={{ cursor: "grab" }}
       >
@@ -53,7 +57,7 @@ export default function ReusableCarousel({ title, data = [] }) {
           const isManga = anime.type === 'MANGA';
           return (
             <SwiperSlide key={index}>
-              <div className="flex flex-col p-8 text-center gap-3 aspect-[2/3]">
+              <div className="flex flex-col p-8 text-center gap-3 aspect-[2/3] xxl:h-[300px]">
               <Link href={isManga ? `/Manga/details/${anime.id}` : `/pages/Anime/details/${anime.id}`}>
                 <img
                   className="rounded-lg object-cover h-[300px]"

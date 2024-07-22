@@ -23,6 +23,7 @@ const config = {
         'md': '768px',
         'lg': '1024px',
         'xl': '1280px',
+        'xxl' : '1300px',
         'max-sm': {'max': '639px'},  
         'max-md': {'max': '767px'},  
         'max-lg': {'max': '1023px'},
