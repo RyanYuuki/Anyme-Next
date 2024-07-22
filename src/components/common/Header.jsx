@@ -18,12 +18,12 @@ import NavigationMenu from '../../components/NavigationItems';
 const Header = () => {
   const [isSearchBarToggled, setIsSearchBarToggled] = useState(false);
   return (
-    <header className="relative z-50 flex flex-row items-center justify-evenly gap-5 p-5 px-7 backdrop-blur-lg border-b border-b-border bg-black/15 max-md:gap-0 max-md:px-3 max-md:justify-between">
+    <header className="fixed w-full z-50 flex flex-row items-center justify-evenly gap-5 p-5 px-7 backdrop-blur-lg border-b border-b-border bg-black/15 max-md:gap-0 max-md:px-3 max-md:justify-between">
       <h1 className="text-2xl font-semibold">
         An<span className="text-4xl text-neutral-500">Y</span>meY
       </h1>
       <NavigationMenu />
-      <Input className="w-2/5 bg-input rounded-lg max-md:hidden" />
+      <Input className="w-2/5 bg-input/50 rounded-lg max-md:hidden" />
       <div style={{ display: isSearchBarToggled ? 'flex' : 'none' }} className="absolute left-0 top-[100%] w-full flex items-center justify-center p-5 bg-primary-foreground">
         <Input className="bg-input w-full" />
       </div>
@@ -31,7 +31,7 @@ const Header = () => {
         <Button className="max-md:block hidden" variant={"outline"} size={"icon"}>
           <MagnifyingGlassIcon />
         </Button>
-        <Button variant={"outline"} size={"icon"}>
+        <Button className="bg-primary-foreground/30 text-primary box-shadow hover:bg-white/10" size={"icon"}>
           <FontAwesomeIcon icon={faShuffle} />
         </Button>
         <ModeToggle />

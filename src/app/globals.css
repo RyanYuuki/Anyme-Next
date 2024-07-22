@@ -78,4 +78,13 @@
   .box-shadow {
     box-shadow: inset 0px 0px 1px rgb(255, 255, 255, 0.5);
   }
+  .hover {
+    transition: 0.5s ease;
+  }
+  .hover:hover {
+    transform: scale(1.1);
+  }
+  .hover:active {
+    transform: scale(0.8);
+  }
 }

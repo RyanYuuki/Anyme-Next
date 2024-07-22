@@ -39,7 +39,7 @@ export default function NavigationMenuDemo() {
     <NavigationMenu className="max-md:hidden">
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="flex flex-row gap-2 text-base">
+          <NavigationMenuTrigger className="flex flex-row gap-2 text-base bg-primary-foreground/30">
             {" "}
             <FontAwesomeIcon icon={faCirclePlay} />
             Anime
@@ -69,7 +69,7 @@ export default function NavigationMenuDemo() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="flex flex-row gap-2 text-base" > <FontAwesomeIcon icon={faBook} /> Manga</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="flex flex-row gap-2 text-base bg-primary-foreground/30" > <FontAwesomeIcon icon={faBook} /> Manga</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">

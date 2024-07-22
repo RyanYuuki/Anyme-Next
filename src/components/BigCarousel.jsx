@@ -16,6 +16,7 @@ import {
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Link from "next/link";
 
 export default function BigCarousel({ data }) {
   const disableCopy = {
@@ -25,7 +26,7 @@ export default function BigCarousel({ data }) {
     msUserSelect: "none",
   };
   return (
-    <Swiper className="w-[97.5%]">
+    <Swiper className="w-[97.5%] mt-[100px]">
       {data.map((data, index) => (
         <SwiperSlide>
           <div className="relative mt-3 text-white">
@@ -69,16 +70,20 @@ export default function BigCarousel({ data }) {
                   : data.description}
               </p>
               <div className="flex flex-row gap-5">
+                <Link href={`/pages/Anime/watch/${data.id}`} >
                 <Button
                   className="flex flex-row gap-1 px-[18px] py-[8px] max-md:py-[5px] max-md:px-[10px] rounded-3xl hover:bg-primary-foreground hover:text-accent-foreground transition-all duration-500 hover:scale-110 active:scale-75"
                 >
                   <FontAwesomeIcon icon={faPlay} /> Watch Now
                 </Button>
+                </Link>
+                <Link href={`/pages/Anime/details/${data.id}`}>
                 <Button
                   className="flex flex-row gap-1 text-base px-[18px] py-[10px] max-md:px-[10px] max-md:py-[10px] bg-white/20 text-white rounded-3xl hover:bg-black hover:text-white transition-all duration-500 hover:scale-110 active:scale-75"
                 >
                   <FontAwesomeIcon icon={faInfoCircle} /> Detail
                 </Button>
+                </Link>
               </div>
             </div>
           </div>
