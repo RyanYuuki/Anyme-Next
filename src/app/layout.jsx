@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
       <head />
       <body
         className={cn(
-          "min-h-screen bg-background antialiased"
+          "min-h-screen antialiased"
         )}
       >
         <ThemeProvider
@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
           disableTransitionOnChange
         >
           <Header/>
-          {children}
+          <div className=" translate-y-[90px]" >{children}</div>
           <Footer/>
         </ThemeProvider>
       </body>

@@ -30,14 +30,14 @@ const ReusableStack = ({ data }) => {
         return (
           <div
             key={index}
-            className="flex flex-col bg-primary-foreground/30 box-shadow p-5 w-[24%] gap-5 rounded-xl"
+            className="flex flex-col bg-neutral-700/20 box-shadow p-5 w-[24%] gap-5 rounded-xl"
           >
             <h1 className="text-2xl">{title}</h1>
             {currentData &&
               currentData.map((dataItem, index) => (
                 <div
                   key={index}
-                  className="flex flex-row gap-3 bg-primary-foreground/80 rounded-lg p-3 box-shadow"
+                  className="flex flex-row gap-3 bg-neutral-600/20 rounded-lg p-3 box-shadow"
                 >
                   <img
                     className="xl:h-[100px] rounded-lg"

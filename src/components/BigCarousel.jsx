@@ -26,7 +26,7 @@ export default function BigCarousel({ data }) {
     msUserSelect: "none",
   };
   return (
-    <Swiper className="w-[97.5%] mt-[100px]">
+    <Swiper className="w-[97.5%]">
       {data.map((data, index) => (
         <SwiperSlide>
           <div className="relative mt-3 text-white">

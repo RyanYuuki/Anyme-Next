@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="flex flex-row bg-primary-foreground/60 justify-between relative w-[100%] px-[10%] py-10 border-t-2 border-b-border">
+    <div className="flex flex-row bg-primary-foreground/60 justify-between mt-[100px] relative w-[100%] px-[10%] py-10 border-t-2 border-b-border">
       <div className="flex flex-col gap-3">
         <h1 className="font-semibold text-4xl">
           An<span>Y</span>meY
