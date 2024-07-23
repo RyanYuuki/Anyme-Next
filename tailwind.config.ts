@@ -10,6 +10,7 @@ const config = {
     './src/components/*.{js,jsx,ts,tsx}',
     './src/components/ui/*.{js,jsx,ts,tsx}',
     './src/components/common/*.{js,jsx,ts,tsx}',
+    './src/components/Anime/*.{js,jsx,ts,tsx}',
 	],
   prefix: "",
   theme: {
@@ -23,7 +24,7 @@ const config = {
         'md': '768px',
         'lg': '1024px',
         'xl': '1930px',
-        'min-2xl' : { min: '1930px'},
+        'min-2xl' : { 'min': '1930px'},
         'max-sm': {'max': '639px'},  
         'max-md': {'max': '767px'},  
         'max-lg': {'max': '1023px'},

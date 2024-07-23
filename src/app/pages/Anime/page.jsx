@@ -33,7 +33,7 @@ const page = () => {
   if (!data || !popularData) return <div>Loading...</div>;
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col px-10 gap-5">
       <BigCarousel data={data} />
       <ReusableCarousel title={"Trending"} data={carouselData} />
       <ReusableCarousel title={"Popular"} data={popularData} />

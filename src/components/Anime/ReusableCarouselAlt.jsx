@@ -2,9 +2,8 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Link from 'next/link';
-import { cn } from "@/lib/utils";
 
-export default function ReusableCarousel({ title, data = [], className }) {
+export default function ReusableCarouselAlt({ title, data = [] }) {
   if (!Array.isArray(data) || data.length === 0) {
     return (
       <div className="carousel-error">
@@ -14,9 +13,9 @@ export default function ReusableCarousel({ title, data = [], className }) {
   }
 
   return (
-    <div className={cn("flex flex-col gap-5", className)}>
-      <h2 className="text-3xl font-semibold border-l-8 border-l-neutral-800 px-5" >{title}</h2>
+    <div className="flex flex-col gap-5">
       <div className="bg-neutral-700/30 rounded-lg box-shadow" >
+      <h2 className="text-3xl font-semibold border-l-8 border-l-neutral-800 px-5" >{title}</h2>
       <Swiper
         breakpoints={{
           0: {

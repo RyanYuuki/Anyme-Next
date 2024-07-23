@@ -1,5 +1,6 @@
 import { faClosedCaptioning, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 import { title } from "process";
 import React from "react";
 
@@ -24,7 +25,7 @@ const ReusableStack = ({ data }) => {
   ];
 
   return (
-    <div className="flex flex-row justify-evenly pb-5">
+    <div className="flex flex-row justify-between pb-5">
       {MetaData.map(({ title, index }) => {
         const currentData = data[index];
         return (
@@ -39,11 +40,13 @@ const ReusableStack = ({ data }) => {
                   key={index}
                   className="flex flex-row gap-3 bg-neutral-600/20 rounded-lg p-3 box-shadow"
                 >
+                  <Link href={`/pages/Anime/details/${dataItem.id}`} >
                   <img
-                    className="xl:h-[100px] rounded-lg"
+                    className="xl:h-[100px] h-[100px] w-[90px] rounded-lg"
                     src={dataItem.image}
                     alt={dataItem.title.english || dataItem.title.romaji}
                   />
+                  </Link>
                   <div className="flex flex-col justify-center gap-2 w-full">
                     <h2>{dataItem.title.english || dataItem.title.romaji}</h2>
                     <div className="flex flex-row gap-[2px] w-full items-center text-[12px]">
