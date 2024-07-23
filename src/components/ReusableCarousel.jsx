@@ -46,11 +46,7 @@ export default function ReusableCarousel({ title, data = [], className }) {
           1200: {
             slidesPerView: 5,
             spaceBetween: 20,
-          },
-          1300: {
-            slidesPerView: 6,
-            spaceBetween: 20,
-          },
+          }
         }}
         style={{ cursor: "grab" }}
       >
@@ -61,7 +57,7 @@ export default function ReusableCarousel({ title, data = [], className }) {
               <div className="flex flex-col p-8 text-center gap-3 aspect-[2/3] hover">
               <Link href={isManga ? `/Manga/details/${anime.id}` : `/pages/Anime/details/${anime.id}`}>
                 <img
-                  className="rounded-lg object-cover h-[290px] 2xl:h-[300px] w-fit"
+                  className="rounded-2xl object-cover h-[290px] 2xl:h-[300px] w-fit"
                   src={anime.image || "/path/to/default-image.jpg"}
                   alt={
                     anime.title?.english ||

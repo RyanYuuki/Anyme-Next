@@ -3,7 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -61,7 +60,6 @@
   }
 }
 
-
 @layer base {
   * {
     @apply border-border;
@@ -76,7 +74,7 @@
     font-weight: 600;
   }
   .custom-gradient {
-    background: linear-gradient(40deg,#000000e6,#fff0);
+    background: linear-gradient(40deg, #000000e6, #fff0);
   }
   .box-shadow {
     box-shadow: inset 0px 0px 1px rgb(255, 255, 255, 0.5);
@@ -89,5 +87,29 @@
   }
   .hover:active {
     transform: scale(0.8);
+  }
+
+  .vds-player {
+    border-radius: 15px;
+  }
+
+  .media-player[data-view-type="video"] {
+    aspect-ratio: 16 / 9;
+  }
+
+  .vds-video-layout {
+    --video-brand: hsl(0, 0%, 96%);
+    /* Layout: https://vidstack.io/docs/player/components/layouts/default-layout#video-layout  */
+    /* Components: https://www.vidstack.io/docs/player/components/layouts/default-layout#components */
+  }
+
+  .vds-audio-layout {
+    --audio-brand: hsl(0, 0%, 96%);
+    /* Layout: https://vidstack.io/docs/player/components/layouts/default-layout#audio-layout */
+    /* Components: https://www.vidstack.io/docs/player/components/layouts/default-layout#components */
+  }
+
+  .custom-scrollbar {
+    scrollbar-width: none;
   }
 }

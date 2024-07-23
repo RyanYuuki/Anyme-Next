@@ -2,8 +2,9 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Link from 'next/link';
+import { cn } from "@/lib/utils";
 
-export default function ReusableCarouselAlt({ title, data = [] }) {
+export default function ReusableCarouselAlt({ title, data = [], className }) {
   if (!Array.isArray(data) || data.length === 0) {
     return (
       <div className="carousel-error">
@@ -13,9 +14,9 @@ export default function ReusableCarouselAlt({ title, data = [] }) {
   }
 
   return (
-    <div className="flex flex-col gap-5">
-      <div className="bg-neutral-700/30 rounded-lg box-shadow" >
+    <div className={cn("flex flex-col gap-5", className)}>
       <h2 className="text-3xl font-semibold border-l-8 border-l-neutral-800 px-5" >{title}</h2>
+      <div className="bg-neutral-700/30 rounded-lg box-shadow" >
       <Swiper
         breakpoints={{
           0: {
@@ -44,12 +45,8 @@ export default function ReusableCarouselAlt({ title, data = [] }) {
           },
           1200: {
             slidesPerView: 5,
-            spaceBetween: 20,
-          },
-          1300: {
-            slidesPerView: 6,
-            spaceBetween: 20,
-          },
+            spaceBetween: 10,
+          }
         }}
         style={{ cursor: "grab" }}
       >
@@ -57,10 +54,10 @@ export default function ReusableCarouselAlt({ title, data = [] }) {
           const isManga = anime.type === 'MANGA';
           return (
             <SwiperSlide key={index}>
-              <div className="flex flex-col p-8 text-center gap-3 aspect-[2/3] hover">
+              <div className="flex flex-col p-5 text-center gap-3 hover pt-10">
               <Link href={isManga ? `/Manga/details/${anime.id}` : `/pages/Anime/details/${anime.id}`}>
                 <img
-                  className="rounded-lg object-cover h-[290px] 2xl:h-[300px] w-fit"
+                  className="rounded-2xl object-cover h-[290px] 2xl:h-[300px] w-[230px]"
                   src={anime.image || "/path/to/default-image.jpg"}
                   alt={
                     anime.title?.english ||

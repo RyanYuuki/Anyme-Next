@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import BasicDetails from '@/components/Anime/BasicDetails';
 import CharactersData from '@/components/Anime/CharacterData';
-import ReusableCarousel from "@/components/ReusableCarousel";
+import ReusableCarouselAlt from "@/components/Anime/ReusableCarouselAlt";
 const AnimeDetailsPage = () => {
   const { id } = useParams();
   const [data, setData] = useState(null);
@@ -14,7 +14,7 @@ const AnimeDetailsPage = () => {
       setData(Data);
     };
     loadData();
-  }, []);
+  }, [id]);
 
   if (!data) return <h1>Loading...</h1>;
 
@@ -26,8 +26,8 @@ const AnimeDetailsPage = () => {
       />
       <BasicDetails data={data} />
       <CharactersData data={data.characters} />
-      <ReusableCarousel className={'mt-5'} title={'Related'} data={data.relations} />
-      <ReusableCarousel className={'mt-5'} title={'Recommendations'} data={data.recommendations} />
+      <ReusableCarouselAlt className={'mt-5'} title={'Related'} data={data.relations} />
+      <ReusableCarouselAlt className={'mt-5'} title={'Recommendations'} data={data.recommendations} />
     </div>
   );
 };
