@@ -6,10 +6,11 @@ import { cn } from "@/lib/utils";
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
+  handleCross? : () => void;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, placeholder, ...props }, ref) => {
+  ({ className, type, placeholder, handleCross, ...props }, ref) => {
     const [isSearchBarToggled, setIsSearchBarToggled] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const handleSearch = () => {
@@ -19,6 +20,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const handleExit = () => {
       setIsSearchBarToggled(false);
       setInputValue('');
+      handleCross?.();
     }
 
     const handleInput = (event : ChangeEvent<HTMLInputElement>) => {
