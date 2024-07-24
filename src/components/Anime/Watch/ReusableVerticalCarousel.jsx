@@ -11,7 +11,7 @@ const VerticalReusableCarousel = ({ data, title }) => {
     <div className="flex flex-col p-3 gap-4 w-full h-[49%] bg-neutral-700/30 overflow-scroll custom-scrollbar box-shadow rounded-md">
       <h1 className="text-2xl">{title}</h1>
       {data.map((anime) => (
-        <div className="flex flex-row gap-5 p-3 bg-input rounded-md">
+        <div className="flex flex-row gap-5 p-3 bg-accent hover:bg-indigo-400 transition-full rounded-md">
           <img
             className="w-[75px] h-[100px] object-cover rounded-lg"
             src={anime.image}

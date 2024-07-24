@@ -29,7 +29,7 @@ const EpisodeList = ({ episodesData, currentEpisode, icons, handleClick }) => {
   return (
     <div className="flex flex-col gap-5 w-[26%] overflow-y-scroll scroll-smooth custom-scrollbar h-full p-5 bg-neutral-700/30 rounded-md">
       <div className="flex flex-row items-center gap-3 w-full">
-        <select className="h-[40px] rounded-md px-2 text-[12px] bg-input">
+        <select className="h-[40px] rounded-md px-2 text-[12px] bg-accent">
           <option
             value={`${episodesData[0]?.number || 1} - ${episodesData?.length}`}
           >
@@ -40,7 +40,7 @@ const EpisodeList = ({ episodesData, currentEpisode, icons, handleClick }) => {
         <Input
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="rounded-lg bg-input w-full"
+          className="rounded-lg bg-accent w-full"
           placeholder={"Filter Episodes"}
         />
         <Button onClick={handleListChange} variant={"secondary"} size={"icon"}>
@@ -56,7 +56,7 @@ const EpisodeList = ({ episodesData, currentEpisode, icons, handleClick }) => {
           filteredData.map((data) => (
             <button
               key={data.id}
-              className={`group flex flex-row w-full h-[100px] bg-input rounded-md box-shadow transition-full hover:bg-indigo-400/70 ${
+              className={`group flex flex-row w-full h-[100px] bg-accent rounded-md box-shadow transition-full hover:bg-indigo-400/70 ${
                 currentEpisode == data.number ? "bg-[#818cf8] text-white" : ""
               }`}
               onClick={() => handleClick(data.number)}
@@ -76,7 +76,7 @@ const EpisodeList = ({ episodesData, currentEpisode, icons, handleClick }) => {
           filteredData.map((data) => (
             <button
               key={data.id}
-              className={`group flex flex-row px-5 items-center gap-3 w-full h-[50px] bg-input rounded-md transition-full hover:bg-indigo-400/70 ${
+              className={`group flex flex-row px-5 items-center gap-3 w-full h-[50px] bg-accent rounded-md transition-full hover:bg-indigo-400/70 ${
                 currentEpisode === data.number ? "bg-[#818cf8] text-white" : ""
               }`}
               onClick={() => handleClick(data.number)}
@@ -95,7 +95,7 @@ const EpisodeList = ({ episodesData, currentEpisode, icons, handleClick }) => {
           filteredData.map((data) => (
             <button
               key={data.id}
-              className={`group w-[18%] h-[40px] text-center bg-input rounded-md transition-full hover:bg-indigo-400/70 ${
+              className={`group w-[18%] h-[40px] text-center bg-accent rounded-md transition-full hover:bg-indigo-400/70 ${
                 currentEpisode === data.number ? "bg-[#818cf8]" : ""
               }`}
               onClick={() => handleClick(data.number)}

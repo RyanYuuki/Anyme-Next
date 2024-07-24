@@ -41,7 +41,7 @@ const ReusableStack = ({ data }) => {
                 return (
                   <div
                     key={index}
-                    className="flex flex-row gap-3 bg-neutral-600/20 rounded-lg p-3 box-shadow"
+                    className="flex flex-row gap-3 bg-neutral-600/20 hover:bg-indigo-400 transition-full rounded-lg p-3 box-shadow"
                   >
                     <Link href={`/pages/Anime/details/${dataItem.id}`}>
                       <img

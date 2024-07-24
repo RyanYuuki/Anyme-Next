@@ -27,18 +27,18 @@ const BasicDetails = ({ data, page = 'Details', className }) => {
           alt={data.id}
         />
         <Link href={`/pages/Anime/watch/${data.id}`}>
-        <button className="p-3 w-full bg-accent rounded-md font-semibold">
+        <button className="p-3 w-full bg-accent rounded-md font-semibold hover:bg-indigo-400 transition-full">
           { page == 'Details' ? 'WATCH NOW' : 'INFO' }
         </button>
         </Link>
-        <button className="p-3 bg-accent rounded-md font-semibold">
+        <button className="p-3 bg-accent rounded-md font-semibold hover:bg-indigo-400 transition-full">
           TRAILER
         </button>
         <div className="flex flex-row justify-between">
-          <button className="p-3 w-[45%] bg-accent/80 rounded-md font-semibold">
+          <button className="p-3 w-[45%] bg-accent/80 rounded-md font-semibold hover:bg-indigo-400 transition-full">
             A
           </button>
-          <button className="p-3 w-[45%] bg-accent/80 rounded-md font-semibold">
+          <button className="p-3 w-[45%] bg-accent/80 rounded-md font-semibold hover:bg-indigo-400 transition-full">
             MAL
           </button>
         </div>
