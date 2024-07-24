@@ -14,6 +14,8 @@ import {
 import VideoPlayer from "@/components/Anime/Watch/VideoPlayer";
 import EpisodeList from "@/components/Anime/Watch/EpisodeList";
 import BasicDetails from "@/components/Anime/BasicDetails";
+import AnimeRelation from "@/components/Anime/Watch/AnimeRelations";
+import ReusableVerticalCarousel from "@/components/Anime/Watch/ReusableVerticalCarousel";
 
 const StreamingPage = () => {
   const { id } = useParams();
@@ -66,7 +68,7 @@ const StreamingPage = () => {
   if (isLoading || !episodesData) return <div>Loading...</div>;
 
   return (
-    <div className="flex flex-col px-5">
+    <div className="flex flex-col px-5 gap-3">
       <div className="flex flex-row justify-between h-[600px]">
         <VideoPlayer
           episodeLoading={episodeLoading}
@@ -81,13 +83,20 @@ const StreamingPage = () => {
           handleClick={handleClick}
         />
       </div>
-      <div>
-        {animeData ? (
-          <BasicDetails className={'w-60%'} data={animeData} page="Streaming" />
-        ) : (
-          "Loading..."
-        )}
-      </div>
+      {animeData ? (
+        <div className="flex flex-row w-full justify-between h-[920px]">
+          <div className="flex flex-col w-[72%] justify-between">
+            <BasicDetails data={animeData} page="Streaming"/>
+            <AnimeRelation relations={animeData.relations}/>
+          </div>
+          <div className="flex flex-col w-[26%] h-full justify-between">
+            <ReusableVerticalCarousel data={animeData.relations} title={'Related'} />
+            <ReusableVerticalCarousel data={animeData.recommendations} title={'Recommendations'} />
+          </div>
+        </div>
+      ) : (
+        "Loading..."
+      )}
     </div>
   );
 };
