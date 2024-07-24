@@ -8,10 +8,10 @@ import React from "react";
 
 const VerticalReusableCarousel = ({ data, title }) => {
   return (
-    <div className="flex flex-col p-3 gap-4 w-full h-[49%] bg-accent/30 overflow-scroll custom-scrollbar box-shadow rounded-md">
+    <div className="flex flex-col p-3 gap-4 w-full h-[49%] bg-neutral-700/30 overflow-scroll custom-scrollbar box-shadow rounded-md">
       <h1 className="text-2xl">{title}</h1>
       {data.map((anime) => (
-        <div className="flex flex-row gap-5 p-3 bg-accent/60 rounded-md">
+        <div className="flex flex-row gap-5 p-3 bg-input rounded-md">
           <img
             className="w-[75px] h-[100px] object-cover rounded-lg"
             src={anime.image}
@@ -20,13 +20,13 @@ const VerticalReusableCarousel = ({ data, title }) => {
           <div className="flex flex-col justify-center gap-3 w-full">
             <h1>{anime.title.english || anime.title.romaji}</h1>
             <div className="flex flex-row gap-5">
-              <p className="flex flex-row items-center gap-2 p-2 bg-accent rounded-md ">
+              <p className="flex flex-row items-center gap-2 p-2 bg-neutral-700/30 rounded-md ">
                 <FontAwesomeIcon
                   icon={anime.type == "MANGA" ? faBook : faPlayCircle}
                 />{" "}
                 {anime.type}
               </p>
-              <p className="flex flex-row items-center gap-2 p-2 bg-accent rounded-md ">
+              <p className="flex flex-row items-center gap-2 p-2 bg-neutral-700/30 rounded-md ">
                 {title == "Related" ? null : <FontAwesomeIcon icon={faStar} />}{" "}
                 {title == "Related" ? anime.relationType : anime.rating}
               </p>

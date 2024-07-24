@@ -27,7 +27,7 @@ const EpisodeList = ({ episodesData, currentEpisode, icons, handleClick }) => {
   });
 
   return (
-    <div className="flex flex-col gap-5 w-[26%] overflow-y-scroll scroll-smooth custom-scrollbar h-full p-5 bg-neutral-800/30 rounded-md">
+    <div className="flex flex-col gap-5 w-[26%] overflow-y-scroll scroll-smooth custom-scrollbar h-full p-5 bg-neutral-700/30 rounded-md">
       <div className="flex flex-row items-center gap-3 w-full">
         <select className="h-[40px] rounded-md px-2 text-[12px] bg-input">
           <option
@@ -56,8 +56,8 @@ const EpisodeList = ({ episodesData, currentEpisode, icons, handleClick }) => {
           filteredData.map((data) => (
             <button
               key={data.id}
-              className={`group flex flex-row w-full h-[100px] bg-neutral-500/20 rounded-md box-shadow transition-full hover:bg-indigo-400/70 ${
-                currentEpisode == data.number ? "bg-[#818cf8]" : ""
+              className={`group flex flex-row w-full h-[100px] bg-input rounded-md box-shadow transition-full hover:bg-indigo-400/70 ${
+                currentEpisode == data.number ? "bg-[#818cf8] text-white" : ""
               }`}
               onClick={() => handleClick(data.number)}
             >
@@ -66,9 +66,9 @@ const EpisodeList = ({ episodesData, currentEpisode, icons, handleClick }) => {
                 src={data.image}
                 alt={data.number}
               />
-              <div className="flex flex-col w-[60%] text-white/65 justify-center text-left pl-3 gap-1">
-                <h1 className="group-hover:text-white">Episode {data?.number}</h1>
-                <p className="italic text-white/60 group-hover:text-white">{data?.title}</p>
+              <div className="flex flex-col w-[60%] justify-center text-left pl-3 gap-1">
+                <h1 className="group-hover:text-white transition-full">Episode {data?.number}</h1>
+                <p className="italic group-hover:text-white transition-full">{data?.title}</p>
               </div>
             </button>
           ))}
@@ -76,31 +76,31 @@ const EpisodeList = ({ episodesData, currentEpisode, icons, handleClick }) => {
           filteredData.map((data) => (
             <button
               key={data.id}
-              className={`group flex flex-row px-5 text-white/65 items-center gap-3 w-full h-[50px] bg-neutral-500/20 rounded-md transition-full hover:bg-indigo-400/70 ${
-                currentEpisode === data.number ? "bg-[#818cf8]" : ""
+              className={`group flex flex-row px-5 items-center gap-3 w-full h-[50px] bg-input rounded-md transition-full hover:bg-indigo-400/70 ${
+                currentEpisode === data.number ? "bg-[#818cf8] text-white" : ""
               }`}
               onClick={() => handleClick(data.number)}
             >
-              <h1 className="group-hover:text-white">
+              <h1 className="group-hover:text-white transition-full">
                 {currentEpisode === data.number ? (
                   <FontAwesomeIcon icon={faPlay} />
                 ) : (
                   data.number + "."
                 )}
               </h1>
-              <p className="group-hover:text-white">{data.title || "??"}</p>
+              <p className="group-hover:text-white transition-full">{data.title || "??"}</p>
             </button>
           ))}
         {currentListType === 2 &&
           filteredData.map((data) => (
             <button
               key={data.id}
-              className={`group w-[18%] h-[40px] text-center text-white/65 bg-neutral-500/20 rounded-md transition-full hover:bg-indigo-400/70 ${
+              className={`group w-[18%] h-[40px] text-center bg-input rounded-md transition-full hover:bg-indigo-400/70 ${
                 currentEpisode === data.number ? "bg-[#818cf8]" : ""
               }`}
               onClick={() => handleClick(data.number)}
             >
-              <span className="group-hover:text-white">
+              <span className="group-hover:text-white transition-full">
                 {currentEpisode === data.number ? (
                   <FontAwesomeIcon icon={faPlay} />
                 ) : (

@@ -13,7 +13,7 @@ import {
 function Selector({ onClick }) {
   return (
     <Select onValueChange={onClick} >
-      <SelectTrigger className="w-[180px] bg-neutral-700/70">
+      <SelectTrigger className="w-[180px] bg-neutral-700/30 text-primary">
         <SelectValue placeholder="Japanese" />
       </SelectTrigger>
       <SelectContent>

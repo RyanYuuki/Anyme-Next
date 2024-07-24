@@ -7,7 +7,7 @@ const AnimeRelations = ({ relations }) => {
   );
 
   return (
-    <div className="flex flex-col w-full p-5 bg-accent/45 box-shadow rounded-md">
+    <div className="flex flex-col w-full p-5 bg-neutral-700/30 box-shadow rounded-md">
       <h1 className="text-3xl font-bold">Seasons</h1>
       <div className="flex flex-row items-center h-[400px] justify-evenly w-full">
         {filteredRelations.map((data) => (
@@ -22,8 +22,8 @@ const AnimeRelations = ({ relations }) => {
             />
             <Link href={`/pages/Anime/watch/${data.id}`} className="absolute w-full h-full custom-gradient rounded-lg group-hover:opacity-0 transition-full" />
             <div className="absolute px-5 p-2">
-              <p className="font-semibold">{data.relationType}</p>
-              <h1 className="font-bold">{data.title.english || data.title.romaji}</h1>
+              <p className="font-semibold text-white">{data.relationType}</p>
+              <h1 className="font-bold text-white">{data.title.english || data.title.romaji}</h1>
             </div>
           </div>
         ))}
