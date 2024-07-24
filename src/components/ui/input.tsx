@@ -4,11 +4,12 @@ import React, { ChangeEvent, useState } from "react";
 import { Cross1Icon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { cn } from "@/lib/utils";
 
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  placeholder?: string;
+}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, ...props }, ref) => {
+  ({ className, type, placeholder, ...props }, ref) => {
     const [isSearchBarToggled, setIsSearchBarToggled] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const handleSearch = () => {
@@ -41,7 +42,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           )}
           ref={ref}
           {...props}
-          placeholder="Search Anime..."
+          placeholder={placeholder}
         />
         <MagnifyingGlassIcon
           className={cn(

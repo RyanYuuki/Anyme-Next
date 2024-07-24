@@ -1,17 +1,24 @@
 "use client";
-import { FetchEpisodesData, FetchStreamingData } from "@/hooks/useApi";
+import {
+  FetchAnimeByID,
+  FetchEpisodesData,
+  FetchStreamingData,
+} from "@/hooks/useApi";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import "@vidstack/react/player/styles/default/theme.css";
-import "@vidstack/react/player/styles/default/layouts/video.css";
-import { MediaPlayer, MediaProvider } from "@vidstack/react";
 import {
-  defaultLayoutIcons,
-  DefaultVideoLayout,
-} from "@vidstack/react/player/layouts/default";
+  faBars,
+  faImage,
+  faTableCells,
+} from "@fortawesome/free-solid-svg-icons";
+import VideoPlayer from "@/components/Anime/Watch/VideoPlayer";
+import EpisodeList from "@/components/Anime/Watch/EpisodeList";
+import BasicDetails from "@/components/Anime/BasicDetails";
 
 const StreamingPage = () => {
   const { id } = useParams();
+  const [animeData, setAnimeData] = useState(null);
+  const icons = [faBars, faTableCells, faImage];
   const [episodesData, setEpisodesData] = useState(null);
   const [currentEpisode, setCurrentEpisode] = useState(1);
   const [episodeSrc, setEpisodeSrc] = useState(null);
@@ -24,6 +31,8 @@ const StreamingPage = () => {
       const data = await FetchEpisodesData(id);
       setEpisodesData(data);
       setIsLoading(false);
+      const MetaData = await FetchAnimeByID(id);
+      setAnimeData(MetaData);
     };
     loadData();
   }, [id]);
@@ -59,40 +68,25 @@ const StreamingPage = () => {
   return (
     <div className="flex flex-col px-5">
       <div className="flex flex-row justify-between h-[600px]">
-        <div className="h-full w-[72%] rounded-3xl">
-          {episodeLoading ? (
-            <div>Loading video...</div>
-          ) : (
-            <MediaPlayer
-              className="vds-player"
-              title={
-                episodesData[currentEpisode - 1].title ||
-                `Episode ${currentEpisode}`
-              }
-              src={episodeSrc || ""}
-              crossOrigin
-            >
-              <MediaProvider />
-              <DefaultVideoLayout icons={defaultLayoutIcons} />
-            </MediaPlayer>
-          )}
-        </div>
-        <div className="flex flex-col gap-2 w-[28%] overflow-y-scroll scroll-smooth custom-scrollbar h-full">
-          {episodesData.map((data) => (
-            <div key={data.id}>
-              <button
-                className={`w-full h-[100px] text-center text-white bg-neutral-500/20 rounded-lg ${
-                  currentEpisode === data.number
-                    ? "border-2 border-neutral-600"
-                    : ""
-                }`}
-                onClick={() => handleClick(data.number)}
-              >
-                {data.number}
-              </button>
-            </div>
-          ))}
-        </div>
+        <VideoPlayer
+          episodeLoading={episodeLoading}
+          episodeSrc={episodeSrc}
+          episodesData={episodesData}
+          currentEpisode={currentEpisode}
+        />
+        <EpisodeList
+          episodesData={episodesData}
+          currentEpisode={currentEpisode}
+          icons={icons}
+          handleClick={handleClick}
+        />
+      </div>
+      <div>
+        {animeData ? (
+          <BasicDetails className={'w-60%'} data={animeData} page="Streaming" />
+        ) : (
+          "Loading..."
+        )}
       </div>
     </div>
   );

@@ -1,7 +1,8 @@
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
 
-const BasicDetails = ({ data }) => {
+const BasicDetails = ({ data, page = 'Details', className }) => {
   const Months = [
     "January",
     "February",
@@ -18,7 +19,7 @@ const BasicDetails = ({ data }) => {
   ];
 
   return (
-    <div className="flex flex-row w-full gap-5 p-3 bg-accent/45 box-shadow rounded-sm">
+    <div className={cn("flex flex-row w-full gap-5 p-3 bg-accent/45 box-shadow rounded-sm", className)}>
       <div className="flex flex-col gap-2 w-[180px] text-[13px]">
         <img
           className="object-cover rounded-md"
@@ -27,7 +28,7 @@ const BasicDetails = ({ data }) => {
         />
         <Link href={`/pages/Anime/watch/${data.id}`}>
         <button className="p-3 w-full bg-accent rounded-md font-semibold">
-          WATCH NOW
+          { page == 'Details' ? 'WATCH NOW' : 'INFO' }
         </button>
         </Link>
         <button className="p-3 bg-accent rounded-md font-semibold">

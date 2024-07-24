@@ -54,10 +54,10 @@ export default function ReusableCarousel({ title, data = [], className }) {
           const isManga = anime.type === 'MANGA';
           return (
             <SwiperSlide key={index}>
-              <div className="flex flex-col p-8 text-center gap-3 aspect-[2/3] hover">
+              <div className="flex flex-col justify-center p-8 items-center gap-3 aspect-[2/3] hover">
               <Link href={isManga ? `/Manga/details/${anime.id}` : `/pages/Anime/details/${anime.id}`}>
                 <img
-                  className="rounded-2xl object-cover h-[290px] 2xl:h-[300px] w-fit"
+                  className="rounded-2xl object-cover h-[290px] 2xl:h-[300px] w-[230px]"
                   src={anime.image || "/path/to/default-image.jpg"}
                   alt={
                     anime.title?.english ||

@@ -1,10 +1,4 @@
-import { Card, CardContent } from "@/components/ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
-import "swiper/css";
+ import "swiper/css";
 import { Button } from "./ui/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "@fortawesome/fontawesome-svg-core/styles.css";
@@ -28,7 +22,7 @@ export default function BigCarousel({ data }) {
   return (
     <div className="w-[100%] rounded-[5px] overflow-hidden">
       <Swiper>
-        {data.map((data, index) => (
+        {data.map((data   ) => (
           <SwiperSlide>
             <div className="text-white rounded-[5px]">
               <img

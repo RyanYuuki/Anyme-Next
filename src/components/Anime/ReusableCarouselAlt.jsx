@@ -54,7 +54,7 @@ export default function ReusableCarouselAlt({ title, data = [], className }) {
           const isManga = anime.type === 'MANGA';
           return (
             <SwiperSlide key={index}>
-              <div className="flex flex-col p-5 text-center gap-3 hover pt-10">
+              <div className="flex flex-col items-center justify-center p-5 gap-3 hover pt-10">
               <Link href={isManga ? `/Manga/details/${anime.id}` : `/pages/Anime/details/${anime.id}`}>
                 <img
                   className="rounded-2xl object-cover h-[290px] 2xl:h-[300px] w-[230px]"

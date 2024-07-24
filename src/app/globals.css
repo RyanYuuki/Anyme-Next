@@ -93,8 +93,10 @@
     border-radius: 15px;
   }
 
-  .media-player[data-view-type="video"] {
-    aspect-ratio: 16 / 9;
+  .vds-player[data-view-type="video"] {
+    height: 100%;
+    width: 100%;
+    border-radius: 12px;
   }
 
   .vds-video-layout {
@@ -111,5 +113,8 @@
 
   .custom-scrollbar {
     scrollbar-width: none;
+  }
+  .transition-full {
+    transition: all 0.5s ease-in-out;
   }
 }
