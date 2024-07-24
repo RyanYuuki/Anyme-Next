@@ -20,13 +20,13 @@ const VerticalReusableCarousel = ({ data, title }) => {
           <div className="flex flex-col justify-center gap-3 w-full">
             <h1>{anime.title.english || anime.title.romaji}</h1>
             <div className="flex flex-row gap-5">
-              <p className="flex flex-row items-center gap-2 p-2 bg-neutral-700/30 rounded-md ">
+              <p className="flex flex-row items-center gap-2 p-2 bg-indigo-400 rounded-lg text-white">
                 <FontAwesomeIcon
                   icon={anime.type == "MANGA" ? faBook : faPlayCircle}
                 />{" "}
                 {anime.type}
               </p>
-              <p className="flex flex-row items-center gap-2 p-2 bg-neutral-700/30 rounded-md ">
+              <p className="flex flex-row items-center gap-2 p-2 bg-indigo-400 rounded-lg text-white">
                 {title == "Related" ? null : <FontAwesomeIcon icon={faStar} />}{" "}
                 {title == "Related" ? anime.relationType : anime.rating}
               </p>

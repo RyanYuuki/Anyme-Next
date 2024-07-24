@@ -56,11 +56,12 @@ const EpisodeList = ({ episodesData, currentEpisode, icons, handleClick }) => {
           filteredData.map((data) => (
             <button
               key={data.id}
-              className={`group flex flex-row w-full h-[100px] bg-accent rounded-md box-shadow transition-full hover:bg-indigo-400/70 ${
+              className={`relative group flex flex-row w-full h-[100px] bg-accent rounded-md box-shadow transition-full hover:bg-indigo-400/70 ${
                 currentEpisode === data.number ? "bg-indigo-400/95 text-white" : ""
               }`}
               onClick={() => handleClick(data.number)}
             >
+              <div className="absolute p-1 left-2 bottom-2 rounded-md text-white bg-indigo-400/50" >Ep {data.number}</div>
               <img
                 className="object-cover h-full w-[40%] rounded-l-md"
                 src={data.image}
