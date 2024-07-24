@@ -57,7 +57,7 @@ const EpisodeList = ({ episodesData, currentEpisode, icons, handleClick }) => {
             <button
               key={data.id}
               className={`group flex flex-row w-full h-[100px] bg-accent rounded-md box-shadow transition-full hover:bg-indigo-400/70 ${
-                currentEpisode == data.number ? "bg-[#818cf8] text-white" : ""
+                currentEpisode === data.number ? "bg-indigo-400/95 text-white" : ""
               }`}
               onClick={() => handleClick(data.number)}
             >
@@ -67,8 +67,20 @@ const EpisodeList = ({ episodesData, currentEpisode, icons, handleClick }) => {
                 alt={data.number}
               />
               <div className="flex flex-col w-[60%] justify-center text-left pl-3 gap-1">
-                <h1 className="group-hover:text-white transition-full">Episode {data?.number}</h1>
-                <p className="italic group-hover:text-white transition-full">{data?.title}</p>
+                <h1
+                  className={`group-hover:text-white transition-full ${
+                    currentEpisode === data.number ? "text-white" : ""
+                  }`}
+                >
+                  Episode {data?.number}
+                </h1>
+                <p
+                  className={`italic group-hover:text-white transition-full ${
+                    currentEpisode === data.number ? "text-white" : ""
+                  }`}
+                >
+                  {data?.title}
+                </p>
               </div>
             </button>
           ))}
@@ -77,18 +89,28 @@ const EpisodeList = ({ episodesData, currentEpisode, icons, handleClick }) => {
             <button
               key={data.id}
               className={`group flex flex-row px-5 items-center gap-3 w-full h-[50px] bg-accent rounded-md transition-full hover:bg-indigo-400/70 ${
-                currentEpisode === data.number ? "bg-[#818cf8] text-white" : ""
+                currentEpisode === data.number ? "bg-indigo-400/95 text-white" : ""
               }`}
               onClick={() => handleClick(data.number)}
             >
-              <h1 className="group-hover:text-white transition-full">
+              <h1
+                className={`group-hover:text-white transition-full ${
+                  currentEpisode === data.number ? "text-white" : ""
+                }`}
+              >
                 {currentEpisode === data.number ? (
                   <FontAwesomeIcon icon={faPlay} />
                 ) : (
                   data.number + "."
                 )}
               </h1>
-              <p className="group-hover:text-white transition-full">{data.title || "??"}</p>
+              <p
+                className={`group-hover:text-white transition-full ${
+                  currentEpisode === data.number ? "text-white" : ""
+                }`}
+              >
+                {data.title || "??"}
+              </p>
             </button>
           ))}
         {currentListType === 2 &&
@@ -96,11 +118,15 @@ const EpisodeList = ({ episodesData, currentEpisode, icons, handleClick }) => {
             <button
               key={data.id}
               className={`group w-[18%] h-[40px] text-center bg-accent rounded-md transition-full hover:bg-indigo-400/70 ${
-                currentEpisode === data.number ? "bg-[#818cf8]" : ""
+                currentEpisode === data.number ? "bg-indigo-400/95" : ""
               }`}
               onClick={() => handleClick(data.number)}
             >
-              <span className="group-hover:text-white transition-full">
+              <span
+                className={`group-hover:text-white transition-full ${
+                  currentEpisode === data.number ? "text-white" : ""
+                }`}
+              >
                 {currentEpisode === data.number ? (
                   <FontAwesomeIcon icon={faPlay} />
                 ) : (
