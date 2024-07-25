@@ -1,10 +1,11 @@
- import "swiper/css";
+import "swiper/css";
 import { Button } from "./ui/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import {
   faCalendarAlt,
   faCirclePlay,
+  faClosedCaptioning,
   faInfoCircle,
   faPlay,
   faStar,
@@ -22,7 +23,7 @@ export default function BigCarousel({ data }) {
   return (
     <div className="w-[100%] rounded-[5px] overflow-hidden">
       <Swiper>
-        {data.map((data   ) => (
+        {data.map((data, index) => (
           <SwiperSlide>
             <div className="text-white rounded-[5px]">
               <img
@@ -32,6 +33,9 @@ export default function BigCarousel({ data }) {
               />
               <div className="absolute inset-0 custom-gradient"></div>
               <div className="absolute top-0 h-full w-[50%] flex flex-col gap-5 p-10 max-md:p-2 justify-end max-md:w-full">
+                <h2 style={{ color: data.color, fontSize: 20 }}>
+                  #{index + 1} Spotlight
+                </h2>
                 <h1
                   style={disableCopy}
                   className="text-3xl max-md:text-xl no-select"
@@ -57,10 +61,20 @@ export default function BigCarousel({ data }) {
                     {" "}
                     <FontAwesomeIcon icon={faCalendarAlt} /> {data.releaseDate}
                   </p>
-                  <p style={disableCopy}>
-                    {" "}
-                    <FontAwesomeIcon icon={faStar} /> {data.rating}
-                  </p>
+                  <div className="flex flex-row gap-[2px] items-center text-[14px]">
+                    <p className="flex flex-row justify-center items-center gap-1 px-1 rounded-l-sm bg-green-200 text-black">
+                      {" "}
+                      <FontAwesomeIcon icon={faClosedCaptioning} />{" "}
+                      {data.totalEpisodes}
+                    </p>
+                    <p className="flex flex-row justify-center items-center gap-1 px-1 bg-blue-200 text-black">
+                      {" "}
+                      <FontAwesomeIcon icon={faStar} /> {data.rating}
+                    </p>
+                    <p className="px-2 justify-center rounded-r-sm bg-primary/30">
+                      {data.type}
+                    </p>
+                  </div>
                 </div>
                 <p style={disableCopy} className="lg:block max-md:hidden">
                   {data.description.length > 150
@@ -69,12 +83,12 @@ export default function BigCarousel({ data }) {
                 </p>
                 <div className="flex flex-row gap-5">
                   <Link href={`/pages/Anime/watch/${data.id}`}>
-                    <Button className="flex flex-row gap-1 px-[18px] py-[8px] max-md:py-[5px] max-md:px-[10px] rounded-3xl hover:bg-primary-foreground hover:text-accent-foreground transition-all duration-500 hover:scale-110 active:scale-75">
+                    <Button className="flex flex-row gap-1 px-[18px] py-[8px] max-md:py-[5px] max-md:px-[10px] rounded-3xl  transition-all duration-500 hover:scale-110 active:scale-75">
                       <FontAwesomeIcon icon={faPlay} /> Watch Now
                     </Button>
                   </Link>
                   <Link href={`/pages/Anime/details/${data.id}`}>
-                    <Button className="flex flex-row gap-1 text-base px-[18px] py-[10px] max-md:px-[10px] max-md:py-[10px] bg-white/20 text-white rounded-3xl hover:bg-black hover:text-white transition-all duration-500 hover:scale-110 active:scale-75">
+                    <Button className="flex flex-row gap-1 text-base px-[18px] py-[10px] max-md:px-[10px] max-md:py-[10px] bg-white/20 text-white rounded-3xl hover:bg-indigo-400 hover:text-white transition-all duration-500 hover:scale-110 active:scale-75">
                       <FontAwesomeIcon icon={faInfoCircle} /> Detail
                     </Button>
                   </Link>

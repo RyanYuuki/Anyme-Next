@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import BigCarousel from "../../../components/BigCarousel";
 import {
+  FetchAniwatchHomePage,
   FetchPopularAnime,
   FetchTrendingAnime,
 } from "../../../hooks/useApi.jsx";
@@ -17,6 +18,8 @@ const page = () => {
     const loadData = async () => {
       const data = await FetchTrendingAnime(1, 10);
       setData(data);
+      const test = await FetchAniwatchHomePage();
+      console.log(test);
       const carouselData = await FetchPopularAnime(1, 10);
       setCarouselData(carouselData);
       const popularData = await FetchPopularAnime(2, 10);
@@ -24,7 +27,6 @@ const page = () => {
       if(data && carouselData && popularData) {
         localArr.push([...data],[...carouselData],[...popularData], [...data]);
         setTableData(localArr);
-        console.log(localArr);
       }
     };
     loadData();

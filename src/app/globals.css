@@ -119,4 +119,22 @@
   .transition-full {
     transition: all 0.5s ease-in-out;
   }
+
+  .carousel:hover .overlay-text {
+    opacity: 1;
+  }
+
+  .carousel img {
+    transition: all 0.3s ease-in-out;
+  }
+
+  .carousel:hover img {
+    transform: scale(1.05);
+    transition: all 0.3s ease-in-out;
+  }
+  .overlay-text {
+    opacity: 0; 
+    transition: opacity 0.3s ease-in-out; 
+  }
+  
 }

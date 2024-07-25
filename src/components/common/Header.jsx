@@ -6,9 +6,13 @@ import { Input } from "../ui/input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBook,
+  faCalendar,
   faCirclePlay,
   faFilm,
+  faLaptop,
+  faShield,
   faShuffle,
+  faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { Button } from "../ui/button";
@@ -62,7 +66,7 @@ const Header = () => {
             {searchData.map((data) => (
               <div
                 key={data.id}
-                className="flex flex-row items-center justify-center w-full bg-neutral-700/30 p-2 rounded-md"
+                className="flex flex-row items-center justify-center w-full bg-neutral-700/30 p-2 rounded-md box-shadow"
               >
                 <img
                   className="w-[70px] h-[80px] rounded-lg"
@@ -71,11 +75,11 @@ const Header = () => {
                 />
                 <div className="flex flex-col w-full gap-2 items-center justify-center text-center">
                   <h1>{data?.title?.english || data?.title?.romaji}</h1>
-                  <div className="flex flex-row items-center justify-center gap-10 w-full text-[12px]">
-                    <p>{data?.type || "??"}</p>
-                    <p>{data?.status || "??"}</p>
-                    <p>{data?.totalEpisodes || "??"}</p>
-                    <p>{data?.rating || "??"}</p>
+                  <div className="flex flex-row items-center justify-center gap-10 w-full text-[12px] text-primary/50">
+                    <p><FontAwesomeIcon icon={faCalendar} /> {data?.releaseDate || "??"}</p>
+                    <p><FontAwesomeIcon icon={faLaptop} /> {data?.type || "??"}</p>
+                    <p><FontAwesomeIcon icon={faShield} /> {data?.totalEpisodes || "??"}</p>
+                    <p><FontAwesomeIcon icon={faStar} /> {data?.rating || "??"}</p>
                   </div>
                 </div>
               </div>

@@ -27,7 +27,7 @@ const EpisodeList = ({ episodesData, currentEpisode, icons, handleClick }) => {
   });
 
   return (
-    <div className="flex flex-col gap-5 w-[26%] overflow-y-scroll scroll-smooth custom-scrollbar h-full p-5 bg-neutral-700/30 rounded-md">
+    <div className="flex flex-col gap-5 w-[26%] overflow-y-scroll scroll-smooth custom-scrollbar h-full p-2 bg-neutral-700/30 rounded-md">
       <div className="flex flex-row items-center gap-3 w-full">
         <select className="h-[40px] rounded-md px-2 text-[12px] bg-accent">
           <option
@@ -56,7 +56,7 @@ const EpisodeList = ({ episodesData, currentEpisode, icons, handleClick }) => {
           filteredData.map((data) => (
             <button
               key={data.id}
-              className={`relative group flex flex-row w-full h-[100px] bg-accent rounded-md box-shadow transition-full hover:bg-indigo-400/70 ${
+              className={`relative group flex flex-row w-full h-[100px] bg-accent rounded-md transition-full hover:bg-indigo-400/70 ${
                 currentEpisode === data.number ? "bg-indigo-400/95 text-white" : ""
               }`}
               onClick={() => handleClick(data.number)}

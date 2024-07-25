@@ -7,7 +7,6 @@ const ANIWATCH_URL = "https://aniwatch-ryan.vercel.app/anime/";
 const API_KEY = "e2f1fb12caa883224a8363dc0329b3bc";
 const BASE_MOVIE_URL = "https://api.themoviedb.org";
 
-
 // MOVIE
 
 const fetchData = async (url) => {
@@ -62,7 +61,6 @@ export const fetchMovieInfo = (movieId) =>
 
 export const fetchTVInfo = (TVId) =>
   fetchData(`${PROXY}${BASE_MOVIE_URL}/tv/${TVId}?api_key=${API_KEY}`);
-
 
 // ANIME
 export const FetchTrendingAnime = async (page = 1, perPage = 10) => {
@@ -241,5 +239,20 @@ export const FetchEpisodeLinksByMappedID = async (
     `${ANIWATCH_URL}episode-srcs?id=${id}?server=${server}&category=${category}`
   );
   const data = await response.json();
+  return data;
+};
+
+export const FetchAniwatchHomePage = async () => {
+  const response = await fetch(`${ANIWATCH_URL}home/`);
+  const data = await response.json();
+  console.log(data);
+  return data;
+};
+
+export const FetchAnimeByCategories = async (category, page) => {
+  // categories -> "most-favorite", "most-popular", "subbed-anime", "dubbed-anime", "recently-updated", "recently-added", "top-upcoming", "top-airing", "movie", "special", "ova", "ona", "tv", "completed"
+
+  const resp = await fetch(`${ANIWATCH_URL}/${category}?page=${page}`);
+  const data = await resp.json();
   return data;
 };
