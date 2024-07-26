@@ -1,11 +1,9 @@
 "use client";
 import {
   FetchAnimeByAniwatchID,
-  FetchAnimeByID,
-  FetchEpisodeLinksByMappedID,
   FetchEpisodesByMappedID,
+  FetchEpisodeLinksByMappedID,
   FetchEpisodesData,
-  FetchStreamingData,
 } from "@/hooks/useApi";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -22,10 +20,10 @@ import ReusableVerticalCarousel from "@/components/Anime/Watch/ReusableVerticalC
 import ServerSelector from "@/components/Anime/Watch/ServerSelector";
 
 const StreamingPage = () => {
-  const { id, anilistID } = useParams();
+  const { id } = useParams();
   const [animeData, setAnimeData] = useState(null);
-  const icons = [faBars, faTableCells, faImage];
   const [episodesData, setEpisodesData] = useState(null);
+  const [episodeImages, setEpisodeImages] = useState({});
   const [currentEpisode, setCurrentEpisode] = useState(1);
   const [episodeSrc, setEpisodeSrc] = useState(null);
   const [captionsData, setCaptionsData] = useState(null);
@@ -34,6 +32,7 @@ const StreamingPage = () => {
   const [activeServer, setActiveServer] = useState("VidStream");
   const [episodeType, setEpisodeType] = useState("sub");
   const Servers = ["VidStream", "MegaCloud", "StreamSB"];
+  const icons = [faBars, faTableCells, faImage];
 
   useEffect(() => {
     const loadData = async () => {
@@ -42,23 +41,24 @@ const StreamingPage = () => {
       setAnimeData(MetaData);
       if (MetaData) {
         const EpisodesData = await FetchEpisodesByMappedID(id);
-        const EpisodeData = await FetchEpisodesData(
-          MetaData.anime.info.anilistId
-        );
-        if (EpisodesData) {
-          setEpisodesData(
-            EpisodesData.episodes.map((data) => {
-              const episodeData = EpisodeData[data.number - 1];
-              return {
-                ...data,
-                image: episodeData && episodeData.image ? episodeData.image : MetaData.anime.info.poster,
-              };
-            })
-          );
-        }
+        setEpisodesData(EpisodesData.episodes);
+        fetchEpisodeImages(MetaData.anime.info.anilistId);
       }
       setIsLoading(false);
     };
+
+    const fetchEpisodeImages = async (anilistId) => {
+      const EpisodeData = await FetchEpisodesData(anilistId);
+      if (EpisodeData) {
+        setEpisodeImages(
+          EpisodeData.reduce((acc, episode, index) => {
+            acc[index + 1] = episode.image;
+            return acc;
+          }, {})
+        );
+      }
+    };
+
     loadData();
   }, [id]);
 
@@ -95,18 +95,23 @@ const StreamingPage = () => {
 
   if (isLoading || !episodesData) return <div>Loading...</div>;
 
+  const episodesWithImages = episodesData.map((episode, index) => ({
+    ...episode,
+    image: episodeImages[index + 1] || animeData.anime.info.poster,
+  }));
+
   return (
     <div className="flex flex-col px-5 gap-3">
       <div className="flex flex-row justify-between h-[600px]">
         <VideoPlayer
           episodeLoading={episodeLoading}
           episodeSrc={episodeSrc}
-          episodesData={episodesData}
+          episodesData={episodesWithImages}
           currentEpisode={currentEpisode}
           captionsData={captionsData || []}
         />
         <EpisodeList
-          episodesData={episodesData || []}
+          episodesData={episodesWithImages}
           currentEpisode={currentEpisode}
           icons={icons}
           handleClick={handleClick}

@@ -245,7 +245,6 @@ export const FetchEpisodeLinksByMappedID = async (
 export const FetchAniwatchHomePage = async () => {
   const response = await fetch(`${ANIWATCH_URL}home/`);
   const data = await response.json();
-  console.log(data);
   return data;
 };
 
