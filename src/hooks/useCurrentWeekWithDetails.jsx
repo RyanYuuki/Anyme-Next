@@ -8,7 +8,7 @@ const useCurrentWeekWithDetails = () => {
     const startOfWeek = currentDate.getDate() - currentDate.getDay(); 
     const weekArray = [];
 
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 15; i++) {
       const day = new Date(currentDate.setDate(startOfWeek + i));
       weekArray.push({
         weekday: day.toLocaleDateString(undefined, { weekday: 'long' }),

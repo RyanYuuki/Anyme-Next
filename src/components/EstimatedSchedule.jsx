@@ -4,6 +4,8 @@ import { FetchEstimatedSchedule } from "@/hooks/useApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
 const EstimatedSchedule = () => {
   const week = useCurrentWeekWithDetails();
@@ -42,37 +44,52 @@ const EstimatedSchedule = () => {
     }
   }, [activeDay, activeYear, activeMonth]);
 
-  const handleScheduleDate = (day) => {
+  const handleScheduleDate = (year, month, day) => {
+    setActiveYear(year);
+    setActiveMonth(month);
     setActiveDay(day);
   };
 
   return (
-    <div className="flex flex-col gap-5 w-[70%]">
+    <div className="flex flex-col gap-5 w-full">
       <h1 className="text-2xl">Estimated Schedule</h1>
       <div className="flex flex-col gap-5 justify-center items-center bg-neutral-700/30 p-5 rounded-md">
-        <div className="flex flex-row gap-3">
-          {week.map((data, index) => (
-            <div
-              key={index}
-              onClick={() => handleScheduleDate(data.day)}
-              className={`flex flex-col py-[10px] px-[30px] rounded-xl text-center ${
-                data.day == activeDay ? "bg-indigo-400" : "bg-input"
-              }`}
-            >
-              <h1>{data.weekday.slice(0, 3)}</h1>
-              <p className="text-nowrap">{data.month + " " + data.day}</p>
-            </div>
-          ))}
+        <div className="flex flex-row gap-3 w-full">
+          <Swiper spaceBetween={20} slidesPerView={5}>
+            {week.map((data, index) => (
+              <SwiperSlide key={index}>
+                <div
+                  onClick={() =>
+                    handleScheduleDate(data.year, data.monthNumber, data.day)
+                  }
+                  className={`flex flex-col py-[10px] px-[30px] rounded-xl text-center cursor-pointer ${
+                    data.day == activeDay ? "bg-indigo-400" : "bg-input"
+                  }`}
+                >
+                  <h1>{data.weekday.slice(0, 3)}</h1>
+                  <p className="text-nowrap">{data.month + " " + data.day}</p>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
         {scheduleData &&
           scheduleData.map((data) => (
-            <Link href={`/pages/Anime/watch/${data.id}`} className="flex flex-row justify-between w-full p-3 border-b border-input group hover:text-indigo-400">
+            <Link
+              href={`/pages/Anime/watch/${data.id}`}
+              key={data.id}
+              className="flex flex-row justify-between w-full p-3 border-b border-input group hover:text-indigo-400"
+            >
               <div className="flex flex-row gap-8">
                 <p>{data.time}</p>
-                <h1>{data.name}</h1>
+                <h1>
+                  {data.name.length > 40
+                    ? data.name.substring(0, 40) + "..."
+                    : data.name}
+                </h1>
               </div>
-              <button className="flex flex-row gap-2 items-center p-2 group-hover:bg-indigo-400 group rounded-xl group-hover:text-white" >
-                <FontAwesomeIcon icon={faPlay} /> Episode{" " + data.episode}
+              <button className="flex flex-row gap-2 items-center p-2 group-hover:bg-indigo-400 group rounded-xl group-hover:text-white">
+                <FontAwesomeIcon icon={faPlay} /> Episode {" " + data.episode}
               </button>
             </Link>
           ))}
