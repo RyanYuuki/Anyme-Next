@@ -21,6 +21,7 @@
     "@vidstack/react": "^1.11.30",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "colorthief": "^2.4.0",
     "embla-carousel-react": "^8.1.7",
     "hls.js": "^1.5.13",
     "next": "14.2.5",

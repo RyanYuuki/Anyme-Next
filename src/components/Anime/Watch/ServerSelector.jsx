@@ -5,9 +5,15 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
-const ServerSelector = ({ onClick, activeServer, currentEpisode, episodeType, Servers }) => {
+const ServerSelector = ({
+  onClick,
+  activeServer,
+  currentEpisode,
+  episodeType,
+  Servers,
+}) => {
   return (
-    <div className={`flex flex-row justify-between w-full h-[90px]`}>
+    <div className={`flex flex-row justify-between w-full h-[90px] animated`}>
       <div className="flex flex-col justify-center gap-3 pl-5 h-full w-[55%] bg-neutral-700/30 rounded-md">
         <p>
           You're Watching <span>Episode {currentEpisode}</span>{" "}
@@ -24,11 +30,12 @@ const ServerSelector = ({ onClick, activeServer, currentEpisode, episodeType, Se
           <div className="flex flex-row gap-1">
             {Servers.map((server) => (
               <p
-                onClick={() => onClick('sub', server)}
-                className={`bg-input px-[15px] py-[5px] rounded-md ${
-                  activeServer == server && episodeType == "sub"
-                    ? "bg-indigo-500 text-white"
-                    : ""
+                onClick={() => onClick("sub", server.toLowerCase())}
+                className={`px-[15px] py-[5px] rounded-md ${
+                  activeServer.toLowerCase() == server.toLowerCase() &&
+                  episodeType == "sub"
+                    ? "server-active"
+                    : "bg-input"
                 } hover:bg-indigo-400`}
               >
                 {server}
@@ -43,11 +50,12 @@ const ServerSelector = ({ onClick, activeServer, currentEpisode, episodeType, Se
           <div className="flex flex-row gap-1">
             {Servers.map((server) => (
               <p
-                onClick={() => onClick('dub',server)}
-                className={`bg-input px-[15px] py-[5px] rounded-md ${
-                  activeServer == server && episodeType == "dub"
-                    ? "bg-indigo-500 text-white"
-                    : ""
+                onClick={() => onClick("dub", server.toLowerCase())}
+                className={`px-[15px] py-[5px] rounded-md ${
+                  activeServer.toLowerCase() == server.toLowerCase() &&
+                  episodeType == "dub"
+                    ? "server-active"
+                    : "bg-input"
                 } hover:bg-indigo-400`}
               >
                 {server}

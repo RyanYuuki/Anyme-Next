@@ -1,17 +1,16 @@
-import { faClosedCaptioning, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faClosedCaptioning, faMicrophone, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import { title } from "process";
 import React from "react";
 
 const ReusableStack = ({ data }) => {
   const MetaData = [
     {
-      title: "Popular",
+      title: "Top Airing",
       index: 0,
     },
     {
-      title: "Trending",
+      title: "Most Popular",
       index: 1,
     },
     {
@@ -19,15 +18,20 @@ const ReusableStack = ({ data }) => {
       index: 2,
     },
     {
-      title: "Most Watched",
+      title: "Most Completed",
       index: 3,
     },
   ];
 
+  const chunkedData = [];
+  for (let i = 0; i < data.length; i += 5) {
+    chunkedData.push(data.slice(i, i + 5));
+  }
+
   return (
-    <div className="flex flex-row justify-between pb-5">
+    <div className="flex flex-row justify-between pb-5 animated">
       {MetaData.map(({ title, index }) => {
-        const currentData = data[index];
+        const currentData = chunkedData[index];
         return (
           <div
             key={index}
@@ -35,39 +39,38 @@ const ReusableStack = ({ data }) => {
           >
             <h1 className="text-2xl">{title}</h1>
             {currentData &&
-              currentData.map((dataItem, index) => {
-                const title = dataItem?.title?.english || dataItem?.title?.romaji || dataItem?.title?.userPreffered || '??';
-                const formattedTitle = title.length > 50 ? title.substring(0,50) + '...' : title;
+              currentData.map((dataItem, idx) => {
+                const title = dataItem.name || dataItem.jname;
+                const formattedTitle =
+                  title.length > 40 ? title.substring(0, 40) + "..." : title;
                 return (
-                  <div
-                    key={index}
-                    className="flex flex-row gap-3 bg-neutral-600/20 hover:bg-indigo-400 transition-full rounded-lg p-3 box-shadow"
+                  <Link
+                    href={`/pages/Anime/details/${dataItem.id}`}
+                    key={idx}
+                    className="flex flex-row gap-3 bg-neutral-600/20 animated hover:bg-indigo-400 transition-full rounded-lg p-3 box-shadow"
                   >
-                    <Link href={`/pages/Anime/details/${dataItem.id}`}>
                       <img
                         className="xl:h-[100px] h-[70px] w-[100px] rounded-lg"
-                        src={dataItem.image}
-                        alt={dataItem.title.english || dataItem.title.romaji}
+                        src={dataItem.poster}
                       />
-                    </Link>
                     <div className="flex flex-col justify-center gap-2 w-full">
                       <h2>{formattedTitle}</h2>
                       <div className="flex flex-row gap-[2px] w-full items-center text-[12px]">
                         <p className="flex flex-row items-center gap-1 px-1 rounded-l-sm bg-green-200 text-black">
                           {" "}
                           <FontAwesomeIcon icon={faClosedCaptioning} />{" "}
-                          {dataItem.totalEpisodes}
+                          {dataItem.episodes.sub}
                         </p>
                         <p className="flex flex-row items-center gap-1 px-1 bg-blue-200 text-black">
                           {" "}
-                          <FontAwesomeIcon icon={faStar} /> {dataItem.rating}
+                          <FontAwesomeIcon icon={faMicrophone} /> {dataItem.episodes.dub || '0'}
                         </p>
                         <p className="px-2 rounded-r-sm bg-primary/30">
                           {dataItem.type}
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 );
               })}
           </div>

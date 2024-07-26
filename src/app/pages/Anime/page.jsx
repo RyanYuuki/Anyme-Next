@@ -10,24 +10,17 @@ import ReusableCarousel from "../../../components/ReusableCarousel";
 import ReusableStack from "../../../components/ReusableStack";
 const page = () => {
   const [data, setData] = useState(null);
-  const [carouselData, setCarouselData] = useState(null);
+  const [TrendingData, setTrendingData] = useState(null);
   const [popularData, setPopularData] = useState(null);
   const [tableData, setTableData] = useState(null);
   useEffect(() => {
     const localArr = [];
     const loadData = async () => {
-      const data = await FetchTrendingAnime(1, 10);
-      setData(data);
-      const test = await FetchAniwatchHomePage();
-      console.log(test);
-      const carouselData = await FetchPopularAnime(1, 10);
-      setCarouselData(carouselData);
-      const popularData = await FetchPopularAnime(2, 10);
-      setPopularData(popularData);
-      if(data && carouselData && popularData) {
-        localArr.push([...data],[...carouselData],[...popularData], [...data]);
-        setTableData(localArr);
-      }
+      const data = await FetchAniwatchHomePage();
+      setData(data.spotlightAnimes);
+      setTrendingData(data.top10Animes.today);
+      setPopularData(data.top10Animes.month);
+      setTableData(data.topAiringAnimes);
     };
     loadData();
   }, []);
@@ -37,7 +30,7 @@ const page = () => {
   return (
     <div className="flex flex-col px-10 gap-10">
       <BigCarousel data={data} />
-      <ReusableCarousel title={"Trending"} data={carouselData} />
+      <ReusableCarousel title={"Trending"} data={TrendingData} />
       <ReusableCarousel title={"Popular"} data={popularData} />
       <ReusableStack data={tableData} />
     </div>

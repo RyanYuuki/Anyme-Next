@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 
-const EpisodeList = ({ episodesData, currentEpisode, icons, handleClick }) => {
+const EpisodeList = ({ episodesData, currentEpisode, icons, handleClick, episodeImages }) => {
   const [currentListType, setCurrentListType] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const handleListChange = () => {
@@ -13,18 +13,26 @@ const EpisodeList = ({ episodesData, currentEpisode, icons, handleClick }) => {
     setCurrentListType(newType);
   };
 
-  const filteredData = episodesData.filter((data) => {
-    const title = data.title;
-    const id = data.id;
-    const number = data.number;
-    const altTitle = "Episode " + number;
-    return (
-      title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      number.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
-      altTitle.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  });
+  const filteredData =
+    episodesData.length > 0
+      ? episodesData.filter((data) => {
+          const title = data.title;
+          const id = data.episodeId;
+          const number = data.number;
+          const altTitle = "Episode " + number;
+          return (
+            title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            number
+              .toString()
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase()) ||
+            altTitle.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+        })
+      : ["No Episodes Available"];
+
+  if (!episodesData) return <h1>Episodes Arent Available</h1>;
 
   return (
     <div className="flex flex-col gap-5 w-[26%] overflow-y-scroll scroll-smooth custom-scrollbar h-full p-2 bg-neutral-700/30 rounded-md">
@@ -53,21 +61,26 @@ const EpisodeList = ({ episodesData, currentEpisode, icons, handleClick }) => {
         } gap-2 `}
       >
         {currentListType === 0 &&
+          filteredData.length > 0 &&
           filteredData.map((data) => (
             <button
               key={data.id}
-              className={`relative group flex flex-row w-full h-[100px] bg-accent rounded-md transition-full hover:bg-indigo-400/70 ${
-                currentEpisode === data.number ? "bg-indigo-400/95 text-white" : ""
+              className={`relative animated group flex flex-row w-full h-[100px] bg-accent rounded-md transition-full hover:bg-indigo-400/70 ${
+                currentEpisode === data.number
+                  ? "bg-indigo-400/95 text-white"
+                  : ""
               }`}
               onClick={() => handleClick(data.number)}
             >
-              <div className="absolute p-1 left-2 bottom-2 rounded-md text-white bg-indigo-400/50" >Ep {data.number}</div>
+              <div className="absolute p-1 left-2 bottom-2 rounded-md text-white bg-indigo-400/50">
+                Ep {data.number}
+              </div>
               <img
                 className="object-cover h-full w-[40%] rounded-l-md"
                 src={data.image}
                 alt={data.number}
               />
-              <div className="flex flex-col w-[60%] justify-center text-left pl-3 gap-1">
+              <div className="flex flex-col w-[60%] h-full justify-center text-left pl-3 gap-1">
                 <h1
                   className={`group-hover:text-white transition-full ${
                     currentEpisode === data.number ? "text-white" : ""
@@ -86,11 +99,14 @@ const EpisodeList = ({ episodesData, currentEpisode, icons, handleClick }) => {
             </button>
           ))}
         {currentListType === 1 &&
+          filteredData.length > 0 &&
           filteredData.map((data) => (
             <button
               key={data.id}
-              className={`group flex flex-row px-5 items-center gap-3 w-full h-[50px] bg-accent rounded-md transition-full hover:bg-indigo-400/70 ${
-                currentEpisode === data.number ? "bg-indigo-400/95 text-white" : ""
+              className={`group flex animated flex-row px-5 items-center gap-3 w-full h-[50px] bg-accent rounded-md transition-full hover:bg-indigo-400/70 ${
+                currentEpisode === data.number
+                  ? "bg-indigo-400/95 text-white"
+                  : ""
               }`}
               onClick={() => handleClick(data.number)}
             >
@@ -115,10 +131,11 @@ const EpisodeList = ({ episodesData, currentEpisode, icons, handleClick }) => {
             </button>
           ))}
         {currentListType === 2 &&
+          filteredData.length > 0 &&
           filteredData.map((data) => (
             <button
               key={data.id}
-              className={`group w-[18%] h-[40px] text-center bg-accent rounded-md transition-full hover:bg-indigo-400/70 ${
+              className={`group w-[18%] animated h-[40px] text-center bg-accent rounded-md transition-full hover:bg-indigo-400/70 ${
                 currentEpisode === data.number ? "bg-indigo-400/95" : ""
               }`}
               onClick={() => handleClick(data.number)}

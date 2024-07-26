@@ -1,6 +1,9 @@
 "use client";
 import {
+  FetchAnimeByAniwatchID,
   FetchAnimeByID,
+  FetchEpisodeLinksByMappedID,
+  FetchEpisodesByMappedID,
   FetchEpisodesData,
   FetchStreamingData,
 } from "@/hooks/useApi";
@@ -19,26 +22,42 @@ import ReusableVerticalCarousel from "@/components/Anime/Watch/ReusableVerticalC
 import ServerSelector from "@/components/Anime/Watch/ServerSelector";
 
 const StreamingPage = () => {
-  const { id } = useParams();
+  const { id, anilistID } = useParams();
   const [animeData, setAnimeData] = useState(null);
   const icons = [faBars, faTableCells, faImage];
   const [episodesData, setEpisodesData] = useState(null);
   const [currentEpisode, setCurrentEpisode] = useState(1);
   const [episodeSrc, setEpisodeSrc] = useState(null);
+  const [captionsData, setCaptionsData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [episodeLoading, setEpisodeLoading] = useState(true);
-  const [activeServer, setActiveServer] = useState('Zoro');
-  const [episodeType, setEpisodeType] = useState('sub');
-  const Servers = ["Zoro", "Gogo", "VidStream"];
+  const [activeServer, setActiveServer] = useState("VidStream");
+  const [episodeType, setEpisodeType] = useState("sub");
+  const Servers = ["VidStream", "MegaCloud", "StreamSB"];
 
   useEffect(() => {
     const loadData = async () => {
       setIsLoading(true);
-      const data = await FetchEpisodesData(id);
-      setEpisodesData(data);
-      setIsLoading(false);
-      const MetaData = await FetchAnimeByID(id);
+      const MetaData = await FetchAnimeByAniwatchID(id);
       setAnimeData(MetaData);
+      if (MetaData) {
+        const EpisodesData = await FetchEpisodesByMappedID(id);
+        const EpisodeData = await FetchEpisodesData(
+          MetaData.anime.info.anilistId
+        );
+        if (EpisodesData) {
+          setEpisodesData(
+            EpisodesData.episodes.map((data) => {
+              const episodeData = EpisodeData[data.number - 1];
+              return {
+                ...data,
+                image: episodeData && episodeData.image ? episodeData.image : MetaData.anime.info.poster,
+              };
+            })
+          );
+        }
+      }
+      setIsLoading(false);
     };
     loadData();
   }, [id]);
@@ -48,13 +67,13 @@ const StreamingPage = () => {
       try {
         if (episodesData) {
           setEpisodeLoading(true);
-          const episodeData = await FetchStreamingData(
-            episodesData[currentEpisode - 1].id
+          const episodeSrc = await FetchEpisodeLinksByMappedID(
+            episodesData[currentEpisode - 1].episodeId,
+            activeServer,
+            episodeType
           );
-          const filteredLink = episodeData.find(
-            (episode) => episode.quality === "default"
-          );
-          setEpisodeSrc(filteredLink.url);
+          setCaptionsData(episodeSrc.tracks);
+          setEpisodeSrc(episodeSrc.sources[0].url);
         }
       } catch (error) {
         console.log(error);
@@ -63,7 +82,7 @@ const StreamingPage = () => {
       }
     };
     loadEpisodeData();
-  }, [currentEpisode, episodesData]);
+  }, [currentEpisode, episodesData, episodeType, activeServer]);
 
   const handleClick = (number) => {
     setCurrentEpisode(number);
@@ -72,7 +91,7 @@ const StreamingPage = () => {
   const handleServer = (type, server) => {
     setEpisodeType(type);
     setActiveServer(server);
-  } 
+  };
 
   if (isLoading || !episodesData) return <div>Loading...</div>;
 
@@ -84,28 +103,35 @@ const StreamingPage = () => {
           episodeSrc={episodeSrc}
           episodesData={episodesData}
           currentEpisode={currentEpisode}
+          captionsData={captionsData || []}
         />
         <EpisodeList
-          episodesData={episodesData}
+          episodesData={episodesData || []}
           currentEpisode={currentEpisode}
           icons={icons}
           handleClick={handleClick}
         />
       </div>
       {animeData ? (
-        <div className="flex flex-row w-full justify-between h-[1030px]">
+        <div className="flex flex-row w-full justify-between">
           <div className="flex flex-col w-[72%] gap-3">
-            <ServerSelector onClick={handleServer} episodeType={episodeType} activeServer={activeServer} Servers={Servers} currentEpisode={currentEpisode} />
-            <BasicDetails data={animeData} page="Streaming" />
-            <AnimeRelation relations={animeData.relations} />
+            <ServerSelector
+              onClick={handleServer}
+              episodeType={episodeType}
+              activeServer={activeServer}
+              Servers={Servers}
+              currentEpisode={currentEpisode}
+            />
+            <BasicDetails data={animeData.anime} page="Streaming" />
+            <AnimeRelation relations={animeData.seasons} />
           </div>
-          <div className="flex flex-col w-[26%] h-full justify-between">
+          <div className="flex flex-col w-[26%] h-full gap-2">
             <ReusableVerticalCarousel
-              data={animeData.relations}
+              data={animeData.relatedAnimes}
               title={"RELATED"}
             />
             <ReusableVerticalCarousel
-              data={animeData.recommendations}
+              data={animeData.relatedAnimes}
               title={"RECOMMENDATION"}
             />
           </div>

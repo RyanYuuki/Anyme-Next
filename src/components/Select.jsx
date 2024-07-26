@@ -17,8 +17,8 @@ function Selector({ onClick }) {
         <SelectValue placeholder="Japanese" />
       </SelectTrigger>
       <SelectContent>
-        <SelectGroup>
-          <SelectLabel >Language</SelectLabel>
+        <SelectGroup >
+          <SelectLabel>Language</SelectLabel>
           <SelectItem value="Japanese">Japanese</SelectItem>
           <SelectItem value="English">English</SelectItem>
         </SelectGroup>

@@ -252,7 +252,13 @@ export const FetchAniwatchHomePage = async () => {
 export const FetchAnimeByCategories = async (category, page) => {
   // categories -> "most-favorite", "most-popular", "subbed-anime", "dubbed-anime", "recently-updated", "recently-added", "top-upcoming", "top-airing", "movie", "special", "ova", "ona", "tv", "completed"
 
-  const resp = await fetch(`${ANIWATCH_URL}/${category}?page=${page}`);
+  const resp = await fetch(`https://anymey-proxy-2q4kopd3u-ryanyuukis-projects.vercel.app/cors?url=${ANIWATCH_URL}/${category}?page=${page}`);
   const data = await resp.json();
   return data;
 };
+
+export const FetchAnimeByAniwatchID = async (id) => {
+  const resp = await fetch(`${ANIWATCH_URL}info?id=${id}`);
+  const data = await resp.json();
+  return data;
+}

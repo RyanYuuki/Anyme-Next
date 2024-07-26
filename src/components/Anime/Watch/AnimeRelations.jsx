@@ -2,31 +2,24 @@ import Link from "next/link";
 import React from "react";
 
 const AnimeRelations = ({ relations }) => {
-  const filteredRelations = relations.filter(
-    (anime) => anime.relationType === "SEQUEL" || anime.relationType === "PREQUEL"
-  );
-
   return (
-    <div className="flex flex-col w-full p-5 bg-neutral-700/30 box-shadow rounded-md">
+    <div className="flex flex-col w-full p-5 bg-neutral-700/30 box-shadow rounded-md gap-10 animated">
       <h1 className="text-3xl font-bold">Seasons</h1>
-      <div className="flex flex-row items-center h-[400px] justify-evenly w-full">
-        {filteredRelations.map((data) => (
+      <div className="flex flex-wrap items-center justify-between px-5 w-full gap-5">
+        {relations.length > 0 ? relations.map((data) => (
           <div
             key={data.id}
-            className="relative flex flex-col justify-end w-[400px] h-[200px] overflow-hidden group rounded-lg"
+            className={`relative flex items-center justify-center w-[30%] h-[150px] overflow-hidden animated hover rounded-3xl ${data.isCurrent && 'border-2 border-white'}`}
           >
             <img
               className="w-full h-full object-cover rounded-lg transition-transform duration-300 group-hover:scale-110"
-              src={data.image}
+              src={data.poster}
               alt={data.id}
             />
-            <Link href={`/pages/Anime/watch/${data.id}`} className="absolute w-full h-full custom-gradient rounded-lg group-hover:opacity-0 transition-full" />
-            <div className="absolute px-5 p-2">
-              <p className="font-semibold text-white">{data.relationType}</p>
-              <h1 className="font-bold text-white">{data.title.english || data.title.romaji}</h1>
-            </div>
+            <h1 className="absolute z-50 text-center" >{data.name}</h1>
+            <Link href={`/pages/Anime/watch/${data.id}`} className="absolute w-full h-full rounded-lg transition-full seasonCard" />
           </div>
-        ))}
+        )) : <h1>No Season Aired Yet...</h1> }
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import "swiper/css";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faClosedCaptioning, faMicrophone, faStar } from "@fortawesome/free-solid-svg-icons";
 
 export default function ReusableCarousel({ title, data = [], className }) {
   if (!Array.isArray(data) || data.length === 0) {
@@ -16,7 +16,7 @@ export default function ReusableCarousel({ title, data = [], className }) {
   }
 
   return (
-    <div className={cn("flex flex-col gap-5", className)}>
+    <div className={cn("flex flex-col gap-5 animated", className)}>
       <h2 className="text-3xl font-semibold border-l-8 border-l-neutral-800 px-5">
         {title}
       </h2>
@@ -58,9 +58,9 @@ export default function ReusableCarousel({ title, data = [], className }) {
             const isManga = anime.type === "MANGA";
             return (
               <SwiperSlide key={index}>
-                <div className="flex flex-col justify-center p-8 items-center gap-3 text-center">
+                <div className="flex flex-col animated justify-center p-8 items-center gap-3 text-center">
                   <Link
-                    className={`relative carousel overflow-hidden rounded-2xl`}
+                    className={`relative carousel overflow-hidden rounded-lg`}
                     href={
                       isManga
                         ? `/Manga/details/${anime.id}`
@@ -68,38 +68,25 @@ export default function ReusableCarousel({ title, data = [], className }) {
                     }
                   >
                     <img
-                      className="rounded-2xl object-cover h-[290px] 2xl:h-[300px] w-[230px]"
-                      src={anime.image || "/path/to/default-image.jpg"}
-                      alt={
-                        anime.title?.english ||
-                        anime.title?.romaji ||
-                        anime.title?.userPreferred ||
-                        "Anime"
-                      }
+                      className="rounded-lg object-cover h-[290px] w-[230px]"
+                      src={anime.poster || "/path/to/default-image.jpg"}
                       draggable="false"
                       onError={(e) =>
                         (e.target.src = "/path/to/default-image.jpg")
                       }
                     />
-                    <p
-                      style={{ color: anime.color }}
-                      className="absolute bottom-2 left-2 p-2 px-3 rounded-lg bg-black/65 overlay-text"
-                    >
-                      {anime.type}
-                    </p>
-                    <p
-                      style={{ color: anime.color }}
-                      className="absolute right-0 top-0 p-1 px-4 rounded-bl-2xl bg-black overlay-text"
-                    >
-                      <FontAwesomeIcon icon={faStar} /> {anime.rating}
-                    </p>
+                    <div className="absolute left-[7px] bottom-[7px] flex flex-row gap-[2px] items-center text-[14px]">
+                      <p className="flex flex-row justify-center items-center gap-1 px-1 rounded-sm bg-green-200 text-black">
+                        <FontAwesomeIcon icon={faClosedCaptioning} />{" "}
+                        {anime.episodes.sub}
+                      </p>
+                      <p className="flex flex-row justify-center items-center gap-1 px-1 rounded-sm bg-blue-200 text-black">
+                        <FontAwesomeIcon icon={faMicrophone} />{" "}
+                        {anime.episodes.dub || '0'}
+                      </p>
+                    </div>
                   </Link>
-                  <h4 className="font-semibold">
-                    {anime?.title?.english ||
-                      anime?.title?.romaji ||
-                      anime?.title?.userPreferred ||
-                      "Unknown Title"}
-                  </h4>
+                  <h4 className="font-semibold">{anime.name}</h4>
                 </div>
               </SwiperSlide>
             );
