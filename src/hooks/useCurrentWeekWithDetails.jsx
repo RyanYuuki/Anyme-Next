@@ -5,15 +5,16 @@ const useCurrentWeekWithDetails = () => {
 
   useEffect(() => {
     const currentDate = new Date();
-    const startOfWeek = currentDate.getDate() - currentDate.getDay(); // Get the first day of the week (Sunday)
+    const startOfWeek = currentDate.getDate() - currentDate.getDay(); 
     const weekArray = [];
 
-    for (let i = 0; i < 8; i++) { // Next 7 days including today
+    for (let i = 0; i < 8; i++) {
       const day = new Date(currentDate.setDate(startOfWeek + i));
       weekArray.push({
         weekday: day.toLocaleDateString(undefined, { weekday: 'long' }),
         day: day.getDate(),
         month: day.toLocaleDateString(undefined, { month: 'long' }),
+        monthNumber: String(day.getMonth() + 1).padStart(2, '0'), 
         year: day.getFullYear(),
       });
     }

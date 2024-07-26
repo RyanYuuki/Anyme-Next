@@ -261,3 +261,9 @@ export const FetchAnimeByAniwatchID = async (id) => {
   const data = await resp.json();
   return data;
 }
+
+export const FetchEstimatedSchedule = async (year, month, day) => {
+  const response = await fetch(`${ANIWATCH_URL}schedule?date=${year}-${month}-${day}`);
+  const data = await response.json();
+  return data.scheduledAnimes;
+}

@@ -13,7 +13,6 @@ const page = () => {
   const [tableData, setTableData] = useState(null);
   const [cardStackData, setCardStackData] = useState(null);
   const [genreData, setGenreData] = useState(null);
-  const [scheduleData, setScheduleData] = useState(null);
   useEffect(() => {
     const localArr = [];
     const loadData = async () => {
@@ -28,11 +27,6 @@ const page = () => {
     loadData();
   }, []);
 
-  const handleScheduleDate = (date) => {
-    const schedule = scheduleData.find((item) => item.date === date);
-    setScheduleData(schedule);
-  };
-
   if (!data || !popularData) return <div>Loading...</div>;
 
   return (
@@ -42,7 +36,7 @@ const page = () => {
       <ReusableCarousel title={"Popular"} data={popularData} />
       <ReusableStack data={tableData} />
       <ReusableCardStacks withGenres={true} genresData={genreData} title={'Latest Episodes'} data={cardStackData} />
-      <EstimatedSchedule scheduleData={scheduleData} handleScheduleDate={handleScheduleDate} />
+      <EstimatedSchedule />
     </div>
   );
 };
