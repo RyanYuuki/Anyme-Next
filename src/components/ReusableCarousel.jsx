@@ -4,7 +4,12 @@ import "swiper/css";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClosedCaptioning, faMicrophone, faStar } from "@fortawesome/free-solid-svg-icons";
+import {
+  faClosedCaptioning,
+  faMicrophone,
+  faPlay,
+  faStar,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function ReusableCarousel({ title, data = [], className }) {
   if (!Array.isArray(data) || data.length === 0) {
@@ -60,7 +65,7 @@ export default function ReusableCarousel({ title, data = [], className }) {
               <SwiperSlide key={index}>
                 <div className="flex flex-col animated justify-center p-8 items-center gap-3 text-center">
                   <Link
-                    className={`relative carousel overflow-hidden rounded-lg`}
+                    className={`relative carousel overflow-hidden rounded-lg group`}
                     href={
                       isManga
                         ? `/Manga/details/${anime.id}`
@@ -75,6 +80,12 @@ export default function ReusableCarousel({ title, data = [], className }) {
                         (e.target.src = "/path/to/default-image.jpg")
                       }
                     />
+                    <div className="absolute flex justify-center items-center h-full w-full top-0 group-hover:seasonCard transition-full rounded-xl">
+                      <FontAwesomeIcon
+                        className="text-3xl group-hover:opacity-100 opacity-0 transition-full"
+                        icon={faPlay}
+                      />
+                    </div>
                     <div className="absolute left-[7px] bottom-[7px] flex flex-row gap-[2px] items-center text-[14px]">
                       <p className="flex flex-row justify-center items-center gap-1 px-1 rounded-sm bg-green-200 text-black">
                         <FontAwesomeIcon icon={faClosedCaptioning} />{" "}
@@ -82,11 +93,11 @@ export default function ReusableCarousel({ title, data = [], className }) {
                       </p>
                       <p className="flex flex-row justify-center items-center gap-1 px-1 rounded-sm bg-blue-200 text-black">
                         <FontAwesomeIcon icon={faMicrophone} />{" "}
-                        {anime.episodes.dub || '0'}
+                        {anime.episodes.dub || "0"}
                       </p>
                     </div>
                   </Link>
-                  <h4 className="font-semibold">{anime.name}</h4>
+                  <h4 className="font-semibold">{anime.name.length > 30 ? anime.name.substring(0,30) + '...' : anime.name }</h4>
                 </div>
               </SwiperSlide>
             );
