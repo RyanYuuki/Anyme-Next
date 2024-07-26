@@ -128,7 +128,9 @@ const StreamingPage = () => {
               currentEpisode={currentEpisode}
             />
             <BasicDetails data={animeData.anime} page="Streaming" />
-            <AnimeRelation relations={animeData.seasons} />
+            {animeData.seasons.length > 0 && (
+              <AnimeRelation relations={animeData.seasons} />
+            )}
           </div>
           <div className="flex flex-col w-[26%] h-full gap-2">
             <ReusableVerticalCarousel

@@ -8,16 +8,23 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
 const EstimatedSchedule = () => {
-  const week = useCurrentWeekWithDetails();
+  const week  = useCurrentWeekWithDetails();
   const [scheduleData, setScheduleDate] = useState(null);
   const [activeYear, setActiveYear] = useState(null);
   const [activeDay, setActiveDay] = useState(null);
   const [activeMonth, setActiveMonth] = useState(null);
 
+  const disableCopy = {
+    userSelect: "none",
+    WebkitUserSelect: "none",
+    MozUserSelect: "none",
+    msUserSelect: "none",
+  };
+
   useEffect(() => {
     if (week.length > 0) {
       setActiveYear(week[0].year);
-      setActiveDay(week[0].day);
+      setActiveDay(week[0].dayNumber);
       setActiveMonth(week[0].monthNumber);
     }
   }, [week]);
@@ -31,14 +38,6 @@ const EstimatedSchedule = () => {
           activeDay
         );
         setScheduleDate(data);
-        console.log(
-          "year: " +
-            activeYear +
-            " month: " +
-            activeMonth +
-            " day: " +
-            activeDay
-        );
       };
       loadData();
     }
@@ -60,14 +59,14 @@ const EstimatedSchedule = () => {
               <SwiperSlide key={index}>
                 <div
                   onClick={() =>
-                    handleScheduleDate(data.year, data.monthNumber, data.day)
+                    handleScheduleDate(data.year, data.monthNumber, data.dayNumber)
                   }
                   className={`flex flex-col py-[10px] px-[30px] rounded-xl text-center cursor-pointer ${
                     data.day == activeDay ? "bg-indigo-400" : "bg-input"
                   }`}
                 >
-                  <h1>{data.weekday.slice(0, 3)}</h1>
-                  <p className="text-nowrap">{data.month + " " + data.day}</p>
+                  <h1 style={disableCopy} >{data.weekday.slice(0, 3)}</h1>
+                  <p style={disableCopy} className="text-nowrap">{data.month + " " + data.day}</p>
                 </div>
               </SwiperSlide>
             ))}
