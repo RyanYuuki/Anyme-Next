@@ -28,12 +28,11 @@ const BasicDetails = ({ data, page = "Details", className }) => {
       <div className="flex flex-col gap-2 w-[180px] text-[13px]">
         <div className="relative" >
         <img
-          className="object-cover rounded-md"
+          className="object-cover max-md:h-[150px] rounded-md"
           src={data.info.poster}
           alt={data.info.id}
         />
         <p className="absolute top-1 left-1 px-3 py-1 rounded-md bg-black/70" >{data.info.stats.rating}</p>
-        <p></p>
         </div>
         <Link href={`/pages/Anime/watch/${data.info.id}`}>
           <button className="p-3 w-full bg-accent rounded-md font-semibold hover:bg-indigo-400 transition-full">
@@ -63,7 +62,7 @@ const BasicDetails = ({ data, page = "Details", className }) => {
           {data.info.description.replace(/<\/?[^>]+(>|$)/g, "")}
         </p>
         <div className="flex flex-row justify-between h-full max-md:text-[13px] text-primary/60">
-          <div className="flex flex-col justify-evenly h-full">
+          <div className="flex flex-col justify-evenly max-md:justify-start h-full">
             <p>
               Japanese:{" "}
               <span className="font-semibold text-primary">
@@ -89,7 +88,7 @@ const BasicDetails = ({ data, page = "Details", className }) => {
               </span>
             </p>
           </div>
-          <div className="flex flex-col justify-evenly h-full">
+          <div className="flex flex-col justify-evenly max-md:justify-start h-full">
             <p>
               Episodes (DUB):{" "}
               <span className="font-semibold text-primary">
@@ -115,14 +114,14 @@ const BasicDetails = ({ data, page = "Details", className }) => {
               </span>
             </p>
           </div>
-          <div className="flex flex-col justify-evenly items-center h-full w-[33%]">
+          <div className="flex flex-col justify-evenly max-md:justify-start items-center h-full w-[33%]">
             <p>
               Studios:{" "}
               <span className="font-semibold text-primary uppercase">
                 {data.moreInfo.studios}
               </span>
             </p>
-            <p className="flex flex-wrap gap-3 font-semibold text-primary p-3">
+            <p className="flex flex-wrap gap-3 font-semibold text-primary">
               {data.moreInfo.genres.map((data) => (
                 <span key={data} className="p-2 rounded-xl bg-accent/80">
                   {data}

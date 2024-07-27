@@ -12,7 +12,7 @@ export default function ReusableCarouselAlt({ title, data = [], className }) {
       <h2 className="text-3xl font-semibold border-l-8 border-l-neutral-800 px-5">
         {title}
       </h2>
-      <div className="bg-neutral-700/30 rounded-lg box-shadow p-5 pt-5">
+      <div className="bg-neutral-700/30 rounded-lg box-shadow p-3 pt-5">
         <Swiper
           breakpoints={{
             0: {
@@ -61,7 +61,7 @@ export default function ReusableCarouselAlt({ title, data = [], className }) {
                       }
                     >
                       <img
-                        className="rounded-2xl object-cover h-[290px] w-[230px] max-md:h-[170px] max-md:w-[100px] animated"
+                        className="rounded-2xl object-cover h-[290px] w-[230px] max-md:h-[230px] max-md:w-[200px] animated"
                         src={anime.poster || "/path/to/default-image.jpg"}
                         alt={anime.id}
                         draggable="false"

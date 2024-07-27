@@ -25,7 +25,7 @@ export default function ReusableCarousel({ title, data = [], className }) {
       <h2 className="text-3xl font-semibold border-l-8 border-l-neutral-800 px-5">
         {title}
       </h2>
-      <div className="bg-neutral-700/30 rounded-lg box-shadow">
+      <div className="bg-neutral-700/30 rounded-lg box-shadow max-md:p-3">
         <Swiper
           breakpoints={{
             0: {
@@ -73,7 +73,7 @@ export default function ReusableCarousel({ title, data = [], className }) {
                     }
                   >
                     <img
-                      className="rounded-lg object-cover h-[290px] w-[230px] max-md:h-[150px]"
+                      className="rounded-lg object-cover h-[290px] w-[230px] max-md:h-[200px]"
                       src={anime.poster || "/path/to/default-image.jpg"}
                       draggable="false"
                       onError={(e) =>

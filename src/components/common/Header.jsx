@@ -45,7 +45,7 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed w-full z-50 flex flex-row items-center justify-evenly gap-5 p-5 px-7 backdrop-blur-lg border-b border-b-border bg-black/15 max-md:gap-0 max-md:px-3 max-md:justify-between">
+    <header className="fixed w-[100vw] z-50 flex flex-row items-center justify-evenly gap-5 p-5 px-7 backdrop-blur-lg border-b border-b-border bg-black/15 max-md:gap-0 max-md:px-3 max-md:justify-between">
       <h1 className="text-2xl font-semibold">
         An<span className="text-4xl text-neutral-500">Y</span>meY
       </h1>
@@ -76,10 +76,20 @@ const Header = () => {
                 <div className="flex flex-col w-full gap-2 items-center justify-center text-center">
                   <h1>{data?.title?.english || data?.title?.romaji}</h1>
                   <div className="flex flex-row items-center justify-center gap-10 w-full text-[12px] text-primary/50">
-                    <p><FontAwesomeIcon icon={faCalendar} /> {data?.releaseDate || "??"}</p>
-                    <p><FontAwesomeIcon icon={faLaptop} /> {data?.type || "??"}</p>
-                    <p><FontAwesomeIcon icon={faShield} /> {data?.totalEpisodes || "??"}</p>
-                    <p><FontAwesomeIcon icon={faStar} /> {data?.rating || "??"}</p>
+                    <p>
+                      <FontAwesomeIcon icon={faCalendar} />{" "}
+                      {data?.releaseDate || "??"}
+                    </p>
+                    <p>
+                      <FontAwesomeIcon icon={faLaptop} /> {data?.type || "??"}
+                    </p>
+                    <p>
+                      <FontAwesomeIcon icon={faShield} />{" "}
+                      {data?.totalEpisodes || "??"}
+                    </p>
+                    <p>
+                      <FontAwesomeIcon icon={faStar} /> {data?.rating || "??"}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -90,13 +100,55 @@ const Header = () => {
 
       <div
         style={{ display: isSearchBarToggledMobile ? "flex" : "none" }}
-        className="absolute left-0 top-[100%] w-full flex items-center justify-center p-5 bg-primary-foreground"
+        className="absolute left-0 top-[100%] w-full items-center justify-center p-5 bg-primary-foreground"
       >
-        <Input placeholder="Search Anime..." className="bg-accent w-full" />
+        <Input
+          handleCross={handleCross}
+          value={searchTerm}
+          onChange={() => setSearchTerm(event.target.value)}
+          placeholder="Search Anime..."
+          className="bg-accent w-full"
+        />
+        {searchData && isSearchBarToggledMobile && (
+          <div className="flex flex-col gap-2 absolute w-full top-[100%] max-h-[300px] bg-primary-foreground p-2 overflow-scroll custom-scrollbar rounded-md">
+            {searchData.map((data) => (
+              <div
+                key={data.id}
+                className="flex flex-row items-center justify-center w-full bg-neutral-700/30 p-2 rounded-md box-shadow"
+              >
+                <img
+                  className="w-[70px] h-[80px] rounded-lg"
+                  src={data.image}
+                  alt=""
+                />
+                <div className="flex flex-col w-full gap-2 items-center justify-center text-center">
+                  <h1>{data?.title?.english || data?.title?.romaji}</h1>
+                  <div className="flex flex-row items-center justify-center gap-10 w-full text-[12px] text-primary/50">
+                    <p>
+                      <FontAwesomeIcon icon={faCalendar} />{" "}
+                      {data?.releaseDate || "??"}
+                    </p>
+                    <p>
+                      <FontAwesomeIcon icon={faLaptop} /> {data?.type || "??"}
+                    </p>
+                    <p>
+                      <FontAwesomeIcon icon={faShield} />{" "}
+                      {data?.totalEpisodes || "??"}
+                    </p>
+                    <p>
+                      <FontAwesomeIcon icon={faStar} /> {data?.rating || "??"}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
       <div className="flex flex-row gap-5 items-center max-md:gap-4">
         <Button
-          className="max-md:block hidden"
+          onClick={() => setIsSearchBarToggledMobile(!isSearchBarToggledMobile)}
+          className="max-md:flex justify-center items-center hidden"
           variant={"outline"}
           size={"icon"}
         >
