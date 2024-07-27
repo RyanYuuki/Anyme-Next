@@ -16,7 +16,6 @@ const Top10AnimesTable = ({ data }) => {
     setCurrentData((prevValue) => null);
     const durationArr = [data.today, data.week, data.month];
     setCurrentData(durationArr[activeDuration]);
-    console.log(durationArr[activeDuration]);
   }, [activeDuration]);
 
   return (
@@ -38,14 +37,14 @@ const Top10AnimesTable = ({ data }) => {
           ))}
         </div>
       </div>
-      <div className="grid grid-cols-2 max-md:grid-cols-1 grid-rows-auto gap-3 bg-neutral-700/30 p-5 rounded-md">
+      <div className="grid grid-cols-2  max-md:grid-cols-1 grid-rows-auto gap-3 bg-neutral-700/30 p-5 rounded-md">
         {currentData &&
           currentData.map((data) => (
             <Link
               href={`/pages/Anime/details/${data.id}`}
               className="flex flex-row items-center gap-10 group animated"
             >
-              <h1 className="text-2xl border-b-4 border-indigo-400 group-hover:text-indigo-300 transition-full">
+              <h1 className="text-2xl w-[30px] text-center border-b-4 border-indigo-400 group-hover:text-indigo-300 transition-full">
                 {data.rank.toString().padStart(2, "0")}
               </h1>
               <div className="flex flex-row gap-2">

@@ -120,7 +120,7 @@ const EstimatedSchedule = () => {
                     : data.name}
                 </h1>
               </div>
-              <button className="flex flex-row gap-2 items-center text-nowrap max-md:text-[13px] group-hover:bg-indigo-400 group rounded-xl group-hover:text-white">
+              <button className="flex flex-row gap-2 items-center text-nowrap p-2 max-md:text-[13px] group-hover:bg-indigo-400 group rounded-xl group-hover:text-white">
                 <FontAwesomeIcon icon={faPlay} /> Episode {" " + data.episode}
               </button>
             </Link>

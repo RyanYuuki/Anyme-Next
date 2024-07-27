@@ -152,6 +152,14 @@
   .animated {
     animation: slideIn 0.5s ease-in-out;
   }
+  .cool-gradient {
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.7120098039215687) 0%,
+      rgba(9, 9, 121, 0) 52%,
+      rgba(0, 0, 0, 0.7120098039215687) 100%
+    );
+  }
   .disable {
     animation: none;
     transition: none;
