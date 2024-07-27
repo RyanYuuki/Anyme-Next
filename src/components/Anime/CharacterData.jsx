@@ -35,10 +35,9 @@ const CharacterData = ({ data }) => {
                   src={item.image}
                   alt={item.name}
                 />
-                <div className="flex flex-col justify-center gap-2 items-center text-[13px]">
+                <div className="flex flex-col justify-center gap-2 items-center max-md:text-[13px]">
                   <h1>{item.name.full}</h1>
                   <p className="italic text-gray-400">
-                    {" "}
                     ~ {" " + voiceActor.name.full || "??"}
                   </p>
                 </div>

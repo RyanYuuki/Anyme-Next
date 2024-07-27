@@ -25,7 +25,7 @@ const BasicDetails = ({ data, page = "Details", className }) => {
         className
       )}
     >
-      <div className="flex flex-col gap-2 w-[180px] max-md:w-[130px] text-[12px]">
+      <div className="flex flex-col gap-2 w-[180px] max-md:w-[130px] max-md:text-[12px]">
         <div className="relative">
           <img
             className="object-cover max-md:h-[150px] rounded-md"

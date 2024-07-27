@@ -168,11 +168,13 @@
     animation: none;
     transition: none;
   }
-  .fix-text p {
-    font-size: 12px;
-  }
-  .fix-text span {
-    font-size: 10px;
+  @media screen and (max-width: 768px) {
+    .fix-text p {
+      font-size: 12px;
+    }
+    .fix-text span {
+      font-size: 10px;
+    }
   }
   @keyframes slideIn {
     from {
