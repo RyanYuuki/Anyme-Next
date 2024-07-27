@@ -33,7 +33,7 @@ const AnimeDetailsPage = () => {
   if (!data) return <h1>Loading...</h1>;
 
   return (
-    <div className="flex flex-col gap-2 w-[80%] relative left-[10%] animated">
+    <div className="flex flex-col gap-2 w-[80%] relative left-[10%] max-md:left-[5%] max-md:w-[90%] animated">
       <img
         className="w-full h-[250px] object-cover rounded-sm animated"
         src={posterSrc}

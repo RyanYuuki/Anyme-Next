@@ -35,7 +35,7 @@ const EpisodeList = ({ episodesData, currentEpisode, icons, handleClick, episode
   if (!episodesData) return <h1>Episodes Arent Available</h1>;
 
   return (
-    <div className="flex flex-col gap-5 w-[26%] overflow-y-scroll scroll-smooth custom-scrollbar h-full p-2 bg-neutral-700/30 rounded-md">
+    <div className="flex flex-col gap-5 w-[26%] max-md:w-full max-md:h-[400px] overflow-y-scroll scroll-smooth custom-scrollbar h-full p-2 bg-neutral-700/30 rounded-md">
       <div className="flex flex-row items-center gap-3 w-full">
         <select className="h-[40px] rounded-md px-2 text-[12px] bg-accent">
           <option

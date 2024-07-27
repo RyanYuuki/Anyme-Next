@@ -19,7 +19,7 @@ const CharacterData = ({ data }) => {
         <h1 className="text-2xl">Characters</h1>
         <Selector onClick={handleLanguage} />
       </div>
-      <div className="flex flex-wrap justify-between gap-5 w-full">
+      <div className="grid grid-cols-3 grid-rows-auto max-md:grid-cols-1 justify-between gap-5 w-full">
         {filteredData ? (
           filteredData.map((item) => {
             const voiceActor = item?.voiceActors?.find(
@@ -27,7 +27,7 @@ const CharacterData = ({ data }) => {
             );
             return (
               <div
-                className="flex flex-row animated justify-between bg-accent/80 p-2 rounded-md w-[32%] box-shadow"
+                className="flex flex-row animated justify-between bg-accent/80 p-2 rounded-md box-shadow"
                 key={item.name.full}
               >
                 <img

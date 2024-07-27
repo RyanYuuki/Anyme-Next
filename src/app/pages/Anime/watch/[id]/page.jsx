@@ -102,7 +102,7 @@ const StreamingPage = () => {
 
   return (
     <div className="flex flex-col px-5 gap-3">
-      <div className="flex flex-row justify-between h-[600px]">
+      <div className="flex flex-row justify-between h-[600px] max-md:h-auto max-md:flex-col">
         <VideoPlayer
           episodeLoading={episodeLoading}
           episodeSrc={episodeSrc}
@@ -118,8 +118,8 @@ const StreamingPage = () => {
         />
       </div>
       {animeData ? (
-        <div className="flex flex-row w-full justify-between">
-          <div className="flex flex-col w-[72%] gap-3">
+        <div className="flex flex-row max-md:flex-col max-md:gap-5 w-full justify-between">
+          <div className="flex flex-col w-[72%] max-md:w-full gap-3">
             <ServerSelector
               onClick={handleServer}
               episodeType={episodeType}
@@ -132,7 +132,7 @@ const StreamingPage = () => {
               <AnimeRelation relations={animeData.seasons} />
             )}
           </div>
-          <div className="flex flex-col w-[26%] h-full gap-2">
+          <div className="flex flex-col w-[26%] max-md:w-full h-full gap-2">
             <ReusableVerticalCarousel
               data={animeData.relatedAnimes}
               title={"RELATED"}

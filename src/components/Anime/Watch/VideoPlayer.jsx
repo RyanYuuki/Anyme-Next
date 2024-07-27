@@ -18,7 +18,7 @@ const VideoPlayer = ({
     (caption) => caption.kind == "thumbnails"
   );
   return (
-    <div className="h-full w-[72%] rounded-3xl">
+    <div className="h-full w-[72%] max-md:w-full rounded-3xl">
       {episodeLoading ? (
         <div>Loading video...</div>
       ) : (

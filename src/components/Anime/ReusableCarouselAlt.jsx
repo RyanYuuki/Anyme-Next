@@ -12,7 +12,7 @@ export default function ReusableCarouselAlt({ title, data = [], className }) {
       <h2 className="text-3xl font-semibold border-l-8 border-l-neutral-800 px-5">
         {title}
       </h2>
-      <div className="bg-neutral-700/30 rounded-lg box-shadow">
+      <div className="bg-neutral-700/30 rounded-lg box-shadow p-5 pt-5">
         <Swiper
           breakpoints={{
             0: {
@@ -28,8 +28,8 @@ export default function ReusableCarouselAlt({ title, data = [], className }) {
               spaceBetween: 15,
             },
             400: {
-              slidesPerView: 2,
-              spaceBetween: 20,
+              slidesPerView: 3,
+              spaceBetween: 10,
             },
             768: {
               slidesPerView: 3,
@@ -41,7 +41,7 @@ export default function ReusableCarouselAlt({ title, data = [], className }) {
             },
             1200: {
               slidesPerView: 5,
-              spaceBetween: 10,
+              spaceBetween: 20,
             },
           }}
           style={{ cursor: "grab" }}
@@ -51,7 +51,7 @@ export default function ReusableCarouselAlt({ title, data = [], className }) {
               const isManga = anime.type === "MANGA";
               return (
                 <SwiperSlide key={index}>
-                  <div className="group flex flex-col items-center animated justify-center p-5 gap-3 pt-10 text-center">
+                  <div className="group flex flex-col items-center animated justify-center gap-3  text-center">
                     <Link
                     className="relative transition-full"
                       href={
@@ -61,7 +61,7 @@ export default function ReusableCarouselAlt({ title, data = [], className }) {
                       }
                     >
                       <img
-                        className="rounded-2xl object-cover h-[290px] w-[230px] animated"
+                        className="rounded-2xl object-cover h-[290px] w-[230px] max-md:h-[170px] max-md:w-[100px] animated"
                         src={anime.poster || "/path/to/default-image.jpg"}
                         alt={anime.id}
                         draggable="false"
@@ -84,7 +84,7 @@ export default function ReusableCarouselAlt({ title, data = [], className }) {
                       </div>
                     </Link>
                     <h4 className="font-semibold">
-                      {anime.name || anime.jname}
+                      {anime.name.length > 30 ? anime.name.substring(0,30) + '...' : anime.name || anime.jname}
                     </h4>
                   </div>
                 </SwiperSlide>

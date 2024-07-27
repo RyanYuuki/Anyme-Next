@@ -53,16 +53,16 @@ const BasicDetails = ({ data, page = "Details", className }) => {
         </div>
       </div>
       <div className="flex flex-col gap-2 w-[80%]">
-        <h1 className="text-2xl font-bold">
+        <h1 className="text-2xl max-md:text-lg font-bold">
           {data.info.name || data.info.jname}
         </h1>
-        <p style={{ color: data.color, fontWeight: 700, fontStyle: 'italic' }}>
+        <p className="max-md:text-sm" style={{ color: data.color, fontWeight: 700, fontStyle: 'italic' }}>
           {"[" + (data?.moreInfo?.synonyms || data?.info.jname || data?.info?.name) + "]"}
         </p>
-        <p className="rounded-xl bg-accent/60 p-2 italic box-shadow">
+        <p className="rounded-xl bg-accent/60 p-2 max-md:hidden italic box-shadow">
           {data.info.description.replace(/<\/?[^>]+(>|$)/g, "")}
         </p>
-        <div className="flex flex-row justify-between h-full text-primary/60">
+        <div className="flex flex-row justify-between h-full max-md:text-[13px] text-primary/60">
           <div className="flex flex-col justify-evenly h-full">
             <p>
               Japanese:{" "}
