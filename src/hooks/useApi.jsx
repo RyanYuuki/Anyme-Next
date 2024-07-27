@@ -251,19 +251,53 @@ export const FetchAniwatchHomePage = async () => {
 export const FetchAnimeByCategories = async (category, page) => {
   // categories -> "most-favorite", "most-popular", "subbed-anime", "dubbed-anime", "recently-updated", "recently-added", "top-upcoming", "top-airing", "movie", "special", "ova", "ona", "tv", "completed"
 
-  const resp = await fetch(`https://anymey-proxy-2q4kopd3u-ryanyuukis-projects.vercel.app/cors?url=${ANIWATCH_URL}/${category}?page=${page}`);
+  const resp = await fetch(
+    `https://anymey-proxy-2q4kopd3u-ryanyuukis-projects.vercel.app/cors?url=${ANIWATCH_URL}/${category}?page=${page}`
+  );
   const data = await resp.json();
   return data;
+};
+
+export const FetchAnimesByGenres = async (genre) => {
+  const resp = await fetch(`${ANIWATCH_URL}genre/${genre}`);
+  const data = await resp.json();
+  return data.animes;
+};
+
+export const AdvancedSearch = async (
+  query,
+  genres = "action",
+  type = "anime",
+  sort = "recently-added",
+  season = "spring",
+  lang = "sub",
+  status = "currently-airing",
+  rating = "pg-13",
+  y = "2024",
+  m = "07",
+  d = "27",
+  ey = "2024",
+  em = "08",
+  ed = "28",
+  score = "good"
+) => {
+  const genresParam = genres ? genres : "";
+  const queryUrl = `${ANIWATCH_URL}search?q=${query}&genres=${genresParam}&type=${type}&sort=${sort}&season=${season}&language=${lang}&status=${status}&rated=${rating}&start_date=${y}-${m}-${d}&end_date=${ey}-${em}-${ed}&score=${score}`;
+  const resp = await fetch(queryUrl);
+  const data = await resp.json();
+  return data.animes;
 };
 
 export const FetchAnimeByAniwatchID = async (id) => {
   const resp = await fetch(`${ANIWATCH_URL}info?id=${id}`);
   const data = await resp.json();
   return data;
-}
+};
 
 export const FetchEstimatedSchedule = async (year, month, day) => {
-  const response = await fetch(`${ANIWATCH_URL}schedule?date=${year}-${month}-${day}`);
+  const response = await fetch(
+    `${ANIWATCH_URL}schedule?date=${year}-${month}-${day}`
+  );
   const data = await response.json();
   return data.scheduledAnimes;
-}
+};

@@ -74,13 +74,14 @@ const ReusableCardStacks = ({ withGenres, genresData, data, title }) => {
           <h1 className="text-2xl">Genres</h1>
           <div className="grid grid-cols-3 auto-rows-max gap-2 p-5 bg-input rounded-md">
             {genresData.map((genre, index) => (
-              <div
+              <Link 
+                href={`/pages/Anime/search/${genre}`}
                 key={genre}
                 className="p-2 rounded-md"
                 style={{ color: colors[index], filter: "brightness(1.2)" }}
               >
                 {genre.length > 9 ? genre.substring(0, 9) + ".." : genre}
-              </div>
+              </Link>
             ))}
           </div>
         </div>

@@ -21,7 +21,7 @@ const Top10AnimesTable = ({ data }) => {
   return (
     <div className="flex flex-col gap-5">
       <div className="flex flex-row justify-between">
-        <h2 className="text-3xl font-semibold border-l-8 text-nowrap border-l-neutral-800 px-5">
+        <h2 className="text-3xl max-md:text-2xl font-semibold border-l-8 text-nowrap border-l-neutral-800 px-5">
           Top 10
         </h2>
         <div className="flex flex-row gap-3 items-center">
