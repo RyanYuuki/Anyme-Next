@@ -25,28 +25,30 @@ const BasicDetails = ({ data, page = "Details", className }) => {
         className
       )}
     >
-      <div className="flex flex-col gap-2 w-[180px] text-[13px]">
-        <div className="relative" >
-        <img
-          className="object-cover max-md:h-[150px] rounded-md"
-          src={data.info.poster}
-          alt={data.info.id}
-        />
-        <p className="absolute top-1 left-1 px-3 py-1 rounded-md bg-black/70" >{data.info.stats.rating}</p>
+      <div className="flex flex-col gap-2 w-[180px] max-md:w-[130px] text-[12px]">
+        <div className="relative">
+          <img
+            className="object-cover max-md:h-[150px] rounded-md"
+            src={data.info.poster}
+            alt={data.info.id}
+          />
+          <p className="absolute top-1 left-1 px-3 py-1 rounded-md bg-black/70">
+            {data.info.stats.rating}
+          </p>
         </div>
         <Link href={`/pages/Anime/watch/${data.info.id}`}>
-          <button className="p-3 w-full bg-accent rounded-md font-semibold hover:bg-indigo-400 transition-full">
+          <button className="p-3 max-md:p-2 w-full bg-accent rounded-md font-semibold hover:bg-indigo-400 transition-full">
             {page == "Details" ? "WATCH NOW" : "INFO"}
           </button>
         </Link>
-        <button className="p-3 bg-accent rounded-md font-semibold hover:bg-indigo-400 transition-full">
+        <button className="p-3 max-md:p-2 bg-accent rounded-md font-semibold hover:bg-indigo-400 transition-full">
           TRAILER
         </button>
         <div className="flex flex-row justify-between">
-          <button className="p-3 w-[45%] bg-accent/80 rounded-md font-semibold hover:bg-indigo-400 transition-full">
+          <button className="p-3 max-md:p-2 w-[45%] bg-accent/80 rounded-md font-semibold hover:bg-indigo-400 transition-full">
             A
           </button>
-          <button className="p-3 w-[45%] bg-accent/80 rounded-md font-semibold hover:bg-indigo-400 transition-full">
+          <button className="p-3 max-md:p-2 w-[45%] bg-accent/80 rounded-md font-semibold hover:bg-indigo-400 transition-full">
             MAL
           </button>
         </div>
@@ -55,13 +57,18 @@ const BasicDetails = ({ data, page = "Details", className }) => {
         <h1 className="text-2xl max-md:text-lg font-bold">
           {data.info.name || data.info.jname}
         </h1>
-        <p className="max-md:text-sm" style={{ color: data.color, fontWeight: 700, fontStyle: 'italic' }}>
-          {"[" + (data?.moreInfo?.synonyms || data?.info.jname || data?.info?.name) + "]"}
+        <p
+          className="max-md:text-sm"
+          style={{ color: data.color, fontWeight: 700, fontStyle: "italic" }}
+        >
+          {"[" +
+            (data?.moreInfo?.synonyms || data?.info.jname || data?.info?.name) +
+            "]"}
         </p>
         <p className="rounded-xl bg-accent/60 p-2 max-md:hidden italic box-shadow">
           {data.info.description.replace(/<\/?[^>]+(>|$)/g, "")}
         </p>
-        <div className="flex flex-row justify-between h-full max-md:text-[13px] text-primary/60">
+        <div className="fix-text flex flex-row justify-between h-full max-md:text-[13px] text-primary/60">
           <div className="flex flex-col justify-evenly max-md:justify-start h-full">
             <p>
               Japanese:{" "}
@@ -121,7 +128,7 @@ const BasicDetails = ({ data, page = "Details", className }) => {
                 {data.moreInfo.studios}
               </span>
             </p>
-            <p className="flex flex-wrap gap-3 font-semibold text-primary">
+            <p className="flex flex-wrap gap-3 font-semibold text-primary max-md:hidden">
               {data.moreInfo.genres.map((data) => (
                 <span key={data} className="p-2 rounded-xl bg-accent/80">
                   {data}
@@ -130,6 +137,13 @@ const BasicDetails = ({ data, page = "Details", className }) => {
             </p>
           </div>
         </div>
+        <p className="flex-wrap gap-3 font-semibold text-primary text-[12px] hidden max-md:flex">
+          {data.moreInfo.genres.map((data) => (
+            <span key={data} className="p-2 rounded-xl bg-accent/80">
+              {data}
+            </span>
+          ))}
+        </p>
       </div>
     </div>
   );

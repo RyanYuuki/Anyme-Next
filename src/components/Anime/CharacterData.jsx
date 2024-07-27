@@ -15,7 +15,7 @@ const CharacterData = ({ data }) => {
 
   return (
     <div className="flex flex-col gap-5 w-full bg-neutral-700/30 p-5 box-shadow rounded-md animated">
-      <div className="flex flex-row items-center w-full justify-between px-3">
+      <div className="flex flex-row items-center w-full max-md:gap-5 justify-between px-3">
         <h1 className="text-2xl">Characters</h1>
         <Selector onClick={handleLanguage} />
       </div>
@@ -35,7 +35,7 @@ const CharacterData = ({ data }) => {
                   src={item.image}
                   alt={item.name}
                 />
-                <div className="flex flex-col justify-center gap-2 items-center">
+                <div className="flex flex-col justify-center gap-2 items-center text-[13px]">
                   <h1>{item.name.full}</h1>
                   <p className="italic text-gray-400">
                     {" "}

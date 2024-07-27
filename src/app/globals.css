@@ -168,6 +168,12 @@
     animation: none;
     transition: none;
   }
+  .fix-text p {
+    font-size: 12px;
+  }
+  .fix-text span {
+    font-size: 10px;
+  }
   @keyframes slideIn {
     from {
       transform: translateY(10px);
