@@ -6,9 +6,9 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import useGenerateRandomColor from '../hooks/generateRandomColor';
+import useGenerateRandomColor from "../hooks/generateRandomColor";
 
-const ReusableCardStacks = ({ withGenres, genresData , data, title }) => {
+const ReusableCardStacks = ({ withGenres, genresData, data, title }) => {
   const { generateColor } = useGenerateRandomColor();
   const [colors, setColors] = useState([]);
 
@@ -20,10 +20,12 @@ const ReusableCardStacks = ({ withGenres, genresData , data, title }) => {
   }, [genresData, withGenres]);
 
   return (
-    <div className="flex flex-row justify-between">
-      <div className="flex flex-col gap-5 w-[69%]">
-        <h1 className="text-2xl">{title}</h1>
-        <div className="flex flex-wrap gap-5 p-5 bg-neutral-700/30 rounded-md">
+    <div className="flex flex-row max-md:flex-col max-md:gap-[20px] justify-between">
+      <div className="flex flex-col gap-5 w-[69%] max-md:w-full">
+        <h2 className="text-3xl font-semibold border-l-8 border-l-neutral-800 px-5">
+          {title}
+        </h2>
+        <div className="grid grid-cols-5 grid-row-auto max-md:grid-cols-2 place-items-center gap-5 p-5 bg-neutral-700/30 rounded-md">
           {data.map((anime) => (
             <Link
               key={anime.id}
@@ -68,14 +70,14 @@ const ReusableCardStacks = ({ withGenres, genresData , data, title }) => {
         </div>
       </div>
       {withGenres && (
-        <div className="flex flex-col gap-5 w-[25%]">
+        <div className="flex flex-col gap-5 w-[25%] max-md:w-full">
           <h1 className="text-2xl">Genres</h1>
           <div className="grid grid-cols-3 auto-rows-max gap-2 p-5 bg-input rounded-md">
             {genresData.map((genre, index) => (
               <div
                 key={genre}
                 className="p-2 rounded-md"
-                style={{ color: colors[index] , filter: 'brightness(1.2)'}}
+                style={{ color: colors[index], filter: "brightness(1.2)" }}
               >
                 {genre.length > 9 ? genre.substring(0, 9) + ".." : genre}
               </div>

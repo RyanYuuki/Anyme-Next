@@ -19,18 +19,18 @@ const config = {
       center: true,
       padding: "2rem",
       screens: {
-        "2xl": "1400px",
         'xs': '480px',
         'sm': '640px',
-        'md': '768px',
+        'md': {'min' : '768px', 'max' : '768px'},
         'lg': '1024px',
         'xl': '1930px',
-        'min-2xl' : { 'min': '1930px'},
+        "2xl": "1400px",
         'max-sm': {'max': '639px'},  
         'max-md': {'max': '767px'},  
         'max-lg': {'max': '1023px'},
         'max-xl': {'max': '1279px'}, 
-        'max-2xl': {'max': '1535px'} 
+        'max-2xl': {'max': '1535px'},
+        'min-2xl' : { 'min': '1930px'}, 
       },
     },
     extend: {

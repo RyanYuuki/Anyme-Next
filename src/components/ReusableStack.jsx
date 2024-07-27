@@ -29,13 +29,13 @@ const ReusableStack = ({ data }) => {
   }
 
   return (
-    <div className="flex flex-row justify-between pb-5 animated">
+    <div className="flex flex-row justify-between pb-5 animated max-md:flex-col max-md:gap-5">
       {MetaData.map(({ title, index }) => {
         const currentData = chunkedData[index];
         return (
           <div
             key={index}
-            className="flex flex-col bg-neutral-700/20 box-shadow p-5 w-[24%] gap-5 rounded-xl"
+            className="flex flex-col bg-neutral-700/20 box-shadow p-5 w-[24%] max-md:w-full gap-5 rounded-md"
           >
             <h1 className="text-2xl">{title}</h1>
             {currentData &&
@@ -50,7 +50,7 @@ const ReusableStack = ({ data }) => {
                     className="flex flex-row gap-3 bg-neutral-600/20 animated hover:bg-indigo-400 transition-full rounded-lg p-3 box-shadow"
                   >
                       <img
-                        className="xl:h-[100px] h-[70px] w-[100px] rounded-lg"
+                        className="xl:h-[100px] h-[70px] w-[100px] max-md:w-[70px] rounded-lg"
                         src={dataItem.poster}
                       />
                     <div className="flex flex-col justify-center gap-2 w-full">

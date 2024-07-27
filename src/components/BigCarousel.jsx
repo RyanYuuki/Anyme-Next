@@ -52,7 +52,7 @@ export default function BigCarousel({ data }) {
                       <FontAwesomeIcon icon={faCirclePlay} /> {info}
                     </p>
                   ))}
-                  <div className="flex flex-row gap-[5px] items-center text-[14px]">
+                  <div className="flex flex-row gap-[5px] items-center text-[14px] max-md:text-[12px]">
                     <p className="flex flex-row justify-center items-center gap-1 px-1 rounded-sm bg-green-200 text-black">
                       <FontAwesomeIcon icon={faClosedCaptioning} />{" "}
                       {item.episodes.sub}

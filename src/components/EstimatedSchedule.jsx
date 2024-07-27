@@ -8,7 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
 const EstimatedSchedule = () => {
-  const week  = useCurrentWeekWithDetails();
+  const week = useCurrentWeekWithDetails();
   const [scheduleData, setScheduleDate] = useState(null);
   const [activeYear, setActiveYear] = useState(null);
   const [activeDay, setActiveDay] = useState(null);
@@ -37,7 +37,9 @@ const EstimatedSchedule = () => {
           activeMonth,
           activeDay
         );
-        setScheduleDate(data);
+        if(data) {
+          setScheduleDate(prevValue => data);
+        }
       };
       loadData();
     }
@@ -51,22 +53,41 @@ const EstimatedSchedule = () => {
 
   return (
     <div className="flex flex-col gap-5 w-full">
-      <h1 className="text-2xl">Estimated Schedule</h1>
+      <h2 className="text-3xl font-semibold border-l-8 border-l-neutral-800 px-5">
+        Estimated Schedule
+      </h2>
       <div className="flex flex-col gap-5 justify-center items-center bg-neutral-700/30 p-5 rounded-md">
         <div className="flex flex-row gap-3 w-full">
-          <Swiper spaceBetween={20} slidesPerView={5}>
+          <Swiper
+            breakpoints={{
+              400: {
+                spaceBetween: 20,
+                slidesPerView: 3,
+              },
+              1200: {
+                spaceBetween: 20,
+                slidesPerView: 5,
+              },
+            }}
+          >
             {week.map((data, index) => (
               <SwiperSlide key={index}>
                 <div
                   onClick={() =>
-                    handleScheduleDate(data.year, data.monthNumber, data.dayNumber)
+                    handleScheduleDate(
+                      data.year,
+                      data.monthNumber,
+                      data.dayNumber
+                    )
                   }
                   className={`flex flex-col py-[10px] px-[30px] rounded-xl text-center cursor-pointer ${
                     data.day == activeDay ? "bg-indigo-400" : "bg-input"
                   }`}
                 >
-                  <h1 style={disableCopy} >{data.weekday.slice(0, 3)}</h1>
-                  <p style={disableCopy} className="text-nowrap">{data.month + " " + data.day}</p>
+                  <h1 style={disableCopy}>{data.weekday.slice(0, 3)}</h1>
+                  <p style={disableCopy} className="text-nowrap">
+                    {data.month + " " + data.day}
+                  </p>
                 </div>
               </SwiperSlide>
             ))}
@@ -77,17 +98,17 @@ const EstimatedSchedule = () => {
             <Link
               href={`/pages/Anime/watch/${data.id}`}
               key={data.id}
-              className="flex flex-row justify-between w-full p-3 border-b border-input group hover:text-indigo-400"
+              className="flex flex-row justify-between w-full animated p-3 border-b border-input group hover:text-indigo-400"
             >
               <div className="flex flex-row gap-8">
                 <p>{data.time}</p>
-                <h1>
-                  {data.name.length > 40
-                    ? data.name.substring(0, 40) + "..."
+                <h1 className="max-md:text-[12px]">
+                  {data.name.length > 30
+                    ? data.name.substring(0, 30) + "..."
                     : data.name}
                 </h1>
               </div>
-              <button className="flex flex-row gap-2 items-center p-2 group-hover:bg-indigo-400 group rounded-xl group-hover:text-white">
+              <button className="flex flex-row gap-2 items-center text-nowrap p-2 group-hover:bg-indigo-400 group rounded-xl group-hover:text-white">
                 <FontAwesomeIcon icon={faPlay} /> Episode {" " + data.episode}
               </button>
             </Link>
