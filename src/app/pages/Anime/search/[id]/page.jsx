@@ -27,7 +27,7 @@ import { Input } from "@/components/ui/input";
 const Search = () => {
   const { id } = useParams();
   const [searchData, setSearchData] = useState(null);
-  const [searchQuery, setSearchQuery] = useState(" ");
+  const [searchQuery, setSearchQuery] = useState("");
   const [genre, setGenres] = useState(id.toLowerCase());
   const [type, setType] = useState(null);
   const [sort, setSort] = useState(null);
@@ -45,9 +45,8 @@ const Search = () => {
 
   useEffect(() => {
     const loadData = async () => {
-      if (searchQuery.length > 0) {
         const data = await AdvancedSearch(
-          searchQuery,
+          ' ' + searchQuery,
           genre,
           type,
           sort,
@@ -65,8 +64,6 @@ const Search = () => {
         );
         setSearchData(data);
       }
-    };
-
     loadData();
   }, [
     searchQuery,

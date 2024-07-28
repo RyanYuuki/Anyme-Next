@@ -28,7 +28,7 @@ const BasicDetails = ({ data, page = "Details", className }) => {
       <div className="flex flex-col gap-2 w-[180px] max-md:w-[130px] max-md:text-[12px]">
         <div className="relative">
           <img
-            className="object-cover max-md:h-[150px] rounded-md"
+            className="object-cover max-md:h-[150px] w-[250px] rounded-md"
             src={data.info.poster}
             alt={data.info.id}
           />
@@ -37,28 +37,28 @@ const BasicDetails = ({ data, page = "Details", className }) => {
           </p>
         </div>
         <Link href={`/pages/Anime/watch/${data.info.id}`}>
-          <button className="p-3 max-md:p-2 w-full bg-accent rounded-md font-semibold hover:bg-indigo-400 transition-full">
+          <button className="p-[12px] text-[14px] max-md:text-[10px] max-md:p-2 w-full bg-accent rounded-md font-semibold hover:bg-indigo-400 transition-full">
             {page == "Details" ? "WATCH NOW" : "INFO"}
           </button>
         </Link>
-        <button className="p-3 max-md:p-2 bg-accent rounded-md font-semibold hover:bg-indigo-400 transition-full">
+        <button className="p-[12px] text-[14px] max-md:p-2 max-md:text-[10px] bg-accent rounded-md font-semibold hover:bg-indigo-400 transition-full">
           TRAILER
         </button>
         <div className="flex flex-row justify-between">
-          <button className="p-3 max-md:p-2 w-[45%] bg-accent/80 rounded-md font-semibold hover:bg-indigo-400 transition-full">
+          <button className="p-[12px] text-[14px] max-md:p-2 max-md:text-[10px] w-[45%] bg-accent/80 rounded-md font-semibold hover:bg-indigo-400 transition-full">
             A
           </button>
-          <button className="p-3 max-md:p-2 w-[45%] bg-accent/80 rounded-md font-semibold hover:bg-indigo-400 transition-full">
+          <button className="p=[12px] text-[14px] max-md:p-2 max-md:text-[10px] w-[45%] bg-accent/80 rounded-md font-semibold hover:bg-indigo-400 transition-full">
             MAL
           </button>
         </div>
       </div>
-      <div className="flex flex-col gap-2 w-[80%]">
-        <h1 className="text-2xl max-md:text-lg font-bold">
+      <div className="flex flex-col gap-1 w-[80%]">
+        <h1 className="text-2xl max-md:text-base font-bold">
           {data.info.name || data.info.jname}
         </h1>
         <p
-          className="max-md:text-sm"
+          className="text-[12px] max-md:text-[10px]"
           style={{ color: data.color, fontWeight: 700, fontStyle: "italic" }}
         >
           {"[" +
@@ -68,7 +68,7 @@ const BasicDetails = ({ data, page = "Details", className }) => {
         <p className="rounded-xl bg-accent/60 p-2 max-md:hidden italic box-shadow">
           {data.info.description.replace(/<\/?[^>]+(>|$)/g, "")}
         </p>
-        <div className="fix-text flex flex-row justify-between h-full max-md:text-[13px] text-primary/60">
+        <div className="fix-text flex flex-row max-md:flex-col justify-between h-full max-md:text-[13px] text-primary/60">
           <div className="flex flex-col justify-evenly max-md:justify-start h-full">
             <p>
               Japanese:{" "}
@@ -122,7 +122,7 @@ const BasicDetails = ({ data, page = "Details", className }) => {
             </p>
           </div>
           <div className="flex flex-col justify-evenly max-md:justify-start items-center h-full w-[33%]">
-            <p>
+            <p className="w-full text-nowrap" >
               Studios:{" "}
               <span className="font-semibold text-primary uppercase">
                 {data.moreInfo.studios}
@@ -137,7 +137,7 @@ const BasicDetails = ({ data, page = "Details", className }) => {
             </p>
           </div>
         </div>
-        <p className="flex-wrap gap-3 font-semibold text-primary text-[12px] hidden max-md:flex">
+        <p className="flex-wrap gap-3 max-md:gap-1 max-md:text-[10px] font-semibold text-primary text-[12px] hidden max-md:flex">
           {data.moreInfo.genres.map((data) => (
             <span key={data} className="p-2 rounded-xl bg-accent/80">
               {data}

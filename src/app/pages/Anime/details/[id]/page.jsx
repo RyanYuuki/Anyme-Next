@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import BasicDetails from "@/components/Anime/BasicDetails";
 import CharactersData from "@/components/Anime/CharacterData";
 import ReusableCarouselAlt from "@/components/Anime/ReusableCarouselAlt";
+import PromotionalVideos from "@/components/Anime/PromotionalVideos";
 const AnimeDetailsPage = () => {
   const { id } = useParams();
   const [data, setData] = useState(null);
@@ -14,6 +15,7 @@ const AnimeDetailsPage = () => {
     const loadData = async () => {
       const Data = await FetchAnimeByAniwatchID(id);
       setData(Data);
+      console.log(Data);
       if (
         Data.anime.info.stats.episodes.sub > 300 ||
         Data.anime.info.stats.episodes.sub > "300"
@@ -40,6 +42,10 @@ const AnimeDetailsPage = () => {
       />
       <BasicDetails data={data.anime} />
       {consumetData && <CharactersData data={consumetData?.characters} />}
+      {data.anime.info.promotionalVideos &&
+        data.anime.info.promotionalVideos.length > 0 && (
+          <PromotionalVideos data={data?.anime?.info?.promotionalVideos} />
+        )}
       <ReusableCarouselAlt
         className={"mt-5"}
         title={"Related"}
@@ -49,6 +55,11 @@ const AnimeDetailsPage = () => {
         className={"mt-5"}
         title={"Recommendations"}
         data={data?.recommendedAnimes || []}
+      />
+      <ReusableCarouselAlt
+        className={"mt-5"}
+        title={"Popular"}
+        data={data?.mostPopularAnimes || []}
       />
     </div>
   );

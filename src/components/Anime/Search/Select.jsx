@@ -30,7 +30,7 @@ const Selector = ({ label, options, onClick, placeholder, className }) => {
         <SelectGroup>
           <SelectLabel>{label}</SelectLabel>
           {options.map((option, index) => (
-            <SelectItem key={index} value={option.toLowerCase()}>
+            <SelectItem className="capitalize" key={index} value={option.toLowerCase()}>
               {option}
             </SelectItem>
           ))}
@@ -46,11 +46,11 @@ export const GenreSelector = ({ onClick }) => (
 );
 
 export const TypeSelector = ({ onClick }) => (
-  <Selector label="Type" options={["anime", "manga"]} onClick={onClick} placeholder="Select Type" />
+  <Selector label="Type" options={['tv', "movie", 'ona', 'ova', 'special', 'music']} onClick={onClick} placeholder="Select Type" />
 );
 
 export const SortSelector = ({ onClick }) => (
-  <Selector label="Sort" options={["recently-added", "most-popular"]} onClick={onClick} placeholder="Select Sort" />
+  <Selector label="Sort" options={["recently-added", "recently-updated", 'score', 'name-a-z', 'released-date', 'most-watched']} onClick={onClick} placeholder="Select Sort" />
 );
 
 export const SeasonSelector = ({ onClick }) => (
@@ -58,19 +58,19 @@ export const SeasonSelector = ({ onClick }) => (
 );
 
 export const LanguageSelector = ({ onClick }) => (
-  <Selector label="Language" options={["Japanese", "English"]} onClick={onClick} placeholder="Select Language" />
+  <Selector label="Language" options={["sub", "dub", 'sub-dub']} onClick={onClick} placeholder="Select Language" />
 );
 
 export const StatusSelector = ({ onClick }) => (
-  <Selector label="Status" options={["currently-airing", "completed", "upcoming"]} onClick={onClick} placeholder="Select Status" />
+  <Selector label="Status" options={["currently-airing", "finished-airing", "not-yet-aired"]} onClick={onClick} placeholder="Select Status" />
 );
 
 export const RatingSelector = ({ onClick }) => (
-  <Selector label="Rating" options={["g", "pg", "pg-13", "r", "r18"]} onClick={onClick} placeholder="Select Rating" />
+  <Selector label="Rating" options={["g", "pg", "pg-13", "r", "r+"]} onClick={onClick} placeholder="Select Rating" />
 );
 
 export const ScoreSelector = ({ onClick }) => (
-  <Selector label="Score" options={["excellent", "good", "average", "poor"]} onClick={onClick} placeholder="Select Score" />
+  <Selector label="Score" options={["appalling", "horrible", "very bad", "bad", 'average', 'fire', 'good', 'very-good', 'great', 'masterpiece']} onClick={onClick} placeholder="Select Score" />
 );
 
 // Date Selectors

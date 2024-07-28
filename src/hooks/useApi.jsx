@@ -264,6 +264,14 @@ export const FetchAnimesByGenres = async (genre) => {
   return data.animes;
 };
 
+export const SearchAniWatch = async (
+  query
+) => {
+  const queryUrl = `${ANIWATCH_URL}search?q=${query}`;
+  const resp = await fetch(queryUrl);
+  const data = await resp.json();
+  return data.animes;
+};
 export const AdvancedSearch = async (
   query,
   genres = "action",

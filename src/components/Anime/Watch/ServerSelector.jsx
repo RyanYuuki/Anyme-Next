@@ -14,8 +14,8 @@ const ServerSelector = ({
 }) => {
   return (
     <div className={`flex flex-row max-md:flex-col justify-between max-md:gap-5 w-full h-[90px] max-md:h-auto animated`}>
-      <div className="flex flex-col justify-center max-md:p-3 gap-3 pl-5 h-full w-[55%] text-sm max-md:w-full bg-neutral-700/30 rounded-md">
-        <p className="text-[13px]" >
+      <div className="flex flex-col justify-center max-md:p-3 gap-3 pl-5 h-full w-[55%] max-md:text-sm max-md:w-full bg-neutral-700/30 rounded-md">
+        <p className="max-md:text-[13px]" >
           You're Watching <span>Episode {currentEpisode}</span>{" "}
         </p>
         <p>

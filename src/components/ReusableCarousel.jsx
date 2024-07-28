@@ -22,7 +22,7 @@ export default function ReusableCarousel({ title, data = [], className }) {
 
   return (
     <div className={cn("flex flex-col gap-5 animated", className)}>
-      <h2 className="text-3xl font-semibold border-l-8 border-l-neutral-800 px-5">
+      <h2 className="text-3xl max-md:text-2xl font-semibold border-l-8 border-l-neutral-800 px-5">
         {title}
       </h2>
       <div className="bg-neutral-700/30 rounded-lg box-shadow max-md:p-3">

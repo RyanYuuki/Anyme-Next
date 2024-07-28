@@ -9,7 +9,7 @@ import { faClosedCaptioning, faMicrophone, faPlay } from "@fortawesome/free-soli
 export default function ReusableCarouselAlt({ title, data = [], className }) {
   return (
     <div className={cn("flex flex-col gap-5 animated", className)}>
-      <h2 className="text-3xl font-semibold border-l-8 border-l-neutral-800 px-5">
+      <h2 className="text-3xl max-md:text-2xl font-semibold border-l-8 border-l-neutral-800 px-5">
         {title}
       </h2>
       <div className="bg-neutral-700/30 rounded-lg box-shadow p-3 pt-5">
@@ -51,7 +51,7 @@ export default function ReusableCarouselAlt({ title, data = [], className }) {
               const isManga = anime.type === "MANGA";
               return (
                 <SwiperSlide key={index}>
-                  <div className="group flex flex-col items-center animated justify-center gap-3  text-center">
+                  <div className="group flex flex-col items-center animated justify-center gap-3 p-3 max-md:p-0 text-center">
                     <Link
                     className="relative transition-full"
                       href={

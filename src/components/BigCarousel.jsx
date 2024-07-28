@@ -13,7 +13,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link";
-import { useState, useEffect } from "react";
 
 export default function BigCarousel({ data }) {
 

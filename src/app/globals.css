@@ -135,6 +135,31 @@
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
   }
+  .homeCard {
+    background-color: transparent;
+    background-image: linear-gradient(
+      120deg,
+      transparent,
+      rgb(0, 0, 0, 0.9)
+    );
+    background-size: 5px 5px;
+  }
+  .homeCard::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+      circle,
+      #59599158 10%,
+      transparent 35%
+    );
+    transform: translate(-73%, -60%);
+    z-index: -1;
+    filter: blur(20px);
+  }
   .seasonCard {
     background-color: transparent;
     background-image: linear-gradient(
@@ -142,7 +167,7 @@
       rgb(255, 255, 255, 0.1),
       rgb(0, 0, 0, 0.1)
     );
-    background-size: 10px 10px;
+    background-size: 5px 5px;
     backdrop-filter: blur(10px);
   }
   .server-active {
@@ -170,7 +195,7 @@
   }
   @media screen and (max-width: 768px) {
     .fix-text p {
-      font-size: 12px;
+      font-size: 10px;
     }
     .fix-text span {
       font-size: 10px;

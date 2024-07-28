@@ -101,7 +101,7 @@ const StreamingPage = () => {
   }));
 
   return (
-    <div className="flex flex-col px-5 gap-3">
+    <div className="flex flex-col px-5 gap-3 max-md:px-2">
       <div className="flex flex-row justify-between h-[600px] max-md:h-auto max-md:flex-col">
         <VideoPlayer
           episodeLoading={episodeLoading}

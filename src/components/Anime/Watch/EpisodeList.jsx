@@ -89,8 +89,8 @@ const EpisodeList = ({ episodesData, currentEpisode, icons, handleClick, episode
                   Episode {data?.number}
                 </h1>
                 <p
-                  className={`italic group-hover:text-white transition-full ${
-                    currentEpisode === data.number ? "text-white" : ""
+                  className={`italic group-hover:text-white max-md:text-[12px] transition-full ${
+                    currentEpisode === data.number ? "text-white" : "text-primary/50"
                   }`}
                 >
                   {data?.title}
@@ -103,10 +103,10 @@ const EpisodeList = ({ episodesData, currentEpisode, icons, handleClick, episode
           filteredData.map((data) => (
             <button
               key={data.id}
-              className={`group flex animated flex-row px-5 items-center gap-3 w-full h-[50px] bg-accent rounded-md transition-full hover:bg-indigo-400/70 ${
+              className={`group flex animated flex-row px-5 items-center gap-3 w-full h-[50px] bg-accent rounded-md transition-full max-md:text-[14px] italic hover:bg-indigo-400/70 ${
                 currentEpisode === data.number
                   ? "bg-indigo-400/95 text-white"
-                  : ""
+                  : "text-primary/50"
               }`}
               onClick={() => handleClick(data.number)}
             >
@@ -123,7 +123,7 @@ const EpisodeList = ({ episodesData, currentEpisode, icons, handleClick, episode
               </h1>
               <p
                 className={`group-hover:text-white transition-full ${
-                  currentEpisode === data.number ? "text-white" : ""
+                  currentEpisode === data.number ? "text-white" : "text-primary/50"
                 }`}
               >
                 {data.title || "??"}
