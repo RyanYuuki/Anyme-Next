@@ -3,13 +3,11 @@ import { Button } from "./ui/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import {
-  faCalendarAlt,
   faCirclePlay,
   faClosedCaptioning,
   faInfoCircle,
   faMicrophone,
   faPlay,
-  faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link";
@@ -54,10 +52,10 @@ export default function BigCarousel({ data }) {
                   <div className="flex flex-row gap-[5px] items-center text-[14px] max-md:text-[12px]">
                     <p className="flex flex-row justify-center items-center gap-1 px-1 rounded-sm bg-green-200 text-black">
                       <FontAwesomeIcon icon={faClosedCaptioning} />{" "}
-                      {item.episodes.sub}
+                      {item.episodes.sub || '0'}
                     </p>
                     <p className="flex flex-row justify-center items-center gap-1 px-1 rounded-sm bg-blue-200 text-black">
-                      <FontAwesomeIcon icon={faMicrophone} /> {item.episodes.dub}
+                      <FontAwesomeIcon icon={faMicrophone} /> {item.episodes.dub || '0'}
                     </p>
                   </div>
                 </div>

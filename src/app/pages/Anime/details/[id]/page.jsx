@@ -15,10 +15,9 @@ const AnimeDetailsPage = () => {
     const loadData = async () => {
       const Data = await FetchAnimeByAniwatchID(id);
       setData(Data);
-      console.log(Data);
       if (
-        Data.anime.info.stats.episodes.sub > 300 ||
-        Data.anime.info.stats.episodes.sub > "300"
+        Data.anime.info.stats.episodes.sub > 100 ||
+        Data.anime.info.stats.episodes.sub > "100"
       ) {
         const AltData = await FetchAnimeByID(Data.anime.info.anilistId, "data");
         setPosterSrc(AltData.cover);
