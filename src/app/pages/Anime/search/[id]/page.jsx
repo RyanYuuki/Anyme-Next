@@ -108,13 +108,13 @@ const Search = () => {
         <MonthSelector onClick={setEndMonth} label="End Month" />
         <DaySelector onClick={setEndDay} label="End Day" />
       </div>
-      <div className="grid grid-cols-7 max-md:grid-cols-2 place-items-center gap-5 p-5 bg-neutral-700/30 rounded-md">
+      <div className="grid grid-cols-7 max-md:grid-cols-2 place-items-center gap-5 p-5 ">
         {searchData ?
           searchData.map((anime) => (
             <Link
               key={anime.id}
               href={`/pages/Anime/details/${anime.id}`}
-              className="flex flex-col group"
+              className="flex flex-col group animated"
             >
               <div className="relative flex items-center justify-center">
                 <img
