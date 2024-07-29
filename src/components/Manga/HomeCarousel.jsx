@@ -25,7 +25,7 @@ const HomeCarousel = ({ data }) => {
                 alt={item.title || "Cover Image"}
                 className="object-cover w-full h-[400px] object-center"
               />
-              <div className="absolute inset-0 custom-gradient backdrop-blur-lg"></div>
+              <div className="absolute inset-0 bg-black/70 backdrop-blur-lg"></div>
               <div className="absolute top-0 h-full w-full flex flex-row gap-10 p-10">
                 <div className="relative flex-shrink-0">
                   <img
