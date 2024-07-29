@@ -51,10 +51,10 @@ const StreamingPage = () => {
       const EpisodeData = await FetchEpisodesData(anilistId);
       if (EpisodeData) {
         setEpisodeImages(
-          EpisodeData.reduce((acc, episode, index) => {
-            acc[index + 1] = episode.image;
-            return acc;
-          }, {})
+            EpisodeData.reduce((acc, episode, index) => {
+              acc[index + 1] = episode.image;
+              return acc;
+            }, {})
         );
       }
     };
@@ -74,6 +74,7 @@ const StreamingPage = () => {
           );
           setCaptionsData(episodeSrc.tracks);
           setEpisodeSrc(episodeSrc.sources[0].url);
+          console.log(episodesData[currentEpisode - 1].episodeId);
         }
       } catch (error) {
         console.log(error);
@@ -93,16 +94,16 @@ const StreamingPage = () => {
     setActiveServer(server);
   };
 
-  if (isLoading || !episodesData) return <div>Loading...</div>;
-
-  const episodesWithImages = episodesData.map((episode, index) => ({
-    ...episode,
-    image: episodeImages[index + 1] || animeData.anime.info.poster,
-  }));
+  const episodesWithImages =
+    episodesData &&
+    episodesData.map((episode, index) => ({
+      ...episode,
+      image: episodeImages[index + 1] || animeData.anime.info.poster,
+    }));
 
   return (
     <div className="flex flex-col px-5 gap-3 max-md:px-2">
-      <div className="flex flex-row justify-between h-[600px] max-md:h-auto max-md:flex-col">
+      <div className="flex flex-row justify-between h-[700px] max-md:h-auto max-md:flex-col">
         <VideoPlayer
           episodeLoading={episodeLoading}
           episodeSrc={episodeSrc}
@@ -111,7 +112,7 @@ const StreamingPage = () => {
           captionsData={captionsData || []}
         />
         <EpisodeList
-          episodesData={episodesWithImages}
+          episodesData={episodesWithImages || []}
           currentEpisode={currentEpisode}
           icons={icons}
           handleClick={handleClick}

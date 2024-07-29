@@ -19,6 +19,19 @@ const ReusableCardStacks = ({ withGenres, genresData, data, title }) => {
     }
   }, [genresData, withGenres]);
 
+  if (
+    !Array.isArray(data) ||
+    data.length === 0 ||
+    !Array.isArray(genresData) ||
+    genresData.length === 0
+  ) {
+    return (
+      <div className="w-full h-[400px]">
+        <div className="skeleton-carousel" />
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-row max-md:flex-col max-md:gap-[20px] justify-between">
       <div className="flex flex-col gap-5 w-[69%] max-md:w-full">
@@ -74,7 +87,7 @@ const ReusableCardStacks = ({ withGenres, genresData, data, title }) => {
           <h1 className="text-2xl">Genres</h1>
           <div className="grid grid-cols-3 auto-rows-max gap-2 p-5 bg-neutral-700/30 rounded-md">
             {genresData.map((genre, index) => (
-              <Link 
+              <Link
                 href={`/pages/Anime/search/${genre}`}
                 key={genre}
                 className="p-2 rounded-md"

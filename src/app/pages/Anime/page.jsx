@@ -4,9 +4,9 @@ import BigCarousel from "@/components/BigCarousel";
 import { FetchAniwatchHomePage } from "../../../hooks/useApi.jsx";
 import ReusableCarousel from "@/components/ReusableCarousel";
 import ReusableStack from "@/components/ReusableStack";
-import ReusableCardStacks from '@/components/ReusableCardStacks';
-import EstimatedSchedule from '@/components/EstimatedSchedule.jsx';
-import TopAnimesTable from '@/components/TopAnimesTable.jsx';
+import ReusableCardStacks from "@/components/ReusableCardStacks";
+import EstimatedSchedule from "@/components/EstimatedSchedule.jsx";
+import TopAnimesTable from "@/components/TopAnimesTable.jsx";
 const page = () => {
   const [data, setData] = useState(null);
   const [TrendingData, setTrendingData] = useState(null);
@@ -16,7 +16,6 @@ const page = () => {
   const [cardStackData, setCardStackData] = useState(null);
   const [genreData, setGenreData] = useState(null);
   useEffect(() => {
-    const localArr = [];
     const loadData = async () => {
       const data = await FetchAniwatchHomePage();
       setData(data.spotlightAnimes);
@@ -31,16 +30,19 @@ const page = () => {
   }, []);
 
 
-  if (!data || !popularData) return <div>Loading...</div>;
-
   return (
     <div className="flex flex-col px-10 gap-10 max-md:px-2">
-      <BigCarousel data={data} />
-      <ReusableCarousel title={"Trending"} data={TrendingData} />
-      <ReusableCarousel title={"Popular"} data={popularData} />
-      <TopAnimesTable data={top10AnimesData} />
-      <ReusableStack data={tableData} />
-      <ReusableCardStacks withGenres={true} genresData={genreData} title={'Latest Episodes'} data={cardStackData} />
+      <BigCarousel data={data || []} />
+      <ReusableCarousel title={"Trending"} data={TrendingData || []} />
+      <ReusableCarousel title={"Popular"} data={popularData || []} />
+      <TopAnimesTable data={top10AnimesData || []} />
+      <ReusableStack data={tableData || []} />
+      <ReusableCardStacks
+        withGenres={true}
+        genresData={genreData || []}
+        title={"Latest Episodes"}
+        data={cardStackData || []}
+      />
       <EstimatedSchedule />
     </div>
   );

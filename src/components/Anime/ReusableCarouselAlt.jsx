@@ -7,6 +7,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClosedCaptioning, faMicrophone, faPlay } from "@fortawesome/free-solid-svg-icons";
 
 export default function ReusableCarouselAlt({ title, data = [], className }) {
+  const demoArray = ["", "", "", "", ""];
+  if (!Array.isArray(data) || data.length === 0) {
+    return (
+      <div className="small-carousel">
+        {demoArray.map((data, index) => (
+          <div key={index} className="carousel-card" />
+        ))}
+      </div>
+    );
+  }
+  
   return (
     <div className={cn("flex flex-col gap-5 animated", className)}>
       <h2 className="text-3xl max-md:text-2xl font-semibold border-l-8 border-l-neutral-800 px-5">

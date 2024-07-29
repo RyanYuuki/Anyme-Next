@@ -28,6 +28,15 @@ const ReusableStack = ({ data }) => {
     chunkedData.push(data.slice(i, i + 5));
   }
 
+  if (!Array.isArray(data) || data.length === 0) {
+    return (
+      <div className="w-full h-[600px]">
+        <div className="skeleton-carousel" />
+      </div>
+    );
+  }
+
+
   return (
     <div className="flex flex-row justify-between pb-5 animated max-md:flex-col max-md:gap-5">
       {MetaData.map(({ title, index }) => {

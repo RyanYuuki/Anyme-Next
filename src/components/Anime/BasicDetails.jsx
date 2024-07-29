@@ -3,20 +3,14 @@ import Link from "next/link";
 import React from "react";
 
 const BasicDetails = ({ data, page = "Details", className }) => {
-  const Months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+
+  if (!data || data.length < 1) {
+    return (
+      <div className="h-[400px] w-full">
+        <div className="skeleton-universal" />
+      </div>
+    );
+  }
 
   return (
     <div
@@ -37,18 +31,30 @@ const BasicDetails = ({ data, page = "Details", className }) => {
           </p>
         </div>
         <Link href={`/pages/Anime/watch/${data.info.id}`}>
-          <button className="p-[12px] text-[14px] max-md:text-[10px] max-md:p-2 w-full bg-accent rounded-md font-semibold hover:bg-indigo-400 transition-full">
-            {page == "Details" ? "WATCH NOW" : "INFO"}
+          <button
+            className="p-[12px] text-[14px] max-md:text-[10px] max-md:p-2 w-full bg-accent rounded-md font-semibold hover:bg-indigo-400 transition-full"
+            aria-label={page === "Details" ? "Watch Now" : "More Info"}
+          >
+            {page === "Details" ? "WATCH NOW" : "INFO"}
           </button>
         </Link>
-        <button className="p-[12px] text-[14px] max-md:p-2 max-md:text-[10px] bg-accent rounded-md font-semibold hover:bg-indigo-400 transition-full">
+        <button
+          className="p-[12px] text-[14px] max-md:p-2 max-md:text-[10px] bg-accent rounded-md font-semibold hover:bg-indigo-400 transition-full"
+          aria-label="Watch Trailer"
+        >
           TRAILER
         </button>
         <div className="flex flex-row justify-between">
-          <button className="p-[12px] text-[14px] max-md:p-2 max-md:text-[10px] w-[45%] bg-accent/80 rounded-md font-semibold hover:bg-indigo-400 transition-full">
+          <button
+            className="p-[12px] text-[14px] max-md:p-2 max-md:text-[10px] w-[45%] bg-accent/80 rounded-md font-semibold hover:bg-indigo-400 transition-full"
+            aria-label="Action"
+          >
             A
           </button>
-          <button className="p=[12px] text-[14px] max-md:p-2 max-md:text-[10px] w-[45%] bg-accent/80 rounded-md font-semibold hover:bg-indigo-400 transition-full">
+          <button
+            className="p-[12px] text-[14px] max-md:p-2 max-md:text-[10px] w-[45%] bg-accent/80 rounded-md font-semibold hover:bg-indigo-400 transition-full"
+            aria-label="MAL"
+          >
             MAL
           </button>
         </div>
@@ -122,25 +128,25 @@ const BasicDetails = ({ data, page = "Details", className }) => {
             </p>
           </div>
           <div className="flex flex-col justify-evenly max-md:justify-start items-center h-full w-[33%]">
-            <p className="w-full text-nowrap" >
+            <p className="w-full text-nowrap">
               Studios:{" "}
               <span className="font-semibold text-primary uppercase">
                 {data.moreInfo.studios}
               </span>
             </p>
             <p className="flex flex-wrap gap-3 font-semibold text-primary max-md:hidden">
-              {data.moreInfo.genres.map((data) => (
-                <span key={data} className="p-2 rounded-xl bg-accent/80">
-                  {data}
+              {data.moreInfo.genres.map((genre) => (
+                <span key={genre} className="p-2 rounded-xl bg-accent/80">
+                  {genre}
                 </span>
               ))}
             </p>
           </div>
         </div>
         <p className="flex-wrap gap-3 max-md:gap-1 max-md:text-[10px] font-semibold text-primary text-[12px] hidden max-md:flex">
-          {data.moreInfo.genres.map((data) => (
-            <span key={data} className="p-2 rounded-xl bg-accent/80">
-              {data}
+          {data.moreInfo.genres.map((genre) => (
+            <span key={genre} className="p-2 rounded-xl bg-accent/80">
+              {genre}
             </span>
           ))}
         </p>

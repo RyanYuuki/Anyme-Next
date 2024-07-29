@@ -3,8 +3,8 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex flex-row justify-evenly items-center h-screen homeCard">
-      <div className="flex flex-row gap-5 w-[40%] h-[75%] justify-evenly bg-transparent max-md:hidden">
+    <div className="flex flex-row justify-center items-center h-screen homeCard">
+      <div className="flex flex-row gap-10 w-[40%] h-[75%] justify-center bg-transparent max-md:hidden">
         <img
           src="/homepage_cover.jpg"
           alt="Homepage Cover"

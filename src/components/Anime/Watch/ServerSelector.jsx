@@ -22,7 +22,7 @@ const ServerSelector = ({
           If current server doesn't work, you can switch to a different server.
         </p>
       </div>
-      <div className="flex flex-col w-[43%] max-md:w-full max-md:p-3 max-md:text-[12px] justify-evenly bg-neutral-700/30 rounded-md">
+      <div className="flex flex-col w-[43%] max-md:w-full max-md:p-3 px-2 max-md:text-[10px] max-md:gap-1 justify-evenly bg-neutral-700/30 rounded-md">
         <div className="flex flex-row justify-evenly items-center">
           <h1>
             <FontAwesomeIcon icon={faClosedCaptioning} /> Sub
@@ -31,7 +31,7 @@ const ServerSelector = ({
             {Servers.map((server) => (
               <p
                 onClick={() => onClick("sub", server.toLowerCase())}
-                className={`px-[15px] py-[5px] rounded-md max-md:text-[12px] ${
+                className={`px-[15px] py-[5px] rounded-md max-md:text-[10px] ${
                   activeServer.toLowerCase() == server.toLowerCase() &&
                   episodeType == "sub"
                     ? "server-active"

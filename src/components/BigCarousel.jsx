@@ -13,13 +13,20 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link";
 
 export default function BigCarousel({ data }) {
-
   const disableCopy = {
     userSelect: "none",
     WebkitUserSelect: "none",
     MozUserSelect: "none",
     msUserSelect: "none",
   };
+
+  if (!Array.isArray(data) || data.length === 0) {
+    return (
+      <div className="w-full h-[400px]">
+        <div className="skeleton-carousel" />
+      </div>
+    );
+  }
 
   return (
     <div className="w-[100%] rounded-[5px] overflow-hidden animated">
@@ -34,9 +41,7 @@ export default function BigCarousel({ data }) {
               />
               <div className="absolute inset-0 custom-gradient"></div>
               <div className="absolute top-0 h-full w-[50%] flex flex-col gap-5 p-10 max-md:p-2 justify-end max-md:w-full">
-                <h2 style={{ fontSize: 20 }}>
-                  #{index + 1} Spotlight
-                </h2>
+                <h2 style={{ fontSize: 20 }}>#{index + 1} Spotlight</h2>
                 <h1
                   style={disableCopy}
                   className="text-3xl max-md:text-xl no-select"
@@ -52,10 +57,11 @@ export default function BigCarousel({ data }) {
                   <div className="flex flex-row gap-[5px] items-center text-[14px] max-md:text-[12px]">
                     <p className="flex flex-row justify-center items-center gap-1 px-1 rounded-sm bg-green-200 text-black">
                       <FontAwesomeIcon icon={faClosedCaptioning} />{" "}
-                      {item.episodes.sub || '0'}
+                      {item.episodes.sub || "0"}
                     </p>
                     <p className="flex flex-row justify-center items-center gap-1 px-1 rounded-sm bg-blue-200 text-black">
-                      <FontAwesomeIcon icon={faMicrophone} /> {item.episodes.dub || '0'}
+                      <FontAwesomeIcon icon={faMicrophone} />{" "}
+                      {item.episodes.dub || "0"}
                     </p>
                   </div>
                 </div>

@@ -12,10 +12,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function ReusableCarousel({ title, data = [], className }) {
+  const demoArray = ["", "", "", "", ""];
   if (!Array.isArray(data) || data.length === 0) {
     return (
-      <div className="carousel-error">
-        <p>No {title} anime available at the moment.</p>
+      <div className="small-carousel">
+        {demoArray.map(() => (
+          <div className="carousel-card" />
+        ))}
       </div>
     );
   }
@@ -97,7 +100,11 @@ export default function ReusableCarousel({ title, data = [], className }) {
                       </p>
                     </div>
                   </Link>
-                  <h4 className="font-semibold max-md:text-sm">{anime.name.length > 30 ? anime.name.substring(0,30) + '...' : anime.name }</h4>
+                  <h4 className="font-semibold max-md:text-sm">
+                    {anime.name.length > 30
+                      ? anime.name.substring(0, 30) + "..."
+                      : anime.name}
+                  </h4>
                 </div>
               </SwiperSlide>
             );

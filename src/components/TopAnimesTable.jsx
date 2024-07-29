@@ -14,9 +14,18 @@ const Top10AnimesTable = ({ data }) => {
 
   useEffect(() => {
     setCurrentData((prevValue) => null);
-    const durationArr = [data.today, data.week, data.month];
-    setCurrentData(durationArr[activeDuration]);
-  }, [activeDuration]);
+    const durationArr = [data?.today, data?.week, data?.month];
+    setCurrentData(durationArr?.[activeDuration]);
+  }, [activeDuration, data]);
+
+  if (!data || data.length === 0) {
+    return (
+      <div className="w-full h-[500px]">
+        <div className="skeleton-carousel" />
+      </div>
+    );
+  }
+
 
   return (
     <div className="flex flex-col gap-5">
@@ -41,6 +50,7 @@ const Top10AnimesTable = ({ data }) => {
         {currentData &&
           currentData.map((data) => (
             <Link
+              key={data.id}
               href={`/pages/Anime/details/${data.id}`}
               className="flex flex-row items-center gap-10 group animated"
             >

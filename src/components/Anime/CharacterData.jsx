@@ -5,13 +5,34 @@ const CharacterData = ({ data }) => {
   const [currentLang, setCurrentLang] = useState("Japanese");
   const availableLangs = ["Japanese", "English", "German", "Spanish"];
 
-  const filteredData = data && data.filter((anime) =>
-    anime.voiceActors?.some((actor) => actor.language === currentLang)
-  );
+  const filteredData =
+    data &&
+    data.filter((anime) =>
+      anime.voiceActors?.some((actor) => actor.language === currentLang)
+    );
 
   const handleLanguage = (event) => {
     setCurrentLang(event);
   };
+
+  if (!data || data.length < 1) {
+    const sequentialArray = [...Array(20)].map((_, i) => i);
+    return (
+      <div className="skeleton-characters">
+        {sequentialArray.map((index) => (
+          <div key={index} className="skeleton-characterCards">
+            <div className="skeleton-characterCards-image" />
+            <div className="skeleton-details">
+              <div className="base-skeleton w-full rounded-full h-[20px]" />
+              <div className="base-skeleton w-[60%] rounded-full h-[20px]" />
+              <div className="base-skeleton w-[40%] rounded-full h-[20px]" />
+            </div>
+            <div className="skeleton-characterCards-image" />
+          </div>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-5 w-full bg-neutral-700/30 p-5 box-shadow rounded-md animated">
