@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
 import { jaroWinklerDistance } from "./jaro-winkler";
-const PROXY = "https://sup-proxy.zephex0-f6c.workers.dev/api-json?url=";
+const PROXY = "https://anymey-proxy.vercel.app/cors?url=";
 const apiLink = "https://consumet-api-two-nu.vercel.app";
 const BASE_URL = "https://consumet-api-two-nu.vercel.app/meta/anilist/";
 const ANIWATCH_URL = "https://aniwatch-ryan.vercel.app/anime/";
 const API_KEY = "e2f1fb12caa883224a8363dc0329b3bc";
 const BASE_MOVIE_URL = "https://api.themoviedb.org";
+const MANGA_URL = 'https://manga-ryan.vercel.app/api/';
 
 // MOVIE
 
@@ -309,3 +310,22 @@ export const FetchEstimatedSchedule = async (year, month, day) => {
   const data = await response.json();
   return data.scheduledAnimes;
 };
+
+export const FetchMangaList = async (page = 1) => {
+  const response = await fetch('https://anymey-proxy.vercel.app/cors?url=' + MANGA_URL + 'mangalist' + '?page=' + page);
+  const data = await response.json();
+  return data;
+}
+
+export const FetchMangaByCategory = async (category) => {
+  const response = await fetch(PROXY + MANGA_URL + 'mangalist?category=' + category);
+  const data = await response.json();
+  return data;
+}
+
+export const FetchMangaByType = async (type) => {
+  const response = await fetch(PROXY + MANGA_URL + 'mangalist?type=' + type);
+  const data = await response.json();
+  return data;
+}
+

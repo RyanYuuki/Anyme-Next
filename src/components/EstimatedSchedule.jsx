@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import useCurrentWeekWithDetails from "../hooks/useCurrentWeekWithDetails";
 import { FetchEstimatedSchedule } from "@/hooks/useApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import { faClock, faPlay } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -112,15 +112,15 @@ const EstimatedSchedule = () => {
               key={data.id}
               className="flex flex-row justify-between w-full animated p-3 border-b border-input group hover:text-indigo-400"
             >
-              <div className="flex flex-row gap-8">
-                <p>{data.time}</p>
+              <div className="flex flex-row gap-8 items-center">
+                <p className="flex flex-row gap-2 items-center group-hover:bg-indigo-400 group rounded-xl group-hover:text-white transition-full group-hover:p-2" ><FontAwesomeIcon icon={faClock} /> {data.time}</p>
                 <h1 className="max-md:text-[12px]">
                   {data.name.length > 30
                     ? data.name.substring(0, 30) + "..."
                     : data.name}
                 </h1>
               </div>
-              <button className="flex flex-row gap-2 items-center text-nowrap p-2 max-md:text-[13px] group-hover:bg-indigo-400 group rounded-xl group-hover:text-white">
+              <button className="flex flex-row gap-2 items-center text-nowrap p-2 max-md:text-[13px] group-hover:bg-indigo-400 group-hover:px-3 group rounded-xl group-hover:text-white transition-full">
                 <FontAwesomeIcon icon={faPlay} /> Episode {" " + data.episode}
               </button>
             </Link>

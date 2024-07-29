@@ -17,12 +17,24 @@ export default function Home() {
         />
       </div>
       <div className="flex flex-col text-[35px] max-md:text-[20px] max-md:mt-10 max-md:w-[100%] mt-10 w-[40%] h-[75%] gap-5">
-        <h1 className="max-md:text-center">Welcome To An<span className="text-indigo-400 text-[40px]" >Y</span>mey</h1>
-        <h1 className=" max-md:text-center" >Your one-stop solution for finding anime, manga.</h1>
-        <Link className="flex flex-row max-md:justify-evenly gap-5" href="/pages/Anime/">
-          <Button size={'lg'} className="mt-4">Anime</Button>
-          <Button size={'lg'} className="mt-4">Manga</Button>
-        </Link>
+        <h1 className="max-md:text-center">
+          Welcome To An<span className="text-indigo-400 text-[40px]">Y</span>mey
+        </h1>
+        <h1 className=" max-md:text-center">
+          Your one-stop solution for finding anime, manga.
+        </h1>
+        <div className="flex flex-row max-md:justify-evenly gap-5">
+          <Link href="/pages/Anime/">
+            <Button size={"lg"} className="mt-4">
+              Anime
+            </Button>
+          </Link>
+          <Link href={"/pages/Manga/"}>
+            <Button size={"lg"} className="mt-4">
+              Manga
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   );

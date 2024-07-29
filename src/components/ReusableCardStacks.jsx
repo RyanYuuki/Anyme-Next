@@ -5,25 +5,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import useGenerateRandomColor from "../hooks/generateRandomColor";
 
 const ReusableCardStacks = ({ withGenres, genresData, data, title }) => {
-  const { generateColor } = useGenerateRandomColor();
-  const [colors, setColors] = useState([]);
-
-  useEffect(() => {
-    if (withGenres) {
-      const newColors = genresData.map(() => generateColor());
-      setColors(newColors);
-    }
-  }, [genresData, withGenres]);
-
   if (
     !Array.isArray(data) ||
     data.length === 0 ||
-    !Array.isArray(genresData) ||
-    genresData.length === 0
+    (withGenres && !Array.isArray(genresData)) ||
+    (withGenres && genresData.length === 0)
   ) {
     return (
       <div className="w-full h-[400px]">
@@ -34,11 +22,11 @@ const ReusableCardStacks = ({ withGenres, genresData, data, title }) => {
 
   return (
     <div className="flex flex-row max-md:flex-col max-md:gap-[20px] justify-between">
-      <div className="flex flex-col gap-5 w-[69%] max-md:w-full">
+      <div className={`flex flex-col gap-5 ${ withGenres ? 'w-[69%]' : 'w-full'} max-md:w-full`}>
         <h2 className="text-3xl max-md:text-2xl font-semibold border-l-8 border-l-neutral-800 px-5">
           {title}
         </h2>
-        <div className="grid grid-cols-5 grid-row-auto max-md:grid-cols-2 place-items-center gap-5 p-5 bg-neutral-700/30 rounded-md">
+        <div className={`grid ${ withGenres ? 'grid-cols-5' : 'grid-cols-6' } grid-row-auto max-md:grid-cols-2 place-items-center gap-5 p-5 bg-neutral-700/30 rounded-md`}>
           {data.map((anime) => (
             <Link
               key={anime.id}
@@ -91,7 +79,7 @@ const ReusableCardStacks = ({ withGenres, genresData, data, title }) => {
                 href={`/pages/Anime/search/${genre}`}
                 key={genre}
                 className="p-2 rounded-md"
-                style={{ color: colors[index], filter: "brightness(1.2)" }}
+                style={{ filter: "brightness(1.2)" }}
               >
                 {genre.length > 9 ? genre.substring(0, 9) + ".." : genre}
               </Link>
