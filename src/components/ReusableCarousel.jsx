@@ -66,7 +66,7 @@ export default function ReusableCarousel({ title, data = [], className }) {
             const isManga = anime.type === "MANGA";
             return (
               <SwiperSlide key={index}>
-                <div className="flex flex-col animated justify-center p-8 items-center gap-3 text-center max-md:p-3">
+                <div className="flex flex-col animated justify-center p-8 items-center gap-3 text-center max-md:p-0">
                   <Link
                     className={`relative carousel overflow-hidden rounded-lg group`}
                     href={
@@ -76,7 +76,7 @@ export default function ReusableCarousel({ title, data = [], className }) {
                     }
                   >
                     <img
-                      className="rounded-lg object-cover h-[290px] w-[230px] max-md:h-[200px]"
+                      className="rounded-lg object-cover h-[290px] w-[250px] max-md:h-[170px]"
                       src={anime.poster || "/path/to/default-image.jpg"}
                       draggable="false"
                       onError={(e) =>
@@ -100,9 +100,9 @@ export default function ReusableCarousel({ title, data = [], className }) {
                       </p>
                     </div>
                   </Link>
-                  <h4 className="font-semibold max-md:text-sm">
-                    {anime.name.length > 30
-                      ? anime.name.substring(0, 30) + "..."
+                  <h4 className="font-semibold max-md:text-[12px]">
+                    {anime.name.length > 20
+                      ? anime.name.substring(0, 20) + "..."
                       : anime.name}
                   </h4>
                 </div>

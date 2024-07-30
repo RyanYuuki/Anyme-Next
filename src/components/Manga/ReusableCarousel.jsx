@@ -4,7 +4,7 @@ import "swiper/css";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBook, faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faBook, faFireAlt } from "@fortawesome/free-solid-svg-icons";
 
 export default function ReusableCarousel({ title, data = [], className }) {
   const demoArray = ["", "", "", "", ""];
@@ -80,7 +80,7 @@ export default function ReusableCarousel({ title, data = [], className }) {
                       />
                     </div>
                     <p className="absolute top-2 left-2 rounded-md flex flex-row justify-center items-center gap-1 px-2 bg-green-200 text-black">
-                      <FontAwesomeIcon icon={faHeart} />
+                      <FontAwesomeIcon icon={faFireAlt} />
                       {data.view}
                     </p>
                   </Link>

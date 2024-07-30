@@ -2,7 +2,6 @@
 import { FetchMangaDetails } from "@/hooks/useApi";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import MangaCover from '@/components/Manga/MangaCover';
 import BasicDetails from '@/components/Manga/BasicDetails';
 import ChapterList from '@/components/Manga/ChapterList';
 
@@ -21,7 +20,7 @@ const MangaDetails = () => {
   return (
     <div className="flex flex-col gap-5 px-20 min-h-screen">
       <BasicDetails data={data} />
-      <ChapterList chaptersData={data?.chapterList} />
+      <ChapterList id={id} chaptersData={data?.chapterList} />
     </div>
   );
 };

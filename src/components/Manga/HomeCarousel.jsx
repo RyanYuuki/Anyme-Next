@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBook, faHeart, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { faBook, faFireAlt, faHeart, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import React from "react";
@@ -23,9 +23,9 @@ const HomeCarousel = ({ data }) => {
               <img
                 src={item.image || "/manga-carousel.png"}
                 alt={item.title || "Cover Image"}
-                className="object-cover w-full h-[400px] object-center"
+                className="object-cover w-full h-[400px] object-center inset-0 blur-lg"
               />
-              <div className="absolute inset-0 bg-black/70 backdrop-blur-lg"></div>
+              <div className="absolute inset-0 bg-black/80"></div>
               <div className="absolute top-0 h-full w-full flex flex-row gap-10 p-10">
                 <div className="relative flex-shrink-0">
                   <img
@@ -34,7 +34,7 @@ const HomeCarousel = ({ data }) => {
                     alt={item.title || "Image"}
                   />
                   <p className="absolute top-1 left-1 p-2 px-3 rounded-md text-sm bg-indigo-400">
-                    <FontAwesomeIcon icon={faHeart} /> {item.view}
+                    <FontAwesomeIcon icon={faFireAlt} /> {item.view}
                   </p>
                   {item.chapter && (
                     <p className="absolute bottom-[25px] right-[6px] p-2 rounded-md text-sm bg-indigo-400 text-white">

@@ -332,6 +332,11 @@ export const FetchMangaByType = async (type) => {
 export const FetchMangaDetails = async (id) => {
   const response = await fetch(PROXY + MANGA_URL + 'manga/' + id);
   const data = await response.json();
-  console.log(PROXY + MANGA_URL + 'manga/' + id );
+  return data;
+}
+
+export const FetchMangaChaptersSrc = async (MangaID, chapterID) => {
+  const response = await fetch(PROXY + MANGA_URL + "manga/" + MangaID + '/' + chapterID );
+  const data = await response.json();
   return data;
 }

@@ -19,7 +19,6 @@ const Manga = () => {
       setLatestData(LatestData.mangaList);
       setTopViewData(TopData.mangaList);
       setMangaList(data.mangaList);
-      console.log(NewData);
     };
     loadData();
   }, []);

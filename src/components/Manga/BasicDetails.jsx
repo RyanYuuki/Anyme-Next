@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "../ui/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faFireAlt } from "@fortawesome/free-solid-svg-icons";
 
 const BasicDetails = ({ data }) => {
   return (
@@ -15,12 +15,11 @@ const BasicDetails = ({ data }) => {
         <Button>Read Now</Button>
       </div>
       <div className="flex flex-col justify-evenly">
-        <h1 className="text-2xl">{data.name}</h1>
-        <p>{data.author}</p>
-        <p>{data.status}</p>
-        <p>{data.updated}</p>
-        <p>
-          Views: <span className="font-bold" >{data.view} <FontAwesomeIcon icon={faHeart} /></span>
+        <h1 className="flex flex-col text-3xl font-bold">{data.name}<p className="text-[14px] italic text-primary/50 font-normal" >{data.author}</p></h1>
+        <p className="flex flex-row gap-1" >Status:<span className="font-bold" >{data.status}</span></p>
+        <p className="flex flex-row gap-1" >Last Updated: <span className="font-bold" >{data.updated}</span></p>
+        <p className="flex flex-row gap-1" >
+          Views: <span className="font-bold" >{data.view} <FontAwesomeIcon icon={faFireAlt} /></span>
         </p>
         <div className="flex flex-row gap-3">
           {data.genres.map((genre) => (
