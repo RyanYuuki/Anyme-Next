@@ -4,6 +4,8 @@ import Selector from "@/components/Manga/Select";
 import { FetchMangaChaptersSrc } from "@/hooks/useApi";
 import React, { useEffect, useState } from "react";
 import Breadcrumb from "@/components/Manga/BreadCrumb";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLeftLong, faRightLong } from "@fortawesome/free-solid-svg-icons";
 
 const ReadPage = ({ params }) => {
   const [mangaID, setMangaID] = useState(params.id[0]);
@@ -39,19 +41,19 @@ const ReadPage = ({ params }) => {
 
   return (
     <div className="min-h-screen flex flex-col items-center gap-5">
-      <h1 className="text-2xl">{chapterData.title}</h1>
+      <h1 className="text-3xl font-bold">{chapterData.title}</h1>
       <h1>{chapterData.currentChapter}</h1>
       <Breadcrumb prevPage={mangaID} title={chapterData.title} currentPath={chapterData.currentChapter} />
       <div className="flex flex-col gap-5">
         <div className="flex justify-between items-center flex-row flex-shrink-0 max-md:px-5">
-          <Button onClick={() => handleNavigation(+1)}>Prev</Button>
+          <Button className="flex flex-row gap-1 group" onClick={() => handleNavigation(+1)}> <FontAwesomeIcon className="group-hover:mr-2 transition-full" icon={faLeftLong} /> Prev</Button>
           <Selector
             options={chapterData.chapterListIds}
             onClick={handleClick}
             placeholder={chapterData.currentChapter}
             label={"Chapters"}
           />
-          <Button onClick={() => handleNavigation(-1)}>Next</Button>
+          <Button className="flex flex-row gap-1 group" onClick={() => handleNavigation(-1)}>Next<FontAwesomeIcon className="group-hover:mr-2 transition-full" icon={faRightLong} /></Button>
         </div>
         <div className="flex flex-col gap-0">
           {chapterImages ? (
@@ -69,8 +71,8 @@ const ReadPage = ({ params }) => {
             <h1>Loading...</h1>
           )}
           <div className="flex mt-5 justify-between items-center flex-row flex-shrink-0 max-md:px-5">
-          <Button onClick={() => handleNavigation(+1)}>Prev</Button>
-          <Button onClick={() => handleNavigation(-1)}>Next</Button>
+          <Button className="flex flex-row gap-1 group" onClick={() => handleNavigation(+1)}><FontAwesomeIcon className="group-hover:mr-2 transition-full" icon={faLeftLong} /> Prev</Button>
+          <Button className="flex flex-row gap-1 group" onClick={() => handleNavigation(-1)}>Next<FontAwesomeIcon className="group-hover:ml-2 transition-full" icon={faRightLong} /></Button>
         </div>
         </div>
       </div>

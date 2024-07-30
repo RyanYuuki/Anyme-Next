@@ -60,7 +60,7 @@ const ChapterList = ({ chaptersData, id }) => {
             </Link>
           ) : (
             <Link
-              href={`/pages/Manga/read/${id}/${chaptersData.id}`}
+              href={`/pages/Manga/read/${id}/${chapter.id}`}
               className="flex flex-row justify-center items-center w-[120px] h-[50px] rounded-md bg-input hover:bg-white hover:text-black transition-full"
             >
               <h1>
