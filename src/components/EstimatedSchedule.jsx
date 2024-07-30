@@ -13,6 +13,8 @@ const EstimatedSchedule = () => {
   const [activeYear, setActiveYear] = useState(null);
   const [activeDay, setActiveDay] = useState(null);
   const [activeMonth, setActiveMonth] = useState(null);
+  const date = new Date();
+  const day = date.getDate();
 
   const disableCopy = {
     userSelect: "none",
@@ -24,7 +26,7 @@ const EstimatedSchedule = () => {
   useEffect(() => {
     if (week.length > 0) {
       setActiveYear(week[0].year);
-      setActiveDay(week[0].dayNumber);
+      setActiveDay(week[day - 1].dayNumber);
       setActiveMonth(week[0].monthNumber);
     }
   }, [week]);
@@ -37,8 +39,8 @@ const EstimatedSchedule = () => {
           activeMonth,
           activeDay
         );
-        if(data) {
-          setScheduleDate(prevValue => data);
+        if (data) {
+          setScheduleDate((prevValue) => data);
         }
       };
       loadData();
@@ -59,6 +61,9 @@ const EstimatedSchedule = () => {
       <div className="flex flex-col gap-5 justify-center items-center bg-neutral-700/30 p-5 rounded-md">
         <div className="flex flex-row gap-3 w-full">
           <Swiper
+            initialSlide={day }
+            centeredSlidesBounds={true}
+            centeredSlides={true}
             breakpoints={{
               300: {
                 spaceBetween: 20,
@@ -113,7 +118,9 @@ const EstimatedSchedule = () => {
               className="flex flex-row justify-between w-full animated p-3 border-b border-input group hover:text-indigo-400"
             >
               <div className="flex flex-row gap-8 items-center">
-                <p className="flex flex-row gap-2 items-center group-hover:bg-indigo-400 group rounded-xl group-hover:text-white transition-full group-hover:p-2" ><FontAwesomeIcon icon={faClock} /> {data.time}</p>
+                <p className="flex flex-row gap-2 items-center group-hover:bg-indigo-400 group rounded-xl group-hover:text-white transition-full group-hover:p-2">
+                  <FontAwesomeIcon icon={faClock} /> {data.time}
+                </p>
                 <h1 className="max-md:text-[12px]">
                   {data.name.length > 30
                     ? data.name.substring(0, 30) + "..."

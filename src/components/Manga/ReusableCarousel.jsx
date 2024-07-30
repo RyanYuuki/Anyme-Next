@@ -66,7 +66,7 @@ export default function ReusableCarousel({ title, data = [], className }) {
                     href={`/pages/Manga/details/${data.id}`}
                   >
                     <img
-                      className="rounded-t-xl object-cover h-[290px] w-[230px] max-md:h-[200px]"
+                      className="rounded-xl object-cover h-[290px] w-[230px] max-md:h-[200px]"
                       src={data.image || "/path/to/default-image.jpg"}
                       draggable="false"
                       onError={(e) =>
@@ -79,7 +79,7 @@ export default function ReusableCarousel({ title, data = [], className }) {
                         icon={faBook}
                       />
                     </div>
-                    <p className="flex flex-row justify-center items-center gap-1 px-1 bg-green-200 text-black">
+                    <p className="absolute top-2 left-2 rounded-md flex flex-row justify-center items-center gap-1 px-2 bg-green-200 text-black">
                       <FontAwesomeIcon icon={faHeart} />
                       {data.view}
                     </p>
@@ -89,6 +89,11 @@ export default function ReusableCarousel({ title, data = [], className }) {
                       ? data.title.substring(0, 30) + "..."
                       : data.title}
                   </h4>
+                  <p className="rounded-md text-wrap px-2 bg-white text-black">
+                      {data.chapter.length > 20
+                        ? data.chapter.substring(0, 20) + "..."
+                        : data.chapter}
+                    </p>
                 </div>
               </SwiperSlide>
             );

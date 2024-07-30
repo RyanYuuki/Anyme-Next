@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { FetchMangaList } from "@/hooks/useApi";
 import HomeCarousel from "@/components/Manga/HomeCarousel";
 import ReusableCarousel from "@/components/Manga/ReusableCarousel";
+import ReusableCardStacks from "@/components/Manga/ReusableCardStacks";
 const Manga = () => {
   const [mangaList, setMangaList] = useState(null);
   const [newestData, setNewestData] = useState(null);
@@ -30,7 +31,7 @@ const Manga = () => {
       <HomeCarousel data={mangaList} />
       <ReusableCarousel title={'Trending'} data={newestData} />
       <ReusableCarousel title={'Popular'} data={latestData} />
-      <ReusableCarousel title={'Popular'} data={topViewData} />
+      <ReusableCardStacks title={'Top Reads'} data={topViewData} />
     </div>
   );
 };

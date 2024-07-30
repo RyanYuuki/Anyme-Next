@@ -329,3 +329,9 @@ export const FetchMangaByType = async (type) => {
   return data;
 }
 
+export const FetchMangaDetails = async (id) => {
+  const response = await fetch(PROXY + MANGA_URL + 'manga/' + id);
+  const data = await response.json();
+  console.log(PROXY + MANGA_URL + 'manga/' + id );
+  return data;
+}
