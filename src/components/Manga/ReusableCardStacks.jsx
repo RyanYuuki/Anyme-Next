@@ -109,7 +109,7 @@ const ReusableCardStacks = ({ data, title }) => {
             })}
         </div>
       </div>
-      <div className="flex flex-col gap-5 w-[30%]" >
+      <div className="flex flex-col gap-5 w-[35%]" >
       <h1 className="text-2xl" > <FontAwesomeIcon icon={faFireAlt} /> {' '} Trending</h1>
       <TrendingTabs data={data} />
       </div>
