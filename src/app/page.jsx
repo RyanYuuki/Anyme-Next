@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex flex-row justify-center items-center h-screen homeCard">
+    <div className="flex flex-row justify-evenly items-center h-screen homeCard">
       <div className="flex flex-row gap-10 w-[40%] h-[75%] justify-center bg-transparent max-md:hidden">
         <img
           src="/homepage_cover.jpg"
@@ -16,7 +16,7 @@ export default function Home() {
           className="w-[250px] h-[350px] mt-10 rounded-2xl object-cover"
         />
       </div>
-      <div className="flex flex-col text-[35px] max-md:text-[20px] max-md:mt-10 max-md:w-[100%] mt-10 w-[40%] h-[75%] gap-5">
+      <div className="flex flex-col justify-center text-[35px] max-md:text-[20px] max-md:mt-10 max-md:w-[100%] w-[40%] h-[50%] mb-28 gap-5 max-md:justify-start">
         <h1 className="max-md:text-center">
           Welcome To An<span className="text-indigo-400 text-[40px]">Y</span>mey
         </h1>

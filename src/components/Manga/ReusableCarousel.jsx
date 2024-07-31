@@ -85,13 +85,13 @@ export default function ReusableCarousel({ title, data = [], className }) {
                     </p>
                   </Link>
                   <h4 className="font-semibold max-md:text-sm">
-                    {data.title.length > 30
-                      ? data.title.substring(0, 30) + "..."
+                    {data.title.length > 20
+                      ? data.title.substring(0, 20) + "..."
                       : data.title}
                   </h4>
                   <p className="rounded-md text-wrap px-2 bg-white text-black">
-                      {data.chapter.length > 11
-                        ? data.chapter.substring(0, 11) + "..."
+                      {data.chapter.length > 13
+                        ? data.chapter.substring(0, 13) + "..."
                         : data.chapter}
                     </p>
                 </div>

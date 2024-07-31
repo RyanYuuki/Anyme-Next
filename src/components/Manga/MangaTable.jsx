@@ -61,16 +61,11 @@ const ReusableStack = ({ data }) => {
                       <h2>{formattedTitle}</h2>
                       <div className="flex flex-row gap-[2px] w-full items-center text-[12px]">
                         <p className="flex flex-row items-center gap-1 px-1 rounded-l-sm bg-green-200 text-black">
-                          {" "}
                           <FontAwesomeIcon icon={faFireAlt} />{" "}
                           {dataItem.view}
                         </p>
-                        <p className="flex flex-row items-center gap-1 px-1 bg-blue-200 text-black">
-                          {" "}
-                          <FontAwesomeIcon icon={faBook} /> {dataItem.chapter.length > 13 ? dataItem.chapter.substring(0,13) + '...' : dataItem.chapter || '0'}
-                        </p>
-                        <p className="px-2 rounded-r-sm bg-primary/30">
-                          MANGA
+                        <p className="flex flex-row items-center rounded-r-sm gap-1 px-1 bg-blue-200 text-black">
+                          <FontAwesomeIcon icon={faBook} />{dataItem.chapter.length > 15 ? dataItem.chapter.substring(0,15) : dataItem.chapter || '0'}
                         </p>
                       </div>
                     </div>
