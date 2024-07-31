@@ -191,6 +191,10 @@
     animation: none;
     transition: none;
   }
+  .bg-custom {
+    background-image: url(/body-background.png);
+    background-attachment: fixed;
+  }
   /* Animations */
   /* Keyframes for pulse animation */
   @keyframes pulseAnimation {

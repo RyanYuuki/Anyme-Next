@@ -5,6 +5,7 @@ import HomeCarousel from "@/components/Manga/HomeCarousel";
 import ReusableCarousel from "@/components/Manga/ReusableCarousel";
 import MangaTable from "@/components/Manga/MangaTable";
 import ReusableStack from "@/components/Manga/ReusableCardStacks";
+import BackgroundOverlay from '@/components/common/BackgroundOverlay';
 const Manga = () => {
   const [mangaList, setMangaList] = useState(null);
   const [newestData, setNewestData] = useState(null);
@@ -28,7 +29,7 @@ const Manga = () => {
     return <h1>Loading...</h1>;
 
   return (
-    <div className="flex flex-col gap-10 px-10 max-md:px-1">
+    <div className="flex flex-col gap-10 px-10 max-md:px-1 bg-custom">
       <HomeCarousel data={mangaList} />
       <ReusableCarousel title={"Trending"} data={newestData} />
       <ReusableCarousel title={"Popular"} data={latestData} />

@@ -1,4 +1,9 @@
-import { faBook, faCircle, faFireAlt, faStar } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBook,
+  faCircle,
+  faFireAlt,
+  faStar,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { Button } from "../ui/button";
@@ -22,7 +27,7 @@ const ReusableCardStacks = ({ data, title }) => {
           {title}
         </h2>
         <div
-          className={`grid grid-cols-5 grid-row-auto max-md:grid-cols-2 place-items-center gap-5 p-5 py-10 bg-neutral-700/30 rounded-md w-[90%] flex-shrink-0`}
+          className={`grid grid-cols-5 grid-row-auto max-md:grid-cols-2 place-items-center gap-5 p-5 py-10 bg-primary-foreground/50 rounded-md w-[90%] flex-shrink-0`}
         >
           {newData &&
             newData.map((manga) => {
@@ -80,10 +85,7 @@ const ReusableCardStacks = ({ data, title }) => {
                           doubleCheckedChapter.split(" ")[1]
                         }`}
                       >
-                        <Button
-                          className="hover:bg-white hover:text-black w-full"
-                          variant={"secondary"}
-                        >
+                        <Button className="bg-primary/5 hover:text-black text-primary w-full">
                           {doubleCheckedChapter}
                         </Button>
                       </Link>
@@ -94,8 +96,7 @@ const ReusableCardStacks = ({ data, title }) => {
                           }`}
                         >
                           <Button
-                            className="hover:bg-white hover:text-black w-full"
-                            variant={"secondary"}
+                            className="bg-primary/5 hover:text-black text-primary w-full"
                           >
                             Chapter{" "}
                             {parseInt(doubleCheckedChapter.split(" ")[1]) - 1}
@@ -109,9 +110,12 @@ const ReusableCardStacks = ({ data, title }) => {
             })}
         </div>
       </div>
-      <div className="flex flex-col gap-5 w-[35%]" >
-      <h1 className="text-2xl" > <FontAwesomeIcon icon={faFireAlt} /> {' '} Trending</h1>
-      <TrendingTabs data={data} />
+      <div className="flex flex-col gap-5 w-[35%]">
+        <h1 className="text-2xl">
+          {" "}
+          <FontAwesomeIcon icon={faFireAlt} /> Trending
+        </h1>
+        <TrendingTabs data={data} />
       </div>
     </div>
   );
