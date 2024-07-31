@@ -89,7 +89,7 @@ export default function ReusableCarousel({ title, data = [], className }) {
                       ? data.title.substring(0, 20) + "..."
                       : data.title}
                   </h4>
-                  <p className="rounded-md text-wrap px-2 bg-white text-black">
+                  <p className="rounded-md text-wrap px-2 bg-primary/20">
                       {data.chapter.length > 13
                         ? data.chapter.substring(0, 13) + "..."
                         : data.chapter}

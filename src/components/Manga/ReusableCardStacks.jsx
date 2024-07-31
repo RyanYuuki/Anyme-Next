@@ -27,7 +27,7 @@ const ReusableCardStacks = ({ data, title }) => {
           {title}
         </h2>
         <div
-          className={`grid grid-cols-5 grid-row-auto max-md:grid-cols-2 place-items-center gap-5 p-5 py-10 bg-primary-foreground/50 rounded-md w-[90%] flex-shrink-0`}
+          className={`grid grid-cols-5 grid-row-auto max-md:grid-cols-2 place-items-center gap-5 p-5 py-10 bg-primary-foreground/50 rounded-md w-[90%] max-md:w-full flex-shrink-0`}
         >
           {newData &&
             newData.map((manga) => {
@@ -110,7 +110,7 @@ const ReusableCardStacks = ({ data, title }) => {
             })}
         </div>
       </div>
-      <div className="flex flex-col gap-5 w-[35%]">
+      <div className="flex flex-col gap-5 w-[35%] max-md:w-full">
         <h1 className="text-2xl">
           {" "}
           <FontAwesomeIcon icon={faFireAlt} /> Trending

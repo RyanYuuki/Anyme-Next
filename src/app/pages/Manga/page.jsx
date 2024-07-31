@@ -29,7 +29,7 @@ const Manga = () => {
     return <h1>Loading...</h1>;
 
   return (
-    <div className="flex flex-col gap-10 px-10 max-md:px-1 bg-custom">
+    <div className="flex flex-col gap-10 px-10 max-md:px-2 bg-custom">
       <HomeCarousel data={mangaList} />
       <ReusableCarousel title={"Trending"} data={newestData} />
       <ReusableCarousel title={"Popular"} data={latestData} />

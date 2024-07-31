@@ -20,17 +20,15 @@ const HomeCarousel = ({ data }) => {
   };
 
   return (
-    <div className="w-full overflow-hidden animated">
+    <div className="w-full overflow-hidden animated rounded-md box-shadow">
       <Swiper>
         {data.map((item, index) => (
           <SwiperSlide key={index}>
             <div className="text-white rounded-5 relative">
-              <img
-                src={item.image || "/manga-carousel.png"}
-                alt={item.title || "Cover Image"}
+              <div
                 className="object-cover w-full h-[400px] object-center inset-0 blur-lg max-md:h-[250px]"
               />
-              <div className="absolute inset-0 bg-black/80"></div>
+              <div className="absolute inset-0 bg-primary-foreground/70 "></div>
               <div className="absolute top-0 h-full w-full flex flex-row gap-10 max-md:gap-5 max-md:p-2 p-10">
                 <div className="relative flex items-center flex-shrink-0">
                   <img
