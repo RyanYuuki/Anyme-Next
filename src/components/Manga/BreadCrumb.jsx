@@ -12,7 +12,7 @@ import {
 export default function BreadcrumbWithCustomSeparator({ prevPage, currentPath, title }) {
   return (
     <Breadcrumb>
-      <BreadcrumbList>
+      <BreadcrumbList className="flex items-center justify-center" >
         <BreadcrumbItem>
           <BreadcrumbLink>
             <Link href="/pages/Manga/">Home</Link>

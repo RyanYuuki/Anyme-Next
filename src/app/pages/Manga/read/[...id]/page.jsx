@@ -41,19 +41,19 @@ const ReadPage = ({ params }) => {
 
   return (
     <div className="min-h-screen flex flex-col items-center gap-5">
-      <h1 className="text-3xl font-bold">{chapterData.title}</h1>
+      <h1 className="text-3xl font-bold max-md:text-center">{chapterData.title}</h1>
       <h1>{chapterData.currentChapter}</h1>
       <Breadcrumb prevPage={mangaID} title={chapterData.title} currentPath={chapterData.currentChapter} />
       <div className="flex flex-col gap-5">
-        <div className="flex justify-between items-center flex-row flex-shrink-0 max-md:px-5">
-          <Button className="flex flex-row gap-1 group" onClick={() => handleNavigation(+1)}> <FontAwesomeIcon className="group-hover:mr-2 transition-full" icon={faLeftLong} /> Prev</Button>
+        <div className="flex justify-between items-center flex-row max-md:w-[400px] max-md:px-5">
+          <Button className="flex flex-row gap-1 group" onClick={() => handleNavigation(+1)}> <FontAwesomeIcon className="group-hover:mr-2 transition-full duration-100" icon={faLeftLong} /> Prev</Button>
           <Selector
             options={chapterData.chapterListIds}
             onClick={handleClick}
             placeholder={chapterData.currentChapter}
             label={"Chapters"}
           />
-          <Button className="flex flex-row gap-1 group" onClick={() => handleNavigation(-1)}>Next<FontAwesomeIcon className="group-hover:mr-2 transition-full" icon={faRightLong} /></Button>
+          <Button className="flex flex-row gap-1 group" onClick={() => handleNavigation(-1)}>Next<FontAwesomeIcon className="group-hover:ml-2 duration-100 transition-full" icon={faRightLong} /></Button>
         </div>
         <div className="flex flex-col gap-0">
           {chapterImages ? (
@@ -71,8 +71,8 @@ const ReadPage = ({ params }) => {
             <h1>Loading...</h1>
           )}
           <div className="flex mt-5 justify-between items-center flex-row flex-shrink-0 max-md:px-5">
-          <Button className="flex flex-row gap-1 group" onClick={() => handleNavigation(+1)}><FontAwesomeIcon className="group-hover:mr-2 transition-full" icon={faLeftLong} /> Prev</Button>
-          <Button className="flex flex-row gap-1 group" onClick={() => handleNavigation(-1)}>Next<FontAwesomeIcon className="group-hover:ml-2 transition-full" icon={faRightLong} /></Button>
+          <Button className="flex flex-row gap-1 group" onClick={() => handleNavigation(+1)}><FontAwesomeIcon className="group-hover:mr-2 transition-full duration-100" icon={faLeftLong} /> Prev</Button>
+          <Button className="flex flex-row gap-1 group" onClick={() => handleNavigation(-1)}>Next<FontAwesomeIcon className="group-hover:ml-2 transition-full duration-100" icon={faRightLong} /></Button>
         </div>
         </div>
       </div>

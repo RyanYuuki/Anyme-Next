@@ -6,7 +6,7 @@ const BASE_URL = "https://consumet-api-two-nu.vercel.app/meta/anilist/";
 const ANIWATCH_URL = "https://aniwatch-ryan.vercel.app/anime/";
 const API_KEY = "e2f1fb12caa883224a8363dc0329b3bc";
 const BASE_MOVIE_URL = "https://api.themoviedb.org";
-const MANGA_URL = 'https://manga-ryan.vercel.app/api/';
+const MANGA_URL = "https://manga-ryan.vercel.app/api/";
 
 // MOVIE
 
@@ -265,9 +265,7 @@ export const FetchAnimesByGenres = async (genre) => {
   return data.animes;
 };
 
-export const SearchAniWatch = async (
-  query
-) => {
+export const SearchAniWatch = async (query) => {
   const queryUrl = `${ANIWATCH_URL}search?q=${query}`;
   const resp = await fetch(queryUrl);
   const data = await resp.json();
@@ -312,31 +310,49 @@ export const FetchEstimatedSchedule = async (year, month, day) => {
 };
 
 export const FetchMangaList = async (page = 1) => {
-  const response = await fetch('https://anymey-proxy.vercel.app/cors?url=' + MANGA_URL + 'mangalist' + '?page=' + page);
+  const response = await fetch(
+    "https://anymey-proxy.vercel.app/cors?url=" +
+      MANGA_URL +
+      "mangalist" +
+      "?page=" +
+      page
+  );
   const data = await response.json();
   return data;
-}
+};
 
 export const FetchMangaByCategory = async (category) => {
-  const response = await fetch(PROXY + MANGA_URL + 'mangalist?category=' + category);
+  const response = await fetch(
+    PROXY + MANGA_URL + "mangalist?category=" + category
+  );
   const data = await response.json();
   return data;
-}
+};
 
 export const FetchMangaByType = async (type) => {
-  const response = await fetch(PROXY + MANGA_URL + 'mangalist?type=' + type);
+  const response = await fetch(PROXY + MANGA_URL + "mangalist?type=" + type);
   const data = await response.json();
   return data;
-}
+};
 
 export const FetchMangaDetails = async (id) => {
-  const response = await fetch(PROXY + MANGA_URL + 'manga/' + id);
+  const response = await fetch(PROXY + MANGA_URL + "manga/" + id);
   const data = await response.json();
   return data;
-}
+};
 
 export const FetchMangaChaptersSrc = async (MangaID, chapterID) => {
-  const response = await fetch(PROXY + MANGA_URL + "manga/" + MangaID + '/' + chapterID );
+  const response = await fetch(
+    PROXY + MANGA_URL + "manga/" + MangaID + "/" + chapterID
+  );
   const data = await response.json();
   return data;
-}
+};
+
+export const SearchManga = async (query = "", page = 1) => {
+  const response = await fetch(
+    PROXY + MANGA_URL + "search/" + query + "?page=" + page
+  );
+  const data = await response.json();
+  return data;
+};

@@ -18,7 +18,7 @@ const MangaDetails = () => {
 
   if (!data || !data.chapterList) return <h1>Loading...</h1>;
   return (
-    <div className="flex flex-col gap-5 px-20 min-h-screen">
+    <div className="flex flex-col gap-5 px-20 max-md:px-2 min-h-screen">
       <BasicDetails data={data} />
       <ChapterList id={id} chaptersData={data?.chapterList} />
     </div>

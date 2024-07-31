@@ -22,7 +22,7 @@ const ReusableCardStacks = ({ data, title }) => {
         <div
           className={`grid grid-cols-7 grid-row-auto max-md:grid-cols-2 place-items-center gap-5 p-5 py-10 bg-neutral-700/30 rounded-md`}
         >
-          {data.map((manga) => (
+          {data && data.map((manga) => (
             <Link
               key={manga.id}
               href={`/pages/Manga/details/${manga.id}`}
