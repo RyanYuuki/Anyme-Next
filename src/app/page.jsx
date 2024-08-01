@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex flex-row justify-evenly h-screen homeCard">
+    <div className="flex flex-row justify-evenly h-screen">
       <div className="flex flex-row gap-10 w-[40%] h-[75%] justify-center items-center bg-transparent max-md:hidden">
         <img
           src="/homepage_cover.jpg"
