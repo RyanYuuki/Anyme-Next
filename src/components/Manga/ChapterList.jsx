@@ -49,7 +49,7 @@ const ChapterList = ({ chaptersData, id }) => {
           !isGrid ? (
             <Link
               href={`/pages/Manga/read/${id}/${chapter.id}/`}
-              className="flex flex-row justify-between items-center p-3 rounded-md bg-input animated"
+              className="flex flex-row justify-between items-center p-3 rounded-md bg-input/50 hover:bg-input animated"
             >
               <h1 className="flex flex-col gap-2">
                 {chapter.name}

@@ -29,7 +29,7 @@ const BasicDetails = ({ data }) => {
               {"[" + data.author + "]"}
             </p>
           </h1>
-          <div className="flex flex-col gap-7 bg-input p-2 rounded-lg max-md:hidden">
+          <div className="flex flex-col gap-7 bg-input/20 p-2 rounded-lg max-md:hidden">
             <p className="flex flex-row gap-2">
               Status:<span className="font-bold">{data.status}</span>
             </p>

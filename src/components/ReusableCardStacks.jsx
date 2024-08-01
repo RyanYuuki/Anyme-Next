@@ -31,9 +31,9 @@ const ReusableCardStacks = ({ withGenres, genresData, data, title }) => {
             <Link
               key={anime.id}
               href={`/pages/Anime/details/${anime.id}`}
-              className="flex flex-col group"
+              className="flex flex-col gap-1 group"
             >
-              <div className="relative flex items-center justify-center">
+              <div className="relative flex items-center justify-center w-[173px]">
                 <img
                   className="w-[173px] h-[244px] object-cover rounded-lg"
                   src={anime.poster}
