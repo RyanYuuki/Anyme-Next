@@ -44,7 +44,7 @@ export default function ReusableCarousel({ title, data = [], className }) {
               spaceBetween: 15,
             },
             400: {
-              slidesPerView: 3,
+              slidesPerView: 2,
               spaceBetween: 20,
             },
             768: {
@@ -76,7 +76,7 @@ export default function ReusableCarousel({ title, data = [], className }) {
                     }
                   >
                     <img
-                      className="rounded-lg object-cover h-[290px] w-[250px] max-md:h-[170px]"
+                      className="rounded-xl object-cover h-[290px] w-[230px] max-md:h-[250px]"
                       src={anime.poster || "/path/to/default-image.jpg"}
                       draggable="false"
                       onError={(e) =>

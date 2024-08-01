@@ -97,8 +97,8 @@ const EstimatedSchedule = () => {
                       data.dayNumber
                     )
                   }
-                  className={`flex flex-col py-[10px] px-[30px] rounded-xl text-center cursor-pointer ${
-                    data.day == activeDay ? "bg-indigo-400" : "bg-input"
+                  className={`flex flex-col p-2 rounded-xl text-center cursor-pointer ${
+                    data.day == activeDay ? "bg-indigo-400 text-white" : "bg-input/50"
                   }`}
                 >
                   <h1 style={disableCopy}>{data.weekday.slice(0, 3)}</h1>
