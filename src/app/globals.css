@@ -191,7 +191,7 @@
     animation: none;
     transition: none;
   }
-  .bg-custom {
+  .bg-custom-body {
     background-image: url(/body-background.png);
     background-attachment: fixed;
   }

@@ -12,7 +12,7 @@ const config = {
     './src/components/ui/*.{js,jsx,ts,tsx}',
     './src/components/common/*.{js,jsx,ts,tsx}',
     './src/components/Anime/*.{js,jsx,ts,tsx}',
-    './src/components/Anime/Watch/*.{js,jsx,ts,tsx}',
+    './src/components/Anime/**/*.{js,jsx,ts,tsx}',
 	],
   prefix: "",
   theme: {

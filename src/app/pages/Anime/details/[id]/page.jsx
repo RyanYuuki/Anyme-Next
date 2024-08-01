@@ -33,7 +33,7 @@ const AnimeDetailsPage = () => {
   }, [id]);
 
   return (
-    <div className="flex flex-col gap-2 w-[80%] relative left-[10%] max-md:left-[2.5%] max-md:w-[95%] animated">
+    <div className="flex flex-col gap-2 w-[80%] relative left-[10%] max-md:left-[2.5%] max-md:w-[95%] animated bg-custom">
       <AnimeCover posterSrc={posterSrc || null} />
       <BasicDetails data={data?.anime} />
       {consumetData && <CharactersData data={consumetData?.characters || []} />}

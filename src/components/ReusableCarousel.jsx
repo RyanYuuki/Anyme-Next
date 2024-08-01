@@ -16,8 +16,8 @@ export default function ReusableCarousel({ title, data = [], className }) {
   if (!Array.isArray(data) || data.length === 0) {
     return (
       <div className="small-carousel">
-        {demoArray.map(() => (
-          <div className="carousel-card" />
+        {demoArray.map((data, index) => (
+          <div key={data + index} className="carousel-card" />
         ))}
       </div>
     );
@@ -28,7 +28,7 @@ export default function ReusableCarousel({ title, data = [], className }) {
       <h2 className="text-3xl max-md:text-2xl font-semibold border-l-8 border-l-neutral-800 px-5">
         {title}
       </h2>
-      <div className="bg-neutral-700/30 rounded-lg box-shadow max-md:p-3">
+      <div className="bg-neutral-700/20 rounded-lg box-shadow max-md:p-3">
         <Swiper
           breakpoints={{
             0: {
@@ -65,7 +65,7 @@ export default function ReusableCarousel({ title, data = [], className }) {
           {data.map((anime, index) => {
             const isManga = anime.type === "MANGA";
             return (
-              <SwiperSlide key={index}>
+              <SwiperSlide key={anime.id + index}>
                 <div className="flex flex-col animated justify-center p-8 items-center gap-3 text-center max-md:p-0">
                   <Link
                     className={`relative carousel overflow-hidden rounded-lg group`}

@@ -9,7 +9,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
-      <body className={cn("min-h-screen antialiased")}>
+      <body className={cn("min-h-screen antialiased bg-custom-body")}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

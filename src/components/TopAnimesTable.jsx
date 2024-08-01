@@ -26,7 +26,6 @@ const Top10AnimesTable = ({ data }) => {
     );
   }
 
-
   return (
     <div className="flex flex-col gap-5">
       <div className="flex flex-row justify-between">
@@ -36,6 +35,7 @@ const Top10AnimesTable = ({ data }) => {
         <div className="flex flex-row gap-3 items-center">
           {MetaData.map((data, index) => (
             <button
+              key={data + index}
               onClick={() => handleDurationChange(index)}
               className={`p-2 px-3 rounded-md max-md:px-2 max-md:p-1 ${
                 index == activeDuration ? "bg-indigo-400" : "bg-input"
@@ -48,7 +48,7 @@ const Top10AnimesTable = ({ data }) => {
       </div>
       <div className="grid grid-cols-2  max-md:grid-cols-1 grid-rows-auto gap-3 bg-neutral-700/30 p-5 rounded-md">
         {currentData &&
-          currentData.map((data) => (
+          currentData.map((data, index) => (
             <Link
               key={data.id}
               href={`/pages/Anime/details/${data.id}`}

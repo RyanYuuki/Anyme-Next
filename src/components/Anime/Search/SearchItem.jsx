@@ -8,7 +8,7 @@ const AnimeItem = ({ data, handleCross }) => (
     onClick={handleCross}
     href={`/pages/Anime/details/${data.id}`}
     key={data.id}
-    className="animated flex flex-row items-center gap-5 justify-center w-full bg-neutral-700/30 p-2 rounded-md box-shadow min-h-[100px]"
+    className="animated flex flex-row items-center gap-5 justify-center w-full bg-neutral-700/30 hover:bg-neutral-700/50 p-2 rounded-md box-shadow min-h-[100px]"
   >
     <img
       className="w-[70px] h-[80px] rounded-lg"
@@ -36,7 +36,7 @@ const MangaItem = ({ data, handleCross }) => (
     onClick={handleCross}
     href={`/pages/Manga/details/${data.id}`}
     key={data.id}
-    className="animated flex flex-row items-center gap-5 justify-center w-full bg-neutral-700/30 p-2 rounded-md box-shadow min-h-[100px]"
+    className="animated flex flex-row items-center gap-5 justify-center w-full bg-neutral-700/30 p-2 rounded-md box-shadow min-h-[100px] hover:bg-neutral-700/10"
   >
     <img
       className="w-[70px] h-[80px] rounded-lg"
