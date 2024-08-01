@@ -9,7 +9,7 @@ export function TabsDemo({ data }) {
   return (
     <Tabs
       defaultValue="today"
-      className="mt-1 w-full bg-primary-foreground/50 p-2 rounded-md pb-10"
+      className="mt-1 w-full bg-neutral-700/20 p-2 rounded-md pb-10"
     >
       <TabsList className="grid w-full grid-cols-3 bg-neutral-600/20">
         <TabsTrigger value="today">Today</TabsTrigger>

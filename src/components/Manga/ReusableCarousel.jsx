@@ -23,7 +23,7 @@ export default function ReusableCarousel({ title, data = [], className }) {
       <h2 className="text-3xl max-md:text-2xl font-semibold border-l-8 border-l-neutral-800 px-5">
         {title}
       </h2>
-      <div className="bg-primary-foreground/50 rounded-lg box-shadow max-md:p-3">
+      <div className="bg-neutral-700/20 rounded-lg box-shadow max-md:p-3">
         <Swiper
           breakpoints={{
             0: {

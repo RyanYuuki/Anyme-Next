@@ -24,11 +24,11 @@ const HomeCarousel = ({ data }) => {
       <Swiper>
         {data.map((item, index) => (
           <SwiperSlide key={index}>
-            <div className="text-white rounded-5 relative">
+            <div className="rounded-5 relative">
               <div
-                className="object-cover w-full h-[400px] object-center inset-0 blur-lg max-md:h-[250px]"
+                className="object-cover w-full h-[400px] object-center inset-0 max-md:h-[250px] bg-neutral-700/20"
               />
-              <div className="absolute inset-0 bg-primary-foreground/70 "></div>
+              <div className="absolute inset-0 custom-blur"></div>
               <div className="absolute top-0 h-full w-full flex flex-row gap-10 max-md:gap-5 max-md:p-2 p-10">
                 <div className="relative flex items-center flex-shrink-0">
                   <img
@@ -69,7 +69,7 @@ const HomeCarousel = ({ data }) => {
                       </Button>
                     </Link>
                     <Link href={`/pages/Manga/details/${item.id}`}>
-                      <Button variant={'secondary'} className="flex flex-row gap-1 max-md:scale-75">
+                      <Button className="flex flex-row gap-1 max-md:scale-75">
                         <FontAwesomeIcon icon={faInfoCircle} /> Detail
                       </Button>
                     </Link>
