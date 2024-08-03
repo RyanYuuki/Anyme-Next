@@ -4,6 +4,8 @@ import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import BasicDetails from '@/components/Manga/BasicDetails';
 import ChapterList from '@/components/Manga/ChapterList';
+import MangaCover from '@/components/Manga/MangaCover';
+import { Skeleton } from "@/components/ui/skeleton";
 
 const MangaDetails = () => {
   const { id } = useParams();
@@ -16,9 +18,9 @@ const MangaDetails = () => {
     loadData();
   },[id]);
 
-  if (!data || !data.chapterList) return <h1>Loading...</h1>;
   return (
     <div className="flex flex-col gap-5 px-20 max-md:px-2 min-h-screen">
+      <MangaCover posterSrc={'/421f5172507433.64c983d7563d0.png'} />
       <BasicDetails data={data} />
       <ChapterList id={id} chaptersData={data?.chapterList} />
     </div>

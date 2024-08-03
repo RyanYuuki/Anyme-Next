@@ -5,19 +5,9 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook, faFireAlt } from "@fortawesome/free-solid-svg-icons";
+import { Skeleton } from "../ui/skeleton";
 
-export default function ReusableCarousel({ title, data = [], className }) {
-  const demoArray = ["", "", "", "", ""];
-  if (!Array.isArray(data) || data.length === 0) {
-    return (
-      <div className="small-carousel">
-        {demoArray.map(() => (
-          <div className="carousel-card" />
-        ))}
-      </div>
-    );
-  }
-
+export default function ReusableCarousel({ title, data, className }) {
   return (
     <div className={cn("flex flex-col gap-5 animated", className)}>
       <h2 className="text-3xl max-md:text-2xl font-semibold border-l-8 border-l-neutral-800 px-5">
@@ -57,47 +47,53 @@ export default function ReusableCarousel({ title, data = [], className }) {
           }}
           style={{ cursor: "grab" }}
         >
-          {data.map((data, index) => {
-            return (
-              <SwiperSlide key={index}>
-                <div className="flex flex-col animated justify-center p-8 items-center gap-3 text-center max-md:p-0">
-                  <Link
-                    className={`relative carousel overflow-hidden rounded-lg group`}
-                    href={`/pages/Manga/details/${data.id}`}
-                  >
-                    <img
-                      className="rounded-xl object-cover h-[290px] w-[230px] max-md:h-[250px]"
-                      src={data.image || "/path/to/default-image.jpg"}
-                      draggable="false"
-                      onError={(e) =>
-                        (e.target.src = "/path/to/default-image.jpg")
-                      }
-                    />
-                    <div className="absolute flex justify-center items-center h-full w-full top-0 group-hover:seasonCard transition-full rounded-xl">
-                      <FontAwesomeIcon
-                        className="text-3xl group-hover:opacity-100 opacity-0 transition-full"
-                        icon={faBook}
+          {data
+            ? data.map((item, index) => (
+                <SwiperSlide key={index}>
+                  <div className="flex flex-col animated justify-center p-8 items-center gap-3 text-center max-md:p-0">
+                    <Link
+                      className="relative carousel overflow-hidden rounded-lg group"
+                      href={`/pages/Manga/details/${item.id}`}
+                    >
+                      <img
+                        className="rounded-xl object-cover h-[290px] w-[230px] max-md:h-[250px]"
+                        src={item.image || "/path/to/default-image.jpg"}
+                        draggable="false"
+                        onError={(e) =>
+                          (e.target.src = "/path/to/default-image.jpg")
+                        }
                       />
-                    </div>
-                    <p className="absolute top-2 left-2 rounded-md flex flex-row justify-center items-center gap-1 px-2 bg-white text-black ">
-                      <FontAwesomeIcon icon={faFireAlt} />
-                      {data.view}
+                      <div className="absolute flex justify-center items-center h-full w-full top-0 group-hover:seasonCard transition-full rounded-xl">
+                        <FontAwesomeIcon
+                          className="text-3xl group-hover:opacity-100 opacity-0 transition-full"
+                          icon={faBook}
+                        />
+                      </div>
+                      <p className="absolute top-2 left-2 rounded-md flex flex-row justify-center items-center gap-1 px-2 bg-white text-black ">
+                        <FontAwesomeIcon icon={faFireAlt} />
+                        {item.view}
+                      </p>
+                    </Link>
+                    <h4 className="font-semibold max-md:text-sm">
+                      {item.title.length > 20
+                        ? item.title.substring(0, 20) + "..."
+                        : item.title}
+                    </h4>
+                    <p className="rounded-md text-wrap px-2 bg-primary/20">
+                      {item.chapter.length > 13
+                        ? item.chapter.substring(0, 13) + "..."
+                        : item.chapter}
                     </p>
-                  </Link>
-                  <h4 className="font-semibold max-md:text-sm">
-                    {data.title.length > 20
-                      ? data.title.substring(0, 20) + "..."
-                      : data.title}
-                  </h4>
-                  <p className="rounded-md text-wrap px-2 bg-primary/20">
-                      {data.chapter.length > 13
-                        ? data.chapter.substring(0, 13) + "..."
-                        : data.chapter}
-                    </p>
-                </div>
-              </SwiperSlide>
-            );
-          })}
+                  </div>
+                </SwiperSlide>
+              ))
+            : Array.from({ length: 10 }).map((_, index) => (
+                <SwiperSlide key={index}>
+                  <div className="w-[250px] h-[330px]" >
+                    <Skeleton className="h-full w-full rounded-lg" />
+                  </div>
+                </SwiperSlide>
+              ))}
         </Swiper>
       </div>
     </div>
