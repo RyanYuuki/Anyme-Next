@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Selector from "@/components/Select";
+import { Skeleton } from "../ui/skeleton";
 
 const CharacterData = ({ data }) => {
   const [currentLang, setCurrentLang] = useState("Japanese");
@@ -16,26 +17,33 @@ const CharacterData = ({ data }) => {
   };
 
   if (!data || data.length < 1) {
-    const sequentialArray = [...Array(20)].map((_, i) => i);
     return (
-      <div className="skeleton-characters">
-        {sequentialArray.map((index) => (
-          <div key={index} className="skeleton-characterCards">
-            <div className="skeleton-characterCards-image" />
-            <div className="skeleton-details">
-              <div className="base-skeleton w-full rounded-full h-[20px]" />
-              <div className="base-skeleton w-[60%] rounded-full h-[20px]" />
-              <div className="base-skeleton w-[40%] rounded-full h-[20px]" />
+      <div className="flex flex-col gap-5 w-full bg-neutral-700/10 p-5 box-shadow rounded-md animated">
+        <div className="flex flex-row items-center w-full justify-between">
+          <h1 className="text-2xl">Characters</h1>
+          <Selector onClick={handleLanguage} />
+        </div>
+        <div className="grid grid-cols-3 grid-rows-auto max-md:grid-cols-1 justify-between gap-5 w-full">
+          {Array.from({ length: 20 }).map((_, index) => (
+            <div
+              key={index}
+              className="flex flex-row animated justify-between bg-neutral-700/20 p-2 rounded-md box-shadow"
+            >
+              <Skeleton className="h-[100px] w-[67px] rounded-md" />
+              <div className="flex flex-col justify-center gap-2 items-center max-md:text-[13px]">
+                <Skeleton className="w-[120px] h-[20px]" />
+                <Skeleton className="w-[100px] h-[20px]" />
+              </div>
+              <Skeleton className="h-[100px] w-[67px] rounded-lg" />
             </div>
-            <div className="skeleton-characterCards-image" />
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col gap-5 w-full bg-neutral-700/30 p-5 box-shadow rounded-md animated">
+    <div className="flex flex-col gap-5 w-full bg-neutral-700/10 p-5 box-shadow rounded-md animated">
       <div className="flex flex-row items-center w-full justify-between">
         <h1 className="text-2xl">Characters</h1>
         <Selector onClick={handleLanguage} />
@@ -44,11 +52,11 @@ const CharacterData = ({ data }) => {
         {filteredData ? (
           filteredData.map((item) => {
             const voiceActor = item?.voiceActors?.find(
-              (data) => data.language == currentLang
+              (data) => data.language === currentLang
             );
             return (
               <div
-                className="flex flex-row animated justify-between bg-accent/80 p-2 rounded-md box-shadow"
+                className="flex flex-row animated justify-between bg-neutral-700/20 p-2 rounded-md box-shadow"
                 key={item.name.full}
               >
                 <img
@@ -59,12 +67,12 @@ const CharacterData = ({ data }) => {
                 <div className="flex flex-col justify-center gap-2 items-center max-md:text-[13px]">
                   <h1>{item.name.full}</h1>
                   <p className="italic text-gray-400">
-                    ~ {" " + voiceActor.name.full || "??"}
+                    ~ {" " + (voiceActor?.name.full || "??")}
                   </p>
                 </div>
                 <img
                   className="object-cover h-[100px] w-[67px] rounded-lg"
-                  src={voiceActor.image}
+                  src={voiceActor?.image || "/path/to/default-image.jpg"}
                   alt=""
                 />
               </div>

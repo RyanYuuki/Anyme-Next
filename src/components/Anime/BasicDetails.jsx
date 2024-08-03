@@ -1,9 +1,10 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
+import { Badge } from "../ui/badge";
+import { Separator } from "../ui/separator";
 
 const BasicDetails = ({ data, page = "Details", className }) => {
-
   if (!data || data.length < 1) {
     return (
       <div className="h-[400px] w-full">
@@ -15,7 +16,7 @@ const BasicDetails = ({ data, page = "Details", className }) => {
   return (
     <div
       className={cn(
-        "flex flex-row w-full gap-5 p-3 bg-neutral-700/30 box-shadow rounded-sm animated",
+        "flex flex-row w-full gap-5 p-3 bg-neutral-700/10 box-shadow rounded-sm animated",
         className
       )}
     >
@@ -32,27 +33,27 @@ const BasicDetails = ({ data, page = "Details", className }) => {
         </div>
         <Link href={`/pages/Anime/watch/${data.info.id}`}>
           <button
-            className="p-[12px] text-[14px] max-md:text-[10px] max-md:p-2 w-full bg-accent rounded-md font-semibold hover:bg-indigo-400 transition-full"
+            className="p-[12px] text-[14px] max-md:text-[10px] max-md:p-2 w-full bg-neutral-700/20 box-shadow rounded-md font-semibold hover:bg-indigo-400 transition-full"
             aria-label={page === "Details" ? "Watch Now" : "More Info"}
           >
             {page === "Details" ? "WATCH NOW" : "INFO"}
           </button>
         </Link>
         <button
-          className="p-[12px] text-[14px] max-md:p-2 max-md:text-[10px] bg-accent rounded-md font-semibold hover:bg-indigo-400 transition-full"
+          className="p-[12px] text-[14px] max-md:p-2 max-md:text-[10px] bg-neutral-700/20 box-shadow rounded-md font-semibold hover:bg-indigo-400 transition-full"
           aria-label="Watch Trailer"
         >
           TRAILER
         </button>
         <div className="flex flex-row justify-between">
           <button
-            className="p-[12px] text-[14px] max-md:p-2 max-md:text-[10px] w-[45%] bg-accent/80 rounded-md font-semibold hover:bg-indigo-400 transition-full"
+            className="p-[12px] text-[14px] max-md:p-2 max-md:text-[10px] w-[45%] bg-neutral-700/20 box-shadow rounded-md font-semibold hover:bg-indigo-400 transition-full"
             aria-label="Action"
           >
             A
           </button>
           <button
-            className="p-[12px] text-[14px] max-md:p-2 max-md:text-[10px] w-[45%] bg-accent/80 rounded-md font-semibold hover:bg-indigo-400 transition-full"
+            className="p-[12px] text-[14px] max-md:p-2 max-md:text-[10px] w-[45%] bg-neutral-700/20 box-shadow rounded-md font-semibold hover:bg-indigo-400 transition-full"
             aria-label="MAL"
           >
             MAL
@@ -60,9 +61,6 @@ const BasicDetails = ({ data, page = "Details", className }) => {
         </div>
       </div>
       <div className="flex flex-col gap-1 w-[80%]">
-        <h1 className="text-2xl max-md:text-base font-bold">
-          {data.info.name || data.info.jname}
-        </h1>
         <p
           className="text-[12px] max-md:text-[10px]"
           style={{ color: data.color, fontWeight: 700, fontStyle: "italic" }}
@@ -71,7 +69,19 @@ const BasicDetails = ({ data, page = "Details", className }) => {
             (data?.moreInfo?.synonyms || data?.info.jname || data?.info?.name) +
             "]"}
         </p>
-        <p className="rounded-xl bg-accent/60 p-2 max-md:hidden italic box-shadow">
+        <h1 className="text-2xl max-md:text-base font-bold">
+          {data.info.name || data.info.jname}
+        </h1>
+        <p className="flex flex-wrap gap-3 font-semibold text-primary max-md:hidden mb-2">
+              {data.moreInfo.genres.map((genre) => (
+                <Badge variant={'secondary'} key={genre}>
+                  {genre}
+                </Badge>
+              ))}
+              <Separator orientation="vertical" />
+              <Badge>{data.malscore || '0.0'}</Badge>
+            </p>
+        <p className="rounded-xl bg-accent/30 p-2 max-md:hidden italic box-shadow">
           {data.info.description.replace(/<\/?[^>]+(>|$)/g, "")}
         </p>
         <div className="fix-text flex flex-row max-md:flex-col justify-between h-full max-md:text-[13px] text-primary/60">
@@ -133,13 +143,6 @@ const BasicDetails = ({ data, page = "Details", className }) => {
               <span className="font-semibold text-primary uppercase">
                 {data.moreInfo.studios}
               </span>
-            </p>
-            <p className="flex flex-wrap gap-3 font-semibold text-primary max-md:hidden">
-              {data.moreInfo.genres.map((genre) => (
-                <span key={genre} className="p-2 rounded-xl bg-accent/80">
-                  {genre}
-                </span>
-              ))}
             </p>
           </div>
         </div>

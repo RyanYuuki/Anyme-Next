@@ -12,14 +12,14 @@ import React from "react";
 
 const VerticalReusableCarousel = ({ data, title }) => {
   return (
-    <div className="flex flex-col p-3 gap-3 animated w-full h-[49%] max-h-[500px] bg-neutral-700/30 overflow-scroll custom-scrollbar rounded-md">
+    <div className="flex flex-col p-3 gap-3 animated w-full h-[49%] max-h-[500px] bg-neutral-700/10 overflow-scroll custom-scrollbar rounded-md">
       <h1 className="text-xl">
         <FontAwesomeIcon icon={title == "RELATED" ? faLayerGroup : faStar} />{" "}
         {title}
       </h1>
       <div className="flex flex-col gap-2">
         {data.map((anime) => (
-          <Link href={`/pages/Anime/watch/${anime.id}`} className="group flex flex-row gap-5 p-1 bg-accent hover:bg-indigo-400 hover:text-white transition-full rounded-md items-center">
+          <Link href={`/pages/Anime/watch/${anime.id}`} className="group flex flex-row gap-5 p-1 bg-neutral-700/20 hover:bg-indigo-400 hover:text-white transition-full rounded-md items-center">
             <img
               className="w-[69px] h-[96px] object-cover rounded-lg"
               src={anime.poster}
