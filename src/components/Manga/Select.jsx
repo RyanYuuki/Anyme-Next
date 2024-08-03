@@ -13,11 +13,11 @@ import { cn } from "@/lib/utils";
 const Selector = ({ label, options, onClick, placeholder, className }) => {
   return (
     <Select onValueChange={onClick}>
-      <SelectTrigger className={cn("w-[300px] h-full max-md:w-[150px] bg-neutral-700/30 text-primary", className)}>
+      <SelectTrigger className={cn("w-[300px] h-full max-md:w-[150px] bg-primary text-primary-foreground", className)}>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>
-        <SelectGroup>
+        <SelectGroup className="w-full" >
           <SelectLabel>{label}</SelectLabel>
           {options.map((option, index) => (
             <SelectItem className="capitalize" key={index} value={option.id}>

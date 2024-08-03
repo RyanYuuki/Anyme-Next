@@ -6,11 +6,24 @@ import { cn } from "@/lib/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook, faFireAlt } from "@fortawesome/free-solid-svg-icons";
 import { Skeleton } from "../ui/skeleton";
+import { Badge } from "../ui/badge";
 
 export default function ReusableCarousel({ title, data, className }) {
+  const renderSkeletons = () => {
+    return Array.from({ length: 10 }).map((_, index) => (
+      <SwiperSlide key={index}>
+        <div className="flex flex-col animated justify-center p-8 items-center gap-3 text-center max-md:p-0">
+          <Skeleton className="relative carousel overflow-hidden rounded-lg h-[290px] w-[230px] max-md:h-[250px]" />
+          <Skeleton className="h-[20px] w-[60%] rounded-md" />
+          <Skeleton className="h-[20px] w-[40%] rounded-md" />
+        </div>
+      </SwiperSlide>
+    ));
+  };
+
   return (
     <div className={cn("flex flex-col gap-5 animated", className)}>
-      <h2 className="text-3xl max-md:text-2xl font-semibold border-l-8 border-l-neutral-800 px-5">
+      <h2 className="text-3xl max-md:text-2xl font-semibold border-l-8 border-l-ring px-5">
         {title}
       </h2>
       <div className="bg-neutral-700/20 rounded-lg box-shadow max-md:p-3">
@@ -69,31 +82,25 @@ export default function ReusableCarousel({ title, data, className }) {
                           icon={faBook}
                         />
                       </div>
-                      <p className="absolute top-2 left-2 rounded-md flex flex-row justify-center items-center gap-1 px-2 bg-white text-black ">
+                      <Badge variant={'secondary'} className="absolute top-2 left-2 rounded-md flex flex-row justify-center items-center gap-1 px-2">
                         <FontAwesomeIcon icon={faFireAlt} />
                         {item.view}
-                      </p>
+                      </Badge>
                     </Link>
                     <h4 className="font-semibold max-md:text-sm">
                       {item.title.length > 20
                         ? item.title.substring(0, 20) + "..."
                         : item.title}
                     </h4>
-                    <p className="rounded-md text-wrap px-2 bg-primary/20">
+                    <Badge variant={'secondary'} className="rounded-md text-wrap">
                       {item.chapter.length > 13
                         ? item.chapter.substring(0, 13) + "..."
                         : item.chapter}
-                    </p>
+                    </Badge>
                   </div>
                 </SwiperSlide>
               ))
-            : Array.from({ length: 10 }).map((_, index) => (
-                <SwiperSlide key={index}>
-                  <div className="w-[250px] h-[330px]" >
-                    <Skeleton className="h-full w-full rounded-lg" />
-                  </div>
-                </SwiperSlide>
-              ))}
+            : renderSkeletons()}
         </Swiper>
       </div>
     </div>

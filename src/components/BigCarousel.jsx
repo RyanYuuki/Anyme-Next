@@ -11,6 +11,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link";
+import { Badge } from "./ui/badge";
+import { Separator } from "./ui/separator";
 
 export default function BigCarousel({ data }) {
   const disableCopy = {
@@ -50,19 +52,20 @@ export default function BigCarousel({ data }) {
                 </h1>
                 <div className="flex flex-row gap-5 max-md:gap-1 items-center max-md:text-sm">
                   {item.otherInfo.map((info, idx) => (
-                    <p key={idx} style={{ ...disableCopy }}>
-                      <FontAwesomeIcon icon={faCirclePlay} /> {info}
-                    </p>
+                    <Badge variant={'secondary'} key={idx} style={{ ...disableCopy }}>
+                      <FontAwesomeIcon className="mr-1" icon={faCirclePlay} /> {info}
+                    </Badge>
                   ))}
-                  <div className="flex flex-row gap-[5px] items-center text-[14px] max-md:text-[12px]">
-                    <p className="flex flex-row justify-center items-center gap-1 px-1 rounded-sm bg-green-200 text-black">
-                      <FontAwesomeIcon icon={faClosedCaptioning} />{" "}
+                  <Separator orientation="vertical" />
+                  <div className="flex flex-row gap-[2px] text-[14px] max-md:text-[12px]">
+                    <Badge className="bg-green-200 text-black rounded-none rounded-l-md">
+                      <FontAwesomeIcon className="mr-1 rounded-none rounded-l-md" icon={faClosedCaptioning} />{" "}
                       {item.episodes.sub || "0"}
-                    </p>
-                    <p className="flex flex-row justify-center items-center gap-1 px-1 rounded-sm bg-blue-200 text-black">
-                      <FontAwesomeIcon icon={faMicrophone} />{" "}
+                    </Badge>
+                    <Badge className="bg-blue-200 text-black rounded-none rounded-r-md">
+                      <FontAwesomeIcon className="mr-1 rounded-none rounded-r-md" icon={faMicrophone} />{" "}
                       {item.episodes.dub || "0"}
-                    </p>
+                    </Badge>
                   </div>
                 </div>
                 <p style={disableCopy} className="lg:block max-md:hidden">

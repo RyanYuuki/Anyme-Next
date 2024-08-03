@@ -20,7 +20,7 @@ export default function ReusableCarouselAlt({ title, data = [], className }) {
   
   return (
     <div className={cn("flex flex-col gap-5 animated", className)}>
-      <h2 className="text-3xl max-md:text-2xl font-semibold border-l-8 border-l-neutral-800 px-5">
+      <h2 className="text-3xl max-md:text-2xl font-semibold border-l-8 border-l-ring px-5">
         {title}
       </h2>
       <div className="bg-neutral-700/30 rounded-lg box-shadow p-3 pt-5 max-md:0">

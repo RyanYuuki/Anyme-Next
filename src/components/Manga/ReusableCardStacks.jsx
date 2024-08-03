@@ -95,18 +95,18 @@ const ReusableCardStacks = ({ data, title }) => {
   };
 
   return (
-    <div className="flex flex-row max-md:flex-col max-md:gap-[20px] justify-between w-full">
-      <div className={`flex flex-col gap-5 max-md:w-full`}>
-        <h2 className="text-3xl max-md:text-2xl font-semibold border-l-8 border-l-neutral-800 px-5">
+    <div className="flex flex-row max-md:flex-col max-md:gap-[20px] w-full justify-between">
+      <div className={`flex flex-col gap-5 max-md:w-full w-[70%]`}>
+        <h2 className="text-3xl max-md:text-2xl font-semibold border-l-8 border-l-ring px-5">
           {title}
         </h2>
         <div
-          className={`grid grid-cols-5 grid-row-auto max-md:grid-cols-2 place-items-center gap-5 p-5 py-10 bg-neutral-700/20 rounded-md w-[90%] max-md:w-full flex-shrink-0`}
+          className={`grid grid-cols-5 grid-row-auto max-md:grid-cols-2 place-items-center gap-5 p-5 py-10 bg-neutral-700/20 rounded-md w-full max-md:w-full flex-shrink-0`}
         >
           {newData ? renderMangaCards() : renderSkeletons()}
         </div>
       </div>
-      <div className="flex flex-col gap-5 w-[30%] max-md:w-full">
+      <div className="flex flex-col gap-5 w-[27%] max-md:w-full">
         <h1 className="text-2xl">
           {" "}
           <FontAwesomeIcon icon={faFireAlt} /> Trending

@@ -50,10 +50,10 @@ const BasicDetails = ({ data }) => {
             </Badge>
           </div>
           <p className="flex flex-row gap-2 max-md:hidden">
-            Status: <Badge className="font-bold">{data.status}</Badge>
+            Status : <Badge className="font-bold">{data.status}</Badge>
           </p>
           <p className="flex flex-row gap-2 max-md:hidden">
-            Last Updated: <Badge className="font-bold">{data.updated}</Badge>
+            Last Updated : <Badge className="font-bold">{data.updated}</Badge>
           </p>
         </div>
       </div>

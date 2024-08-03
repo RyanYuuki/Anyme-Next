@@ -5,6 +5,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
+import { Badge } from "./ui/badge";
+import { Separator } from "./ui/separator";
 
 const ReusableCardStacks = ({ withGenres, genresData, data, title }) => {
   if (
@@ -23,7 +25,7 @@ const ReusableCardStacks = ({ withGenres, genresData, data, title }) => {
   return (
     <div className="flex flex-row max-md:flex-col max-md:gap-[20px] justify-between">
       <div className={`flex flex-col gap-5 ${ withGenres ? 'w-[69%]' : 'w-full'} max-md:w-full`}>
-        <h2 className="text-3xl max-md:text-2xl font-semibold border-l-8 border-l-neutral-800 px-5">
+        <h2 className="text-3xl max-md:text-2xl font-semibold border-l-8 border-l-ring px-5">
           {title}
         </h2>
         <div className={`grid ${ withGenres ? 'grid-cols-5' : 'grid-cols-6' } grid-row-auto max-md:grid-cols-2 place-items-center gap-5 p-5 bg-neutral-700/30 rounded-md`}>
@@ -63,8 +65,8 @@ const ReusableCardStacks = ({ withGenres, genresData, data, title }) => {
                   : anime.name}
               </h2>
               <div className="flex flex-row gap-2">
-                <p>{anime.type}</p>
-                <p>{anime.duration}</p>
+                <Badge variant={'secondary'} >{anime.type}</Badge>
+                <Badge variant={'secondary'} >{anime.duration}</Badge>
               </div>
             </Link>
           ))}

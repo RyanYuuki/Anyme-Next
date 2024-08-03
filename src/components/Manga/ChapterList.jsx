@@ -43,7 +43,7 @@ const ChapterList = ({ chaptersData, id }) => {
       <div
         className={`${
           isGrid
-            ? "grid grid-cols-10 grid-rows-auto place-items-center max-md:grid-cols-2"
+            ? "grid grid-cols-8 grid-rows-auto place-items-center max-md:grid-cols-2"
             : "flex flex-col"
         } gap-3 mt-5`}
       >
@@ -72,7 +72,7 @@ const ChapterList = ({ chaptersData, id }) => {
               <Link
                 key={chapter.id}
                 href={`/pages/Manga/read/${id}/${chapter.id}`}
-                className="flex justify-center items-center w-[150px] h-[50px] rounded-md bg-input hover:bg-white hover:text-black animated transition-colors duration-200"
+                className="flex justify-center items-center w-[150px] h-[50px] rounded-md bg-input/50 hover:bg-white hover:text-black animated transition-colors duration-200"
               >
                 <h1>{strippedChapterNames[index]}</h1>
               </Link>
