@@ -39,7 +39,7 @@ export default function ReusableCarouselAlt({ title, data = [], className }) {
               spaceBetween: 15,
             },
             400: {
-              slidesPerView: 3,
+              slidesPerView: 2,
               spaceBetween: 10,
             },
             768: {
@@ -72,7 +72,7 @@ export default function ReusableCarouselAlt({ title, data = [], className }) {
                       }
                     >
                       <img
-                        className="rounded-2xl object-cover h-[290px] w-[230px] max-md:h-[170px] max-md:w-[230px] animated"
+                        className="rounded-2xl object-cover h-[290px] w-[230px] max-md:h-[250px] max-md:w-[230px] animated"
                         src={anime.poster || "/path/to/default-image.jpg"}
                         alt={anime.id}
                         draggable="false"

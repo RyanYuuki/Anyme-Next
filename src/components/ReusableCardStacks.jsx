@@ -6,18 +6,42 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { Badge } from "./ui/badge";
-import { Separator } from "./ui/separator";
+import { Skeleton } from "./ui/skeleton"; 
 
 const ReusableCardStacks = ({ withGenres, genresData, data, title }) => {
-  if (
-    !Array.isArray(data) ||
-    data.length === 0 ||
-    (withGenres && !Array.isArray(genresData)) ||
-    (withGenres && genresData.length === 0)
-  ) {
+  const isLoading = 
+    !Array.isArray(data) || 
+    data.length === 0 || 
+    (withGenres && (!Array.isArray(genresData) || genresData.length === 0));
+
+  if (isLoading) {
     return (
-      <div className="w-full h-[400px]">
-        <div className="skeleton-carousel" />
+      <div className="flex flex-row max-md:flex-col max-md:gap-[20px] justify-between">
+        <div className={`flex flex-col gap-5 ${ withGenres ? 'w-[69%]' : 'w-full'} max-md:w-full`}>
+          <Skeleton className="h-10 w-36" />
+          <div className={`grid ${ withGenres ? 'grid-cols-5' : 'grid-cols-6' } grid-row-auto max-md:grid-cols-2 place-items-center gap-5 p-5 bg-neutral-700/30 rounded-md`}>
+            {Array(14).fill(null).map((_, index) => (
+              <div key={index} className="flex flex-col gap-2">
+                <Skeleton className="w-[173px] h-[244px] rounded-lg" />
+                <Skeleton className="h-6 w-40" />
+                <div className="flex flex-row gap-2">
+                  <Skeleton className="h-6 w-16 rounded" />
+                  <Skeleton className="h-6 w-16 rounded" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        {withGenres && (
+          <div className="flex flex-col gap-5 w-[25%] max-md:w-full">
+            <Skeleton className="h-8 w-24" />
+            <div className="grid grid-cols-3 auto-rows-max gap-2 p-5 bg-neutral-700/30 rounded-md">
+              {Array(41).fill(null).map((_, index) => (
+                <Skeleton key={index} className="h-8 w-full rounded-md" />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -76,7 +100,7 @@ const ReusableCardStacks = ({ withGenres, genresData, data, title }) => {
         <div className="flex flex-col gap-5 w-[25%] max-md:w-full">
           <h1 className="text-2xl">Genres</h1>
           <div className="grid grid-cols-3 auto-rows-max gap-2 p-5 bg-neutral-700/30 rounded-md">
-            {genresData.map((genre, index) => (
+            {genresData.map((genre) => (
               <Link
                 href={`/pages/Anime/search/${genre}`}
                 key={genre}

@@ -6,6 +6,8 @@ import {
   defaultLayoutIcons,
   DefaultVideoLayout,
 } from "@vidstack/react/player/layouts/default";
+import { Skeleton } from "@/components/ui/skeleton";
+
 const VideoPlayer = ({
   episodeSrc,
   episodesData,
@@ -20,11 +22,18 @@ const VideoPlayer = ({
 
   if (episodeLoading || !episodesData) {
     return (
-      <div className="w-[72%] flex flex-col justify-between">
-        <div className="skeleton-player flex flex-row items-end">
-          
-        </div>
-        <div className="player-buttons" />
+      <div className="w-[72%] flex flex-col gap-4">
+        <Skeleton className=" flex flex-row items-end p-5 justify-between relative w-full h-full rounded-md">
+          <div className="flex flex-row gap-1">
+            <Skeleton className="h-[40px] w-[40px] rounded-full" />
+            <Skeleton className="h-[40px] w-[40px] rounded-full" />
+          </div>
+          <Skeleton className="w-[80%] h-[40px]" />
+          <div className="flex flex-row gap-1">
+            <Skeleton className="h-[40px] w-[40px] rounded-full" />
+            <Skeleton className="h-[40px] w-[40px] rounded-full" />
+          </div>
+        </Skeleton>
       </div>
     );
   }

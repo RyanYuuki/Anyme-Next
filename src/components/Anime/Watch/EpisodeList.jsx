@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const EpisodeList = ({
   episodesData,
@@ -41,9 +42,9 @@ const EpisodeList = ({
         });
 
   return (
-    <div className="flex flex-col gap-5 w-[26%] max-md:w-full max-md:h-[400px] overflow-y-scroll scroll-smooth custom-scrollbar h-full p-2 bg-neutral-700/10 rounded-md">
+    <div className="flex flex-col gap-5 w-[26%] max-md:w-full max-md:h-[400px] overflow-y-scroll scroll-smooth custom-scrollbar h-[600px] box-shadow p-2 bg-neutral-700/10 rounded-md">
       <div className="flex flex-row items-center gap-3 w-full">
-        <select className="h-[40px] rounded-md px-2 text-[12px] bg-neutral-700/20 box-shadow">
+        <select className="h-[40px] rounded-md px-2 text-[12px] bg-neutral-700/20 ">
           <option
             value={`${episodesData[0]?.number || 1} - ${episodesData?.length}`}
           >
@@ -54,7 +55,7 @@ const EpisodeList = ({
         <Input
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="rounded-lg bg-neutral-700/20 box-shadow w-full"
+          className="rounded-lg bg-neutral-700/20 w-full"
           placeholder={"Filter Episodes"}
         />
         <Button onClick={handleListChange} variant={"secondary"} size={"icon"}>
@@ -70,10 +71,10 @@ const EpisodeList = ({
           ? filteredData.map((data, index) => (
               <button
                 key={data.id}
-                className={`relative animated group flex flex-row w-full h-[100px] bg-neutral-700/20 box-shadow rounded-md transition-full hover:bg-indigo-400/70 ${
-                  currentEpisode === data.number
-                    ? "bg-indigo-400/95 text-white"
-                    : ""
+                className={`relative animated group flex flex-row w-full h-[100px] box-shadow rounded-md transition-full hover:bg-indigo-400/70 ${
+                  currentEpisode == data.number
+                    ? "bg-indigo-400 text-white"
+                    : "bg-neutral-700/20"
                 }`}
                 onClick={() => handleClick(data.number)}
               >
@@ -88,29 +89,29 @@ const EpisodeList = ({
                 <div className="flex flex-col w-[60%] h-full justify-center text-left pl-3 gap-1">
                   <h1
                     className={`group-hover:text-white transition-full ${
-                      currentEpisode === data.number ? "text-white" : ""
+                      currentEpisode == data.number ? "text-white" : ""
                     }`}
                   >
                     Episode {data?.number || index + 1}
                   </h1>
                   <p
                     className={`italic group-hover:text-white max-md:text-[12px] transition-full ${
-                      currentEpisode === data.number
+                      currentEpisode == data.number
                         ? "text-white"
                         : "text-primary/50"
                     }`}
                   >
-                    {data?.title}
+                    {data?.title.length > 20 ? data?.title.substring(0,20) + '...' : data?.title}
                   </p>
                 </div>
               </button>
             ))
           : currentListType == 0 && (
-              <div className="skeleton-slides flex flex-col gap-3 p-2">
+              <div className="flex flex-col gap-3 p-2">
                 {demoEpisodes.map(() => (
-                  <div className="base-skeleton flex flex-row popin">
-                    <div className="skeleton-characterCards-image skeleton-alt-base rounded-md w-[35%]"></div>
-                  </div>
+                  <Skeleton className="flex h-[100px]" >
+                    <Skeleton className="w-[30%] rounded-l-md" />
+                  </Skeleton>
                 ))}
               </div>
             )}
@@ -118,16 +119,16 @@ const EpisodeList = ({
           ? filteredData.map((data) => (
               <button
                 key={data.id}
-                className={`group flex animated flex-row px-5 items-center gap-3 w-full h-[50px] bg-neutral-700/20 box-shadow rounded-md transition-full max-md:text-[14px] italic hover:bg-indigo-400/70 ${
-                  currentEpisode === data.number
+                className={`group flex animated flex-row px-5 items-center gap-3 w-full h-[50px] box-shadow rounded-md transition-full max-md:text-[14px] italic hover:bg-indigo-400/70 ${
+                  currentEpisode == data.number
                     ? "bg-indigo-400/95 text-white"
-                    : "text-primary/50"
+                    : "text-primary/50 bg-neutral-700/20"
                 }`}
                 onClick={() => handleClick(data.number)}
               >
                 <h1
                   className={`group-hover:text-white transition-full ${
-                    currentEpisode === data.number ? "text-white" : ""
+                    currentEpisode == data.number ? "text-white" : ""
                   }`}
                 >
                   {currentEpisode === data.number ? (
@@ -148,9 +149,9 @@ const EpisodeList = ({
               </button>
             ))
           : currentListType == 1 && (
-              <div className="skeleton-slides flex flex-col gap-3 p-2">
+              <div className="flex flex-col gap-3 p-2">
                 {demoEpisodesList.map(() => (
-                  <div className="base-skeleton flex flex-row h-[50px] popin"></div>
+                  <Skeleton className="h-[50px]"></Skeleton>
                 ))}
               </div>
             )}
@@ -158,8 +159,8 @@ const EpisodeList = ({
           ? filteredData.map((data) => (
               <button
                 key={data.id}
-                className={`group w-[18%] animated h-[40px] text-center bg-neutral-700/20 box-shadow rounded-md transition-full hover:bg-indigo-400/70 ${
-                  currentEpisode === data.number ? "bg-indigo-400/95" : ""
+                className={`group w-[18%] animated h-[40px] text-center  box-shadow rounded-md transition-full hover:bg-indigo-400/70 ${
+                  currentEpisode == data.number ? "bg-indigo-400/95" : "bg-neutral-700/20"
                 }`}
                 onClick={() => handleClick(data.number)}
               >
@@ -177,9 +178,9 @@ const EpisodeList = ({
               </button>
             ))
           : currentListType == 2 && (
-              <div className="skeleton-slides grid grid-cols-5 grid-rows-auto gap-3 p-2">
+              <div className="grid grid-cols-5 grid-rows-auto gap-3 p-2">
                 {demoEpisodesGrid.map(() => (
-                  <div className="base-skeleton flex flex-row h-[35px] w-[70px] popin"></div>
+                  <Skeleton className="h-[35px] w-[70px]"></Skeleton>
                 ))}
               </div>
             )}

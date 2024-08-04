@@ -3,13 +3,25 @@ import Link from "next/link";
 import React from "react";
 import { Badge } from "../ui/badge";
 import { Separator } from "../ui/separator";
+import { Skeleton } from "../ui/skeleton";
 
 const BasicDetails = ({ data, page = "Details", className }) => {
-  if (!data || data.length < 1) {
+  if (!data || data?.length === 0) {
     return (
-      <div className="h-[400px] w-full">
-        <div className="skeleton-universal" />
-      </div>
+      <Skeleton className="flex flex-row gap-4 p-3 w-full">
+        <div className="flex flex-col gap-3">
+          <Skeleton className="w-[200px] h-[250px] rounded-md" />
+          <Skeleton className="h-[30px] w-[200px] rounded-md" />
+          <Skeleton className="h-[30px] w-[200px] rounded-md" />
+          <div className="flex flex-row justify-between" >
+            <Skeleton className="h-[30px] w-[90px] rounded-md" />
+            <Skeleton className="h-[30px] w-[90px] rounded-md" />
+          </div>
+        </div>
+        <div className="w-full">
+          <Skeleton className="w-full h-[100%] rounded-md" />
+        </div>
+      </Skeleton>
     );
   }
 
@@ -73,14 +85,14 @@ const BasicDetails = ({ data, page = "Details", className }) => {
           {data.info.name || data.info.jname}
         </h1>
         <p className="flex flex-wrap gap-3 font-semibold text-primary max-md:hidden mb-2">
-              {data.moreInfo.genres.map((genre) => (
-                <Badge variant={'secondary'} key={genre}>
-                  {genre}
-                </Badge>
-              ))}
-              <Separator orientation="vertical" />
-              <Badge>{data.malscore || '0.0'}</Badge>
-            </p>
+          {data.moreInfo.genres.map((genre) => (
+            <Badge variant={"secondary"} key={genre}>
+              {genre}
+            </Badge>
+          ))}
+          <Separator orientation="vertical" />
+          <Badge>{data.malscore || "0.0"}</Badge>
+        </p>
         <p className="rounded-xl bg-accent/30 p-2 max-md:hidden italic box-shadow">
           {data.info.description.replace(/<\/?[^>]+(>|$)/g, "")}
         </p>

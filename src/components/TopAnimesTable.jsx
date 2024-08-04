@@ -5,25 +5,56 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { Skeleton } from "./ui/skeleton"; 
 
 const Top10AnimesTable = ({ data }) => {
   const MetaData = [{ title: "Today" }, { title: "Week" }, { title: "Month" }];
   const [activeDuration, setActiveDuration] = useState(0);
   const [currentData, setCurrentData] = useState(null);
+
   const handleDurationChange = (duration) => {
     setActiveDuration(duration);
   };
 
   useEffect(() => {
-    setCurrentData((prevValue) => null);
+    setCurrentData(null);
     const durationArr = [data?.today, data?.week, data?.month];
     setCurrentData(durationArr?.[activeDuration]);
   }, [activeDuration, data]);
 
   if (!data || data.length === 0) {
     return (
-      <div className="w-full h-[500px]">
-        <div className="skeleton-carousel" />
+      <div className="flex flex-col gap-5">
+        <div className="flex flex-row justify-between">
+          <Skeleton className="h-10 w-36" />
+          <div className="flex flex-row gap-3 items-center">
+            {MetaData.map((_, index) => (
+              <Skeleton key={index} className="h-8 w-20 rounded-md" />
+            ))}
+          </div>
+        </div>
+        <div className="grid grid-cols-2 max-md:grid-cols-1 grid-rows-auto gap-3 bg-neutral-700/30 p-5 rounded-md">
+          {Array(10)
+            .fill(null)
+            .map((_, index) => (
+              <div
+                key={index}
+                className="flex flex-row items-center gap-10 group animated"
+              >
+                <Skeleton className="h-10 w-10 text-center" />
+                <div className="flex flex-row gap-2">
+                  <Skeleton className="h-[100px] w-[70px] rounded-lg" />
+                  <div className="flex flex-col justify-center gap-2">
+                    <Skeleton className="h-6 w-40" />
+                    <div className="flex flex-row gap-[2px] w-full items-center">
+                      <Skeleton className="h-4 w-12 rounded-l-sm" />
+                      <Skeleton className="h-4 w-12" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+        </div>
       </div>
     );
   }
@@ -37,7 +68,7 @@ const Top10AnimesTable = ({ data }) => {
         <div className="flex flex-row gap-3 items-center">
           {MetaData.map((data, index) => (
             <button
-              key={data + index}
+              key={data.title + index}
               onClick={() => handleDurationChange(index)}
               className={`p-2 px-3 rounded-md max-md:px-2 max-md:p-1 ${
                 index == activeDuration ? "bg-indigo-400" : "bg-input"
@@ -48,7 +79,7 @@ const Top10AnimesTable = ({ data }) => {
           ))}
         </div>
       </div>
-      <div className="grid grid-cols-2  max-md:grid-cols-1 grid-rows-auto gap-3 bg-neutral-700/30 p-5 rounded-md">
+      <div className="grid grid-cols-2 max-md:grid-cols-1 grid-rows-auto gap-3 bg-neutral-700/30 p-5 rounded-md">
         {currentData &&
           currentData.map((data, index) => (
             <Link
