@@ -1,5 +1,7 @@
+import { Badge } from "@/components/ui/badge";
 import {
   faClosedCaptioning,
+  faDownload,
   faMicrophone,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,7 +18,7 @@ const ServerSelector = ({
     <div className={`flex flex-row max-md:flex-col justify-between max-md:gap-5 w-full h-[90px] max-md:h-auto animated`}>
       <div className="flex flex-col justify-center max-md:p-3 gap-3 pl-5 h-full w-[55%] max-md:text-sm max-md:w-full bg-neutral-700/30 rounded-md">
         <p className="max-md:text-[13px]" >
-          You're Watching <span>Episode {currentEpisode}</span>{" "}
+          You're Watching <span>Episode {currentEpisode}</span>{" "} <Badge className="ml-2"><FontAwesomeIcon className="mr-1" icon={faDownload} />Download</Badge>
         </p>
         <p>
           If current server doesn't work, you can switch to a different server.
@@ -35,7 +37,7 @@ const ServerSelector = ({
                   activeServer.toLowerCase() == server.toLowerCase() &&
                   episodeType == "sub"
                     ? "server-active"
-                    : "bg-input"
+                    : "bg-neutral-700/30"
                 } hover:bg-indigo-400`}
               >
                 {server}
@@ -55,7 +57,7 @@ const ServerSelector = ({
                   activeServer.toLowerCase() == server.toLowerCase() &&
                   episodeType == "dub"
                     ? "server-active"
-                    : "bg-input"
+                    : "bg-neutral-700/30"
                 } hover:bg-indigo-400`}
               >
                 {server}

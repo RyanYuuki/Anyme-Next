@@ -35,7 +35,7 @@ const BasicDetails = ({ data, page = "Details", className }) => {
       <div className="flex flex-col gap-2 w-[180px] max-md:w-[130px] max-md:text-[12px]">
         <div className="relative">
           <img
-            className="object-cover max-md:h-[150px] w-[250px] rounded-md"
+            className="object-cover max-md:h-[150px] w-[250px] rounded-md animated"
             src={data.info.poster}
             alt={data.info.id}
           />
@@ -160,7 +160,7 @@ const BasicDetails = ({ data, page = "Details", className }) => {
         </div>
         <p className="flex-wrap gap-3 max-md:gap-1 max-md:text-[10px] font-semibold text-primary text-[12px] hidden max-md:flex">
           {data.moreInfo.genres.map((genre) => (
-            <span key={genre} className="p-2 rounded-xl bg-accent/80">
+            <span key={genre} className="p-2 rounded-xl bg-accent/30">
               {genre}
             </span>
           ))}

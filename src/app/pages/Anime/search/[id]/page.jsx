@@ -23,6 +23,8 @@ import {
   GenreSelector,
 } from "@/components/Anime/Search/Select";
 import { Input } from "@/components/ui/input";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Badge } from "@/components/ui/badge";
 
 const Search = () => {
   const { id } = useParams();
@@ -45,25 +47,25 @@ const Search = () => {
 
   useEffect(() => {
     const loadData = async () => {
-        const data = await AdvancedSearch(
-          ' ' + searchQuery,
-          genre,
-          type,
-          sort,
-          season,
-          lang,
-          status,
-          rating,
-          startYear,
-          startMonth,
-          startDay,
-          endYear,
-          endMonth,
-          endDay,
-          score
-        );
-        setSearchData(data);
-      }
+      const data = await AdvancedSearch(
+        " " + searchQuery,
+        genre,
+        type,
+        sort,
+        season,
+        lang,
+        status,
+        rating,
+        startYear,
+        startMonth,
+        startDay,
+        endYear,
+        endMonth,
+        endDay,
+        score
+      );
+      setSearchData(data);
+    };
     loadData();
   }, [
     searchQuery,
@@ -82,6 +84,7 @@ const Search = () => {
     endDay,
     score,
   ]);
+  const skeletonArr = Array(14).fill();
 
   return (
     <div className="flex flex-col gap-5">
@@ -108,49 +111,56 @@ const Search = () => {
         <MonthSelector onClick={setEndMonth} label="End Month" />
         <DaySelector onClick={setEndDay} label="End Day" />
       </div>
-      <div className="grid grid-cols-7 max-md:grid-cols-2 place-items-center gap-5 p-5 ">
-        {searchData ?
-          searchData.map((anime) => (
-            <Link
-              key={anime.id}
-              href={`/pages/Anime/details/${anime.id}`}
-              className="flex flex-col group animated"
-            >
-              <div className="relative flex items-center justify-center">
-                <img
-                  className="w-[173px] h-[244px] object-cover rounded-lg"
-                  src={anime.poster}
-                  alt=""
-                />
-                <div className="absolute flex justify-center items-center h-full w-full top-0 group-hover:seasonCard transition-full rounded-xl">
-                  <FontAwesomeIcon
-                    className="text-3xl group-hover:opacity-100 opacity-0 transition-full"
-                    icon={faPlay}
+      <div className="grid grid-cols-7 max-md:grid-cols-2 place-items-center gap-5 p-5 bg-neutral-700/20 rounded-t-3xl">
+        {searchData
+          ? searchData.map((anime) => (
+              <Link
+                key={anime.id}
+                href={`/pages/Anime/details/${anime.id}`}
+                className="flex flex-col group gap-1 animated"
+              >
+                <div className="relative flex items-center justify-center">
+                  <img
+                    className="w-[173px] h-[244px] object-cover rounded-lg"
+                    src={anime.poster}
+                    alt=""
                   />
+                  <div className="absolute flex justify-center items-center h-full w-full top-0 group-hover:seasonCard transition-full rounded-xl">
+                    <FontAwesomeIcon
+                      className="text-3xl group-hover:opacity-100 opacity-0 transition-full"
+                      icon={faPlay}
+                    />
+                  </div>
+                  <div className="absolute left-[7px] bottom-[7px] flex flex-row gap-[5px] items-center text-[14px]">
+                    <Badge className="flex flex-row justify-center items-center gap-1 px-1 rounded-sm bg-green-200 text-black">
+                      <FontAwesomeIcon icon={faClosedCaptioning} />{" "}
+                      {anime.episodes.sub || "0"}
+                    </Badge>
+                    <Badge className="flex flex-row justify-center items-center gap-1 px-1 rounded-sm bg-blue-200 text-black">
+                      <FontAwesomeIcon icon={faMicrophone} />{" "}
+                      {anime.episodes.dub || "0"}
+                    </Badge>
+                  </div>
                 </div>
-                <div className="absolute left-[7px] bottom-[7px] flex flex-row gap-[5px] items-center text-[14px]">
-                  <p className="flex flex-row justify-center items-center gap-1 px-1 rounded-sm bg-green-200 text-black">
-                    <FontAwesomeIcon icon={faClosedCaptioning} />{" "}
-                    {anime.episodes.sub || "0"}
-                  </p>
-                  <p className="flex flex-row justify-center items-center gap-1 px-1 rounded-sm bg-blue-200 text-black">
-                    <FontAwesomeIcon icon={faMicrophone} />{" "}
-                    {anime.episodes.dub || "0"}
-                  </p>
-                </div>
-              </div>
 
-              <h2>
-                {anime.name.length > 17
-                  ? anime.name.substring(0, 17) + "..."
-                  : anime.name}
-              </h2>
-              <div className="flex flex-row gap-2">
-                <p>{anime.type}</p>
-                <p>{anime.duration}</p>
+                <h2>
+                  {anime.name.length > 17
+                    ? anime.name.substring(0, 17) + "..."
+                    : anime.name}
+                </h2>
+                <div className="flex flex-row gap-2">
+                  <Badge variant={'secondary'} >{anime.type}</Badge>
+                  <Badge variant={'secondary'} >{anime.duration}</Badge>
+                </div>
+              </Link>
+            ))
+          : skeletonArr.map((d, index) => (
+              <div className="flex flex-col gap-1 items-center">
+                <Skeleton className="w-[173px] h-[244px]" />
+                <Skeleton className="w-full h-[20px]" />
+                <Skeleton className="w-[50%] h-[20px]" />
               </div>
-            </Link>
-          )) : <h1 className="text-center" >Not Found {':)'}</h1> }
+            ))}
       </div>
     </div>
   );

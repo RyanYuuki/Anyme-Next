@@ -22,7 +22,7 @@ const VideoPlayer = ({
 
   if (episodeLoading || !episodesData) {
     return (
-      <div className="w-[72%] flex flex-col gap-4">
+      <div className="w-[72%] max-md:w-full max-md:h-[200px] max-md:mb-5 flex flex-col gap-4">
         <Skeleton className=" flex flex-row items-end p-5 justify-between relative w-full h-full rounded-md">
           <div className="flex flex-row gap-1">
             <Skeleton className="h-[40px] w-[40px] rounded-full" />
