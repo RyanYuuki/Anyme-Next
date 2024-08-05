@@ -25,7 +25,7 @@ const ChapterList = ({ chaptersData, id }) => {
   );
 
   return (
-    <div className="flex flex-col bg-neutral-700/30 min-h-[70vh] p-5 rounded-md">
+    <div className="flex flex-col bg-neutral-700/30 min-h-[70vh] p-5 max-md:p-3 rounded-md">
       <div className="flex flex-row justify-between items-center">
         <h1 className="text-2xl">Chapters</h1>
         <div className="flex flex-row justify-end items-center gap-3 w-[40%] max-md:w-[60%]">
