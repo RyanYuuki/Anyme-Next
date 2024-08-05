@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { ModeToggle } from "../ModeToggle";
 import { Input } from "../ui/input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShuffle } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faShuffle } from "@fortawesome/free-solid-svg-icons";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { Button } from "../ui/button";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
@@ -12,6 +12,7 @@ import NavigationMenu from "../../components/NavigationItems";
 import { SearchAniWatch, SearchManga } from "@/hooks/useApi";
 import SearchItem from "@/components/Anime/Search/SearchItem";
 import { usePathname } from "next/navigation";
+import Drawer from "./Drawer";
 
 const Header = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -67,8 +68,7 @@ const Header = () => {
       return () => {
         window.removeEventListener("scroll", handleScroll);
       };
-    }
-    else {
+    } else {
       setIsHeaderVisible(true);
     }
   }, [lastScrollY, currentPath]);
@@ -90,8 +90,10 @@ const Header = () => {
         isHeaderVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <h1 className="text-2xl font-semibold">
-        An<span className="text-4xl text-neutral-500">Y</span>meY
+      <Drawer/>
+      <h1 className="text-2xl max-md:text-xl font-semibold">
+        An<span className="text-4xl max-md:text-3xl text-neutral-500">Y</span>
+        meY
       </h1>
       <NavigationMenu />
       <div

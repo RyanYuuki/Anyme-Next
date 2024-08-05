@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 import BasicDetails from '@/components/Manga/BasicDetails';
 import ChapterList from '@/components/Manga/ChapterList';
 import MangaCover from '@/components/Manga/MangaCover';
-import { Skeleton } from "@/components/ui/skeleton";
 
 const MangaDetails = () => {
   const { id } = useParams();
