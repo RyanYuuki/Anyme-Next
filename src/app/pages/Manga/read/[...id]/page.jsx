@@ -92,7 +92,7 @@ const ReadPage = ({ params }) => {
             ? chapterImages.map((chapter, index) => (
                 <img
                   key={index}
-                  className={`w-[700px] object-contain ${
+                  className={`w-[700px] max-md:w-full object-contain ${
                     index === 0 && "rounded-t-md"
                   } ${index === chapterImages.length - 1 && "rounded-b-md"}`}
                   src={chapter.image}
