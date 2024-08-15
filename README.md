@@ -1,4 +1,3 @@
-```markdown
 # 🌟 Anyme-Next 🌟
 
 Welcome to **Anyme-Next** – your ultimate destination for anime and manga! 🎉 This project offers a stunningly designed and fully responsive website that combines the best of both worlds, allowing users to enjoy their favorite anime and manga in one place.
@@ -112,4 +111,3 @@ If you have any questions or want to connect, feel free to reach out:
 ---
 
 **Thanks for checking out Anyme-Next!** ✨
-```
