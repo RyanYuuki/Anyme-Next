@@ -11,8 +11,9 @@ export default function RootLayout({ children }) {
       <head />
       <body className={cn("min-h-screen antialiased bg-custom-body")}>
         <ThemeProvider
+          storageKey="theme"
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >

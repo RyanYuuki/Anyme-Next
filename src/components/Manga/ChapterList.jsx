@@ -33,7 +33,7 @@ const ChapterList = ({ chaptersData, id }) => {
             value={searchTerm}
             onChange={(event) => setSearchTerm(event.target.value)}
             className="w-[90%] bg-input rounded-md"
-            placeholder="Search"
+            placeholder="Filter Chapter..."
           />
           <Button onClick={() => setIsGrid(!isGrid)}>
             <FontAwesomeIcon icon={isGrid ? faBars : faTableCells} />{" "}

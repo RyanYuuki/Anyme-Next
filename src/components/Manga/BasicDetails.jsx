@@ -11,7 +11,7 @@ import { Badge } from "../ui/badge";
 import { Separator } from "../ui/separator";
 import { Skeleton } from "../ui/skeleton";
 
-const BasicDetails = ({ data }) => {
+const BasicDetails = ({ data, id }) => {
   if (!data) {
     return <Skeleton className="h-[300px] w-full rounded-md" />;
   }
@@ -27,7 +27,7 @@ const BasicDetails = ({ data }) => {
           />
           <Link
             className="w-full max-md:hidden"
-            href={`/page/Manga/read/${data.id}/chapter-1`}
+            href={`/page/Manga/read/${id}/chapter-1`}
           >
             <Button className="w-full">Read Now</Button>
           </Link>

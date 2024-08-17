@@ -23,6 +23,7 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-tabs": "^1.1.0",
     "@vidstack/react": "^1.11.30",
+    "artplayer": "^5.1.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "colorthief": "^2.4.0",

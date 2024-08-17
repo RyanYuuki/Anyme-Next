@@ -20,7 +20,7 @@ const MangaDetails = () => {
   return (
     <div className="flex flex-col gap-2 px-20 max-md:px-2 min-h-screen">
       <MangaCover posterSrc={'/421f5172507433.64c983d7563d0.png'} />
-      <BasicDetails data={data} />
+      <BasicDetails data={data} id={id} />
       <ChapterList id={id} chaptersData={data?.chapterList} />
     </div>
   );

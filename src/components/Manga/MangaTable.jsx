@@ -75,7 +75,7 @@ const ReusableStack = ({ data }) => {
                             {dataItem.view}
                           </p>
                           <p className="flex flex-row items-center rounded-r-sm gap-1 px-1 bg-blue-200 text-black">
-                            <FontAwesomeIcon icon={faBook} />{dataItem.chapter.length > 15 ? dataItem.chapter.substring(0, 15) : dataItem.chapter || "0"}
+                            <FontAwesomeIcon icon={faBook} />{dataItem.chapter.length > 10 ? dataItem.chapter.substring(0, 10) : dataItem.chapter || "0"}
                           </p>
                         </div>
                       </div>
