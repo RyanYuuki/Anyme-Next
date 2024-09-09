@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
             shadow="0 0 10px #818cf8,0 0 5px #818cf8"
           />
           <Header />
-          <div className=" translate-y-[90px] mb-24">{children}</div>
+          <div className=" translate-y-[90px] mb-[90px]">{children}</div>
           <Footer />
         </ThemeProvider>
       </body>
