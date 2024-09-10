@@ -18,21 +18,23 @@ import BasicDetails from "@/components/Anime/BasicDetails";
 import AnimeRelation from "@/components/Anime/Watch/AnimeRelations";
 import ReusableVerticalCarousel from "@/components/Anime/Watch/ReusableVerticalCarousel";
 import ServerSelector from "@/components/Anime/Watch/ServerSelector";
+import { useUserData } from "@/provider/database";
 
 const StreamingPage = () => {
   const { id } = useParams();
   const [animeData, setAnimeData] = useState(null);
   const [episodesData, setEpisodesData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [episodeImages, setEpisodeImages] = useState({});
   const [currentEpisode, setCurrentEpisode] = useState(1);
   const [episodeSrc, setEpisodeSrc] = useState(null);
   const [captionsData, setCaptionsData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
   const [episodeLoading, setEpisodeLoading] = useState(true);
   const [activeServer, setActiveServer] = useState("VidStream");
   const [episodeType, setEpisodeType] = useState("sub");
   const Servers = ["VidStream", "MegaCloud", "StreamSB"];
   const icons = [faBars, faTableCells, faImage];
+  const { addAnimeEpisode, currentlyWatching } = useUserData();
 
   useEffect(() => {
     const loadData = async () => {
@@ -51,10 +53,10 @@ const StreamingPage = () => {
       const EpisodeData = await FetchEpisodesData(anilistId);
       if (EpisodeData) {
         setEpisodeImages(
-            EpisodeData.reduce((acc, episode, index) => {
-              acc[index + 1] = episode.image;
-              return acc;
-            }, {})
+          EpisodeData.reduce((acc, episode, index) => {
+            acc[index + 1] = episode.image;
+            return acc;
+          }, {})
         );
       }
     };
@@ -74,12 +76,22 @@ const StreamingPage = () => {
           );
           setCaptionsData(episodeSrc.tracks);
           setEpisodeSrc(episodeSrc.sources[0].url);
-          console.log(episodesData[currentEpisode - 1].episodeId);
         }
       } catch (error) {
         console.log(error);
       } finally {
         setEpisodeLoading(false);
+        if (animeData != null) {
+          addAnimeEpisode(
+            animeData.name ?? animeData.jname ?? "??",
+            currentEpisode,
+            animeData.anime.info.stats.episodes.sub,
+            60,
+            episodesData[currentEpisode - 1].title ??
+              episodesData[currentEpisode - 1].name
+          );
+          console.log(currentlyWatching);
+        }
       }
     };
     loadEpisodeData();
@@ -103,7 +115,7 @@ const StreamingPage = () => {
 
   return (
     <div className="flex flex-col px-5 gap-3 max-md:px-2">
-      <div className="flex flex-row justify-between max-md:h-auto max-md:flex-col">
+      <div className="flex flex-row justify-between h-[700px] max-md:flex-col">
         <VideoPlayer
           episodeLoading={episodeLoading}
           episodeSrc={episodeSrc}

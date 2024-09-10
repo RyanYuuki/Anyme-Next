@@ -61,7 +61,7 @@ const continueReading = [
   },
 ];
 
-export default function Component() {
+export default function ContinueWatchingCard() {
   return (
     <div className="grid gap-6 md:grid-cols-2">
       <ContinueCard
