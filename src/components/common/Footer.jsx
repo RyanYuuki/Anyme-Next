@@ -10,8 +10,8 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="bg-background/50 border-t">
-      <div className="container px-4 py-10 md:py-16 mx-auto">
+    <footer className="bg-muted/50 border-t mx-10 max-md:mx-3 rounded-md">
+      <div className="container px-4 py-10">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           <div className="space-y-4">
             <h2 className="text-2xl font-bold">Anymey</h2>

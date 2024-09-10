@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { useState } from "react"
 
-export function ModeToggle() {
+export default function ModeToggle() {
   const { setTheme } = useTheme();
   return (
     <DropdownMenu>

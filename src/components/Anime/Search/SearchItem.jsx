@@ -51,11 +51,12 @@ const MangaItem = ({ data, handleCross }) => (
 
 const SearchItem = ({ searchData, searchMode, handleCross }) => {
   if (searchMode === 'Anime') {
-    return searchData.map((data) => <AnimeItem key={data.id} data={data} handleCross={handleCross} />);
+    return searchData?.map((data) => <AnimeItem key={data.id} data={data} handleCross={handleCross} />);
   }
 
   if (searchMode === 'Manga') {
-    if (searchData.mangaList.length > 0) {
+    console.log(searchData);
+    if (searchData?.mangaList?.length > 0) {
       return searchData.mangaList.map((data) => <MangaItem key={data.id} data={data} handleCross={handleCross} />);
     } else {
       return <h1>Not Found</h1>;

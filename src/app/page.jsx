@@ -162,9 +162,7 @@ export default function Component() {
                 <div className="line-clamp-2 text-sm leading-snug text-muted-foreground dark:text-muted-foreground">
                   Journey of Monkey D Luffy to Become the king of pirates.
                 </div>
-                <Button className="mt-3">
-                  Watch Now {">"}
-                </Button>
+                <Button className="mt-3">Watch Now {">"}</Button>
               </Link>
               <Link
                 href="/pages/Manga/details/manga-to970571"

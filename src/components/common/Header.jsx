@@ -1,178 +1,294 @@
 "use client";
 
-import React, { useEffect, useState, useCallback } from "react";
-import debounce from "lodash/debounce";
-import { ModeToggle } from "../ModeToggle";
-import { Input } from "../ui/input";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faShuffle } from "@fortawesome/free-solid-svg-icons";
-import "@fortawesome/fontawesome-svg-core/styles.css";
-import { Button } from "../ui/button";
-import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import NavigationMenu from "../../components/NavigationItems";
-import { SearchAniWatch, SearchManga } from "@/hooks/useApi";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+  SheetClose,
+} from "@/components/ui/sheet";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Github,
+  Menu,
+  Search,
+  Home,
+  Film,
+  Book,
+  X,
+  Clapperboard,
+  Command,
+} from "lucide-react";
+import ModeToggle from "@/components/ModeToggle";
+import { useCallback, useEffect, useState } from "react";
+import { GetMangaSearch, SearchAniWatch, SearchManga } from "@/hooks/useApi";
 import SearchItem from "@/components/Anime/Search/SearchItem";
+import debounce from "lodash/debounce";
 import { usePathname } from "next/navigation";
-import Drawer from "./Drawer";
 
-const Header = () => {
+export default function Header() {
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [isSearchBarToggled, setIsSearchBarToggled] = useState(false);
-  const [isSearchBarToggledMobile, setIsSearchBarToggledMobile] =
-    useState(false);
-  const [searchData, setSearchData] = useState(null);
-  const [placeHolder, setPlaceHolder] = useState("Search Anime...");
-  const [searchMode, setSearchMode] = useState("Anime");
-  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const currentPath = usePathname();
+  const [mangaSearchTerm, setMangaSearchTerm] = useState("");
+  const [animeSearchData, setAnimeSearchData] = useState(null);
+  const [mangaSearchData, setMangaSearchData] = useState(null);
+  const pathname = usePathname();
 
-  const fetchData = async (term) => {
-    if (term.trim()) {
-      const data =
-        searchMode === "Anime"
-          ? await SearchAniWatch(term)
-          : await SearchManga(term);
-      setSearchData(data);
-    } else {
-      setSearchData(null);
-    }
-  };
+  const navItems = [
+    { href: "/", label: "Home", icon: Home },
+    { href: "/pages/Anime", label: "Anime", icon: Clapperboard },
+    { href: "/pages/Manga", label: "Manga", icon: Book },
+  ];
 
-  const debouncedFetchData = useCallback(debounce(fetchData, 300), [
-    searchMode,
-  ]);
+  const debouncedAnimeSearch = useCallback(
+    debounce(async (term) => {
+      const tempAnimeData = await SearchAniWatch(term);
+      setAnimeSearchData(tempAnimeData);
+    }, 300),
+    []
+  );
 
   useEffect(() => {
-    debouncedFetchData(searchTerm);
-    // Cleanup debounce on unmount
-    return () => {
-      debouncedFetchData.cancel();
+    const handleKeyDown = (event) => {
+      if (event.ctrlKey && event.key === "k") {
+        event.preventDefault();
+        setIsSearchOpen((prev) => !prev);
+      }
     };
-  }, [searchTerm, searchMode, debouncedFetchData]);
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  const debouncedMangaSearch = useCallback(
+    debounce(async (term) => {
+      const tempMangaData = await SearchManga(term);
+      setMangaSearchData(tempMangaData);
+    }, 300),
+    []
+  );
 
   useEffect(() => {
-    if (currentPath.includes("Manga")) {
-      setSearchMode("Manga");
-      setPlaceHolder("Search Manga...");
-    } else {
-      setSearchMode("Anime");
-      setPlaceHolder("Search Anime...");
+    if (searchTerm) {
+      debouncedAnimeSearch(searchTerm);
     }
-  }, [currentPath]);
+  }, [searchTerm, debouncedAnimeSearch]);
 
   useEffect(() => {
-    if (currentPath.includes("read")) {
-      const handleScroll = () => {
-        const scrollY = window.scrollY;
-        if (scrollY > lastScrollY) {
-          setIsHeaderVisible(false);
-        } else {
-          setIsHeaderVisible(true);
-        }
-        setLastScrollY(scrollY);
-      };
-
-      window.addEventListener("scroll", handleScroll);
-
-      return () => {
-        window.removeEventListener("scroll", handleScroll);
-      };
-    } else {
-      setIsHeaderVisible(true);
+    if (mangaSearchTerm) {
+      debouncedMangaSearch(mangaSearchTerm);
     }
-  }, [lastScrollY, currentPath]);
-
-  const handleCross = () => {
-    setIsSearchBarToggled(false);
-    setIsSearchBarToggledMobile(false);
-    setSearchTerm("");
-    setSearchData(null);
-  };
-
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
+  }, [mangaSearchTerm, debouncedMangaSearch]);
 
   return (
-    <header
-      className={`fixed w-full z-50 flex flex-row items-center justify-evenly gap-5 p-5 px-7 backdrop-blur-lg border-b border-b-border bg-black/15 max-md:gap-0 max-md:px-3 max-md:justify-between transition-transform duration-300 ${
-        isHeaderVisible ? "translate-y-0" : "-translate-y-full"
-      }`}
-    >
-      <Drawer />
-      <h1 className="text-2xl max-md:text-xl font-semibold">
-        An<span className="text-4xl max-md:text-3xl text-neutral-500">Y</span>
-        meY
-      </h1>
-      <NavigationMenu />
-      <div
-        onClick={() => setIsSearchBarToggled(true)}
-        className="relative w-2/5"
-      >
-        <Input
-          handleCross={handleCross}
-          value={searchTerm}
-          onChange={handleSearchChange}
-          placeholder={placeHolder}
-          className="w-full bg-accent/50 rounded-lg max-md:hidden"
-        />
-        {searchData && isSearchBarToggled && (
-          <div className="flex flex-col gap-2 absolute w-full top-[120%] max-h-[500px] bg-primary-foreground p-5 overflow-scroll custom-scrollbar rounded-md">
-            <SearchItem
-              searchData={searchData}
-              searchMode={searchMode}
-              handleCross={handleCross}
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="px-10 max-md:px-3 flex h-14 items-center">
+        <div className="mr-4 hidden md:flex">
+          <Link href="/" className="mr-6 flex items-center space-x-2">
+            <span className="hidden font-bold sm:inline-block">AnymeY</span>
+          </Link>
+          <nav className="flex items-center space-x-6 text-sm font-medium ml-5">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`flex items-center space-x-2 transition-colors hover:text-primary ${
+                  pathname === item.href
+                    ? "text-primary"
+                    : "text-muted-foreground"
+                } active:shadow-glow`}
+              >
+                <item.icon className="h-4 w-4" />
+                <span>{item.label}</span>
+              </Link>
+            ))}
+          </nav>
+        </div>
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button
+              variant="ghost"
+              className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
+            >
+              <Menu className="h-5 w-5" />
+              <span className="sr-only">Toggle Menu</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" className="pr-0">
+            <MobileNav navItems={navItems} />
+          </SheetContent>
+        </Sheet>
+        <div className="w-3 hidden max-md:block" />
+        <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+          <div className="w-full flex-1 md:w-auto md:flex-none">
+            <SearchDialog
+              isOpen={isSearchOpen}
+              onOpenChange={setIsSearchOpen}
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              mangaSearchTerm={mangaSearchTerm}
+              setMangaSearchTerm={setMangaSearchTerm}
+              animeSearchData={animeSearchData}
+              mangaSearchData={mangaSearchData}
+              setAnimeSearchData={setAnimeSearchData}
+              setMangaSearchData={setMangaSearchData}
             />
           </div>
-        )}
-      </div>
-
-      <div
-        style={{
-          transform: isSearchBarToggledMobile ? "scale(1)" : "scale(0)",
-        }}
-        className="absolute flex left-0 top-[100%] w-full items-center justify-center p-5 bg-primary-foreground transition-transform"
-      >
-        <Input
-          handleCross={handleCross}
-          value={searchTerm}
-          onChange={handleSearchChange}
-          placeholder={placeHolder}
-          className="bg-accent w-full"
-        />
-        {searchData && isSearchBarToggledMobile && (
-          <div className="flex flex-col gap-2 absolute w-full top-[100%] max-h-[300px] bg-primary-foreground px-2 overflow-scroll custom-scrollbar rounded-md">
-            <SearchItem
-              searchData={searchData}
-              searchMode={searchMode}
-              handleCross={handleCross}
-            />
-          </div>
-        )}
-      </div>
-      <div className="flex flex-row gap-5 items-center max-md:gap-4">
-        <Button
-          onClick={() => setIsSearchBarToggledMobile(!isSearchBarToggledMobile)}
-          className="max-md:flex justify-center items-center hidden"
-          variant="outline"
-          size="icon"
-        >
-          <MagnifyingGlassIcon />
-        </Button>
-        <Button
-          className="bg-primary-foreground/30 text-primary box-shadow hover:bg-white/10"
-          size="icon"
-        >
-          <FontAwesomeIcon icon={faShuffle} />
-        </Button>
-        <ModeToggle />
-        <Button className="max-md:hidden" variant="secondary">
-          Login
-        </Button>
+          <nav className="flex items-center">
+            <Link
+              href="https://github.com/RyanYuuki/anyme-next"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button variant="ghost" size="sm" className="w-9 px-0">
+                <Github className="h-5 w-5" />
+                <span className="sr-only">GitHub</span>
+              </Button>
+            </Link>
+            <ModeToggle />
+          </nav>
+        </div>
       </div>
     </header>
   );
-};
+}
 
-export default Header;
+function MobileNav({ navItems }) {
+  const pathname = usePathname();
+
+  return (
+    <div className="grid gap-6 p-6 pt-20">
+      <Link href="/" className="flex items-center space-x-2">
+        <span className="font-bold">AnymeY</span>
+      </Link>
+      <nav className="grid gap-4">
+        {navItems.map((item) => (
+          <SheetClose asChild key={item.href}>
+            <Link
+              href={item.href}
+              className={`flex items-center space-x-2 text-sm font-medium transition-colors hover:text-primary ${
+                pathname === item.href
+                  ? "text-primary"
+                  : "text-muted-foreground"
+              } active:shadow-glow`}
+            >
+              <item.icon className="h-5 w-5" />
+              <span>{item.label}</span>
+            </Link>
+          </SheetClose>
+        ))}
+      </nav>
+    </div>
+  );
+}
+
+function SearchDialog({
+  isOpen,
+  onOpenChange,
+  searchTerm,
+  setSearchTerm,
+  mangaSearchTerm,
+  setMangaSearchTerm,
+  animeSearchData,
+  mangaSearchData,
+  setAnimeSearchData,
+  setMangaSearchData,
+}) {
+  return (
+    <Dialog open={isOpen} onOpenChange={onOpenChange}>
+      <DialogTrigger asChild>
+        <Button
+          variant="outline"
+          className="w-full justify-start relative text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64"
+        >
+          <Search className="mr-2 h-4 w-4" />
+          Search
+          <kbd className="pointer-events-none absolute right-1.5 top-1.5 hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
+            <Command className="h-3 w-3" />
+            <span className="text-xs">K</span>
+          </kbd>
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="max-md:w-[400px] md:max-w-[700px] lg:max-w-[900px]">
+        <DialogHeader>
+          <DialogTitle>Search AnymeY</DialogTitle>
+        </DialogHeader>
+        <Tabs defaultValue="anime" className="mt-4">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="anime">Anime</TabsTrigger>
+            <TabsTrigger value="manga">Manga</TabsTrigger>
+          </TabsList>
+          <TabsContent value="anime" className="mt-4">
+            <SearchTab
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              searchData={animeSearchData}
+              setSearchData={setAnimeSearchData}
+              placeholder="Search anime..."
+              mode="Anime"
+              onClose={() => onOpenChange(false)}
+            />
+          </TabsContent>
+          <TabsContent value="manga" className="mt-4">
+            <SearchTab
+              searchTerm={mangaSearchTerm}
+              setSearchTerm={setMangaSearchTerm}
+              searchData={mangaSearchData}
+              setSearchData={setMangaSearchData}
+              placeholder="Search manga..."
+              mode="Manga"
+              onClose={() => onOpenChange(false)}
+            />
+          </TabsContent>
+        </Tabs>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+function SearchTab({
+  searchTerm,
+  setSearchTerm,
+  searchData,
+  setSearchData,
+  placeholder,
+  mode,
+  onClose,
+}) {
+  return (
+    <>
+      <div className="flex items-center space-x-2">
+        <Input
+          value={searchTerm}
+          onChange={(event) => setSearchTerm(event.target.value)}
+          placeholder={placeholder}
+          className="flex-1"
+        />
+      </div>
+      <div className="mt-4 max-h-[400px] space-y-2 overflow-y-auto pr-2 custom-scrollbar">
+        {searchData?.length > 0 && (
+          <SearchItem
+            searchData={searchData}
+            searchMode={mode}
+            handleCross={onClose}
+          />
+        )}
+      </div>
+    </>
+  );
+}

@@ -30,7 +30,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <main
         className={cn(
-          "flex items-center relative h-10 w-2/5 transition-all",
+          "flex items-center relative h-10 w-2/5 transition-all rounded-lg bg-muted/50",
           className
         )}
       >
