@@ -39,7 +39,7 @@ const page = () => {
   return (
     <div className="flex flex-col px-10 gap-10 max-md:px-2 bg-custom">
       <BigCarousel data={data || []} />
-      {/* <ContinueWatching /> */}
+      <ContinueWatching />
       <ReusableCarousel title={"Trending"} data={TrendingData || []} />
       <ReusableCarousel title={"Popular"} data={popularData || []} />
       <TopAnimesTable data={top10AnimesData || []} />

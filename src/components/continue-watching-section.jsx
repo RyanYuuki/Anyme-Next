@@ -11,8 +11,8 @@ import {
 import { PlayCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useUserData } from "@/provider/database"; 
 
-// This would typically come from your backend or state management
 const continueWatchingList = [
   {
     id: 1,
@@ -49,21 +49,28 @@ const continueWatchingList = [
 ];
 
 export default function ContinueWatching() {
+  const { currentlyWatching } = useUserData();
+
+  if(currentlyWatching.length < 1) {
+    return null;
+  }
+
   return (
-    <div className="overflow-hidden">
+    <div className="">
       <h2 className="text-3xl max-md:text-2xl font-semibold border-l-8 border-ring px-5 mb-6">
         Continue Watching
       </h2>
       <Carousel
         opts={{
-          align: "start",
+          align: "center",
+
         }}
-        className="w-full px-10"
+        className="w-full px-5 max-md:px-10"
       >
         <CarouselContent>
-          {continueWatchingList.map((anime) => (
+          {currentlyWatching.map((anime) => (
             <CarouselItem
-              key={anime.id}
+              key={anime.animeId}
               className="md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
             >
               <div className="p-1">
@@ -75,10 +82,10 @@ export default function ContinueWatching() {
                         alt={anime.episodeTitle}
                         width={320}
                         height={180}
-                        className="w-full"
+                        className="w-full aspect-video object-cover"
                       />
                       <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                        <Link href={anime.url}>
+                        <Link href={`/pages/Anime/watch/${anime.animeId}`}>
                           <Button
                             size="lg"
                             variant="ghost"
@@ -98,14 +105,14 @@ export default function ContinueWatching() {
                         {anime.episodeTitle}
                       </p>
                       <div className="flex items-center justify-between text-sm mb-2">
-                        <span>Episode {anime.progress.current}</span>
+                        <span>Episode {anime.currentEpisode}</span>
                         <span className="text-muted-foreground">
-                          {anime.progress.total} episodes
+                          {anime.totalEpisodes} episodes
                         </span>
                       </div>
                       <Progress
                         value={
-                          (anime.progress.current / anime.progress.total) * 100
+                          (anime.currentProgress / 100) * 100
                         }
                         className="h-2"
                       />
@@ -116,6 +123,8 @@ export default function ContinueWatching() {
             </CarouselItem>
           ))}
         </CarouselContent>
+        <CarouselNext className="max-md:mr-4" />
+        <CarouselPrevious className="max-md:ml-4" />
       </Carousel>
     </div>
   );

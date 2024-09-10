@@ -19,7 +19,7 @@ const VerticalReusableCarousel = ({ data, title }) => {
       </h1>
       <div className="flex flex-col gap-2">
         {data.map((anime) => (
-          <Link href={`/pages/Anime/watch/${anime.id}`} className="group flex flex-row gap-5 p-1 bg-neutral-700/20 hover:bg-indigo-400 hover:text-white transition-full rounded-md items-center">
+          <Link key={anime.id} href={`/pages/Anime/watch/${anime.id}`} className="group flex flex-row gap-5 p-1 bg-neutral-700/20 hover:bg-indigo-400 hover:text-white transition-full rounded-md items-center">
             <img
               className="w-[69px] h-[96px] object-cover rounded-lg"
               src={anime.poster}

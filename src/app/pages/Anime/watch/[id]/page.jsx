@@ -83,12 +83,14 @@ const StreamingPage = () => {
         setEpisodeLoading(false);
         if (animeData != null) {
           addAnimeEpisode(
-            animeData.name ?? animeData.jname ?? "??",
+            animeData.anime.info.id,
+            animeData.anime.info.name ?? animeData.anime.info.jname ?? "??",
+            episodesData[currentEpisode - 1].title,
+            episodesWithImages[currentEpisode - 1].image ??
+              animeData.anime.info.poster,
             currentEpisode,
             animeData.anime.info.stats.episodes.sub,
-            60,
-            episodesData[currentEpisode - 1].title ??
-              episodesData[currentEpisode - 1].name
+            60
           );
           console.log(currentlyWatching);
         }
@@ -115,7 +117,7 @@ const StreamingPage = () => {
 
   return (
     <div className="flex flex-col px-5 gap-3 max-md:px-2">
-      <div className="flex flex-row justify-between h-[700px] max-md:flex-col">
+      <div className="flex flex-row justify-between h-[600px] max-md:flex-col">
         <VideoPlayer
           episodeLoading={episodeLoading}
           episodeSrc={episodeSrc}

@@ -79,7 +79,7 @@ const EpisodeList = ({
                 onClick={() => handleClick(data.number)}
               >
                 <div className="absolute p-1 left-2 bottom-2 rounded-md text-white bg-indigo-400/50">
-                  Ep {data.number}
+                  EP {data.number}
                 </div>
                 <img
                   className="object-cover h-full w-[40%] rounded-l-md"

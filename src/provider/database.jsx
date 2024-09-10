@@ -1,36 +1,60 @@
 "use client";
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 
 const UserDataContext = createContext();
 
 export const useUserData = () => useContext(UserDataContext);
 
 export default function DataProvider({ children }) {
-  const [currentlyWatching, setCurrentlyWatching] = useState(
-    JSON.parse(localStorage.getItem("currentlyWatching")) || []
-  );
-  const [currentlyReading, setCurrentlyReading] = useState(
-    JSON.parse(localStorage.getItem("currentlyReading")) || []
-  );
+  const [currentlyWatching, setCurrentlyWatching] = useState([]);
+  const [currentlyReading, setCurrentlyReading] = useState([]);
+
+  useEffect(() => {
+    const watchingFromStorage =
+      JSON.parse(localStorage.getItem("currentlyWatching")) || [];
+    const readingFromStorage =
+      JSON.parse(localStorage.getItem("currentlyReading")) || [];
+
+    setCurrentlyWatching(watchingFromStorage);
+    setCurrentlyReading(readingFromStorage);
+  }, []);
 
   const addAnimeEpisode = (
+    animeId,
     animeTitle,
+    episodeTitle,
+    episodeImage,
     currentEpisode,
     totalEpisodes,
-    currentProgress,
-    episodeTitle
+    currentProgress
   ) => {
     const newEpisode = {
+      animeId,
       animeTitle,
+      episodeTitle,
+      episodeImage,
       currentEpisode,
       totalEpisodes,
       currentProgress,
-      episodeTitle,
     };
 
-    const updatedWatching = [...currentlyWatching, newEpisode];
-    setCurrentlyWatching(updatedWatching);
-    localStorage.setItem("currentlyWatching", JSON.stringify(updatedWatching));
+    const updatedWatching = currentlyWatching.map((anime) =>
+      anime.animeId === animeId
+        ? currentEpisode > anime.currentEpisode
+          ? newEpisode
+          : anime
+        : anime
+    );
+
+    const isAlreadyWatching = updatedWatching.some(
+      (anime) => anime.animeId === animeId
+    );
+    const finalWatching = isAlreadyWatching
+      ? updatedWatching
+      : [...updatedWatching, newEpisode];
+
+    setCurrentlyWatching(finalWatching);
+    localStorage.setItem("currentlyWatching", JSON.stringify(finalWatching));
   };
 
   const contextValue = {
