@@ -7,6 +7,8 @@ import ReusableStack from "@/components/ReusableStack";
 import ReusableCardStacks from "@/components/ReusableCardStacks";
 import EstimatedSchedule from "@/components/EstimatedSchedule.jsx";
 import TopAnimesTable from "@/components/TopAnimesTable.jsx";
+import ContinueWatching from '@/components/continue-watching-section.jsx';
+import { useUserData } from "@/provider/database.jsx";
 const page = () => {
   const [data, setData] = useState(null);
   const [TrendingData, setTrendingData] = useState(null);
@@ -16,6 +18,7 @@ const page = () => {
   const [tableData, setTableData] = useState(null);
   const [cardStackData, setCardStackData] = useState(null);
   const [genreData, setGenreData] = useState(null);
+  const { currentlyWatching } = useUserData();
   useEffect(() => {
     const loadData = async () => {
       const data = await FetchAniwatchHomePage();
@@ -29,12 +32,14 @@ const page = () => {
       setUpcomingAnimesData(data.topUpcomingAnimes);
     };
     loadData();
+    console.log(currentlyWatching);
   }, []);
 
 
   return (
     <div className="flex flex-col px-10 gap-10 max-md:px-2 bg-custom">
       <BigCarousel data={data || []} />
+      <ContinueWatching />
       <ReusableCarousel title={"Trending"} data={TrendingData || []} />
       <ReusableCarousel title={"Popular"} data={popularData || []} />
       <TopAnimesTable data={top10AnimesData || []} />

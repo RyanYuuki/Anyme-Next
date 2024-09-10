@@ -42,7 +42,7 @@ const EpisodeList = ({
         });
 
   return (
-    <div className="flex flex-col gap-5 w-[26%] max-md:w-full max-md:h-[400px] overflow-y-scroll scroll-smooth custom-scrollbar h-[600px] box-shadow p-2 bg-neutral-700/10 rounded-md">
+    <div className="flex flex-col gap-5 w-[26%] max-md:w-full max-md:h-[400px] overflow-y-scroll scroll-smooth custom-scrollbar h-full box-shadow p-2 bg-neutral-700/10 rounded-md">
       <div className="flex flex-row items-center gap-3 w-full">
         <select className="h-[40px] rounded-md px-2 text-[12px] bg-neutral-700/20 ">
           <option

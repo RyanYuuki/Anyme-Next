@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
+import debounce from "lodash/debounce";
 import { ModeToggle } from "../ModeToggle";
 import { Input } from "../ui/input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -26,20 +27,29 @@ const Header = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
   const currentPath = usePathname();
 
+  const fetchData = async (term) => {
+    if (term.trim()) {
+      const data =
+        searchMode === "Anime"
+          ? await SearchAniWatch(term)
+          : await SearchManga(term);
+      setSearchData(data);
+    } else {
+      setSearchData(null);
+    }
+  };
+
+  const debouncedFetchData = useCallback(debounce(fetchData, 300), [
+    searchMode,
+  ]);
+
   useEffect(() => {
-    const loadData = async () => {
-      if (searchTerm.trim()) {
-        const data =
-          searchMode === "Anime"
-            ? await SearchAniWatch(searchTerm)
-            : await SearchManga(searchTerm);
-        setSearchData(data);
-      } else {
-        setSearchData(null);
-      }
+    debouncedFetchData(searchTerm);
+    // Cleanup debounce on unmount
+    return () => {
+      debouncedFetchData.cancel();
     };
-    loadData();
-  }, [searchTerm, searchMode]);
+  }, [searchTerm, searchMode, debouncedFetchData]);
 
   useEffect(() => {
     if (currentPath.includes("Manga")) {
@@ -90,7 +100,7 @@ const Header = () => {
         isHeaderVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <Drawer/>
+      <Drawer />
       <h1 className="text-2xl max-md:text-xl font-semibold">
         An<span className="text-4xl max-md:text-3xl text-neutral-500">Y</span>
         meY
