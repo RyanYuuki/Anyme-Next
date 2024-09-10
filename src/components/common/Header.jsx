@@ -100,7 +100,7 @@ export default function Header() {
       <div className="px-10 max-md:px-3 flex h-14 items-center">
         <div className="mr-4 hidden md:flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
-            <span className="hidden font-bold sm:inline-block">AnymeY</span>
+            <span className="hidden font-bold text-xl sm:inline-block">AnymeY</span>
           </Link>
           <nav className="flex items-center space-x-6 text-sm font-medium ml-5">
             {navItems.map((item) => (
@@ -224,7 +224,7 @@ function SearchDialog({
           </kbd>
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-md:w-[400px] md:max-w-[700px] lg:max-w-[900px]">
+      <DialogContent className="max-md:w-[95%] md:max-w-[700px] lg:max-w-[900px]">
         <DialogHeader>
           <DialogTitle>Search AnymeY</DialogTitle>
         </DialogHeader>

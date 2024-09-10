@@ -31,7 +31,7 @@ export default function RootLayout({ children }) {
               shadow="0 0 10px #818cf8,0 0 5px #818cf8"
             />
             <Header />
-            <div className=" translate-y-[90px] mb-[100px]">{children}</div>
+            <div className=" translate-y-[20px] mb-[50px]">{children}</div>
             <Footer />
           </ThemeProvider>
         </DataProvider>
