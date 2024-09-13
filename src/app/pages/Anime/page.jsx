@@ -8,7 +8,7 @@ import ReusableCardStacks from "@/components/ReusableCardStacks";
 import EstimatedSchedule from "@/components/EstimatedSchedule.jsx";
 import TopAnimesTable from "@/components/TopAnimesTable.jsx";
 import ContinueWatching from '@/components/continue-watching-section.jsx';
-import { useUserData } from "@/provider/database.jsx";
+import { extractData, fetchHomePage } from '@/hooks/ApiMapper.jsx';
 const page = () => {
   const [data, setData] = useState(null);
   const [TrendingData, setTrendingData] = useState(null);
@@ -18,10 +18,9 @@ const page = () => {
   const [tableData, setTableData] = useState(null);
   const [cardStackData, setCardStackData] = useState(null);
   const [genreData, setGenreData] = useState(null);
-  const { currentlyWatching } = useUserData();
   useEffect(() => {
     const loadData = async () => {
-      const data = await FetchAniwatchHomePage();
+      const data = await fetchHomePage();
       setData(data.spotlightAnimes);
       setTop10AnimesData(data.top10Animes);
       setTrendingData(data.top10Animes.today);
@@ -32,7 +31,6 @@ const page = () => {
       setUpcomingAnimesData(data.topUpcomingAnimes);
     };
     loadData();
-    console.log(currentlyWatching);
   }, []);
 
 

@@ -61,17 +61,17 @@ const EstimatedSchedule = () => {
       <div className="flex flex-col gap-5 justify-center items-center bg-neutral-700/30 p-5 rounded-md">
         <div className="flex flex-row gap-3 w-full">
           <Swiper
-            initialSlide={day }
+            initialSlide={day-1}
             centeredSlidesBounds={true}
             centeredSlides={true}
             breakpoints={{
               300: {
                 spaceBetween: 20,
-                slidesPerView: 3,
+                slidesPerView: 2,
               },
               400: {
                 spaceBetween: 20,
-                slidesPerView: 3,
+                slidesPerView: 2,
               },
               600: {
                 spaceBetween: 20,

@@ -59,9 +59,9 @@ const ReusableCardStacks = ({ withGenres, genresData, data, title }) => {
               href={`/pages/Anime/details/${anime.id}`}
               className="flex flex-col gap-1 group"
             >
-              <div className="relative flex items-center justify-center w-[173px]">
+              <div className="relative flex items-center justify-center w-[173px] max-sm:w-[150px]">
                 <img
-                  className="w-[173px] h-[244px] object-cover rounded-lg"
+                  className="w-[173px] h-[244px] object-cover rounded-lg max-sm:h-[220px]"
                   src={anime.poster}
                   alt=""
                 />
@@ -83,7 +83,7 @@ const ReusableCardStacks = ({ withGenres, genresData, data, title }) => {
                 </div>
               </div>
 
-              <h2>
+              <h2 className="whitespace-nowrap overflow-hidden text-ellipsis">
                 {anime.name.length > 17
                   ? anime.name.substring(0, 17) + "..."
                   : anime.name}

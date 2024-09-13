@@ -15,6 +15,7 @@ export default function RootLayout({ children }) {
           <ThemeProvider
             storageKey="theme"
             attribute="class"
+            themes={['light', 'dark']}
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange

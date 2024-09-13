@@ -27,7 +27,7 @@ const config = {
         'lg': '1024px',
         'xl': '1930px',
         "2xl": "1400px",
-        'max-sm': {'max': '639px'},  
+        'max-sm': {'max': '390px'},  
         'max-md': {'max': '767px'},  
         'max-lg': {'max': '1023px'},
         'max-xl': {'max': '1279px'}, 

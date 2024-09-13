@@ -55,7 +55,6 @@ const SearchItem = ({ searchData, searchMode, handleCross }) => {
   }
 
   if (searchMode === 'Manga') {
-    console.log(searchData);
     if (searchData?.mangaList?.length > 0) {
       return searchData.mangaList.map((data) => <MangaItem key={data.id} data={data} handleCross={handleCross} />);
     } else {

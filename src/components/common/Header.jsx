@@ -47,9 +47,24 @@ export default function Header() {
   const pathname = usePathname();
 
   const navItems = [
-    { href: "/", label: "Home", icon: Home },
-    { href: "/pages/Anime", label: "Anime", icon: Clapperboard },
-    { href: "/pages/Manga", label: "Manga", icon: Book },
+    {
+      href: "/",
+      label: "Home",
+      icon: Home,
+      active: !pathname.includes("Anime") && !pathname.includes("Manga"),
+    },
+    {
+      href: "/pages/Anime",
+      label: "Anime",
+      icon: Clapperboard,
+      active: pathname.includes("Anime"),
+    },
+    {
+      href: "/pages/Manga",
+      label: "Manga",
+      icon: Book,
+      active: pathname.includes("Manga"),
+    },
   ];
 
   const debouncedAnimeSearch = useCallback(
@@ -100,7 +115,9 @@ export default function Header() {
       <div className="px-10 max-md:px-3 flex h-14 items-center">
         <div className="mr-4 hidden md:flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
-            <span className="hidden font-bold text-xl sm:inline-block">AnymeY</span>
+            <span className="hidden font-bold text-xl sm:inline-block">
+              AnymeY
+            </span>
           </Link>
           <nav className="flex items-center space-x-6 text-sm font-medium ml-5">
             {navItems.map((item) => (
@@ -108,9 +125,7 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 className={`flex items-center space-x-2 transition-colors hover:text-primary ${
-                  pathname === item.href
-                    ? "text-primary"
-                    : "text-muted-foreground"
+                  item.active ? "text-primary" : "text-muted-foreground"
                 } active:shadow-glow`}
               >
                 <item.icon className="h-4 w-4" />
@@ -125,7 +140,35 @@ export default function Header() {
               variant="ghost"
               className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
             >
-              <Menu className="h-5 w-5" />
+              <svg
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+              >
+                <path
+                  d="M3 5H11"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M3 12H16"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M3 19H21"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
               <span className="sr-only">Toggle Menu</span>
             </Button>
           </SheetTrigger>
@@ -133,7 +176,7 @@ export default function Header() {
             <MobileNav navItems={navItems} />
           </SheetContent>
         </Sheet>
-        <div className="w-3 hidden max-md:block" />
+        <div className="w-2 hidden max-md:block" />
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <div className="w-full flex-1 md:w-auto md:flex-none">
             <SearchDialog
@@ -214,7 +257,7 @@ function SearchDialog({
       <DialogTrigger asChild>
         <Button
           variant="outline"
-          className="w-full justify-start relative text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64"
+          className="w-full justify-start relative text-sm text-muted-foreground bg-muted/50 sm:pr-12 md:w-40 lg:w-64"
         >
           <Search className="mr-2 h-4 w-4" />
           Search
@@ -281,13 +324,11 @@ function SearchTab({
         />
       </div>
       <div className="mt-4 max-h-[400px] space-y-2 overflow-y-auto pr-2 custom-scrollbar">
-        {searchData?.length > 0 && (
-          <SearchItem
-            searchData={searchData}
-            searchMode={mode}
-            handleCross={onClose}
-          />
-        )}
+        <SearchItem
+          searchData={searchData}
+          searchMode={mode}
+          handleCross={onClose}
+        />
       </div>
     </>
   );

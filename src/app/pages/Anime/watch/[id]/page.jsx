@@ -1,12 +1,6 @@
-"use client";
-import {
-  FetchAnimeByAniwatchID,
-  FetchEpisodesByMappedID,
-  FetchEpisodeLinksByMappedID,
-  FetchEpisodesData,
-} from "@/hooks/useApi";
-import { useParams } from "next/navigation";
+'use client'
 import React, { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 import {
   faBars,
   faImage,
@@ -19,6 +13,12 @@ import AnimeRelation from "@/components/Anime/Watch/AnimeRelations";
 import ReusableVerticalCarousel from "@/components/Anime/Watch/ReusableVerticalCarousel";
 import ServerSelector from "@/components/Anime/Watch/ServerSelector";
 import { useUserData } from "@/provider/database";
+import {
+  FetchAnimeByAniwatchID,
+  FetchEpisodesByMappedID,
+  FetchEpisodeLinksByMappedID,
+  FetchEpisodesData,
+} from "@/hooks/useApi";
 
 const StreamingPage = () => {
   const { id } = useParams();
@@ -32,9 +32,10 @@ const StreamingPage = () => {
   const [episodeLoading, setEpisodeLoading] = useState(true);
   const [activeServer, setActiveServer] = useState("VidStream");
   const [episodeType, setEpisodeType] = useState("sub");
-  const Servers = ["VidStream", "MegaCloud", "StreamSB"];
-  const icons = [faBars, faTableCells, faImage];
+  const [lastSavedTime, setLastSavedTime] = useState(0); 
   const { addAnimeEpisode, currentlyWatching } = useUserData();
+  const [episodeDuration, setEpisodeDuration] = useState(1440);
+  const [currentTime, setCurrentTime] = useState(0);
 
   useEffect(() => {
     const loadData = async () => {
@@ -81,23 +82,36 @@ const StreamingPage = () => {
         console.log(error);
       } finally {
         setEpisodeLoading(false);
-        if (animeData != null) {
-          addAnimeEpisode(
-            animeData.anime.info.id,
-            animeData.anime.info.name ?? animeData.anime.info.jname ?? "??",
-            episodesData[currentEpisode - 1].title,
-            episodesWithImages[currentEpisode - 1].image ??
-              animeData.anime.info.poster,
-            currentEpisode,
-            animeData.anime.info.stats.episodes.sub,
-            60
-          );
-          console.log(currentlyWatching);
-        }
       }
     };
     loadEpisodeData();
   }, [currentEpisode, episodesData, episodeType, activeServer]);
+
+  const shouldSaveProgress = (currentTime) => {
+    return currentTime - lastSavedTime >= 240; 
+  };
+
+  const updateDatabase = () => {
+    if (animeData != null && shouldSaveProgress(currentTime)) {
+      addAnimeEpisode(
+        animeData.anime.info.id,
+        animeData.anime.info.name ?? animeData.anime.info.jname ?? "??",
+        episodesData[currentEpisode - 1].title,
+        episodesWithImages[currentEpisode - 1].image ??
+          animeData.anime.info.poster,
+        currentEpisode,
+        animeData.anime.info.stats.episodes.sub,
+        currentTime,
+        episodeDuration
+      );
+      setLastSavedTime(currentTime); 
+      console.log(currentlyWatching);
+    }
+  };
+
+  useEffect(() => {
+    updateDatabase();
+  }, [currentEpisode, currentTime, episodeDuration, episodeImages]);
 
   const handleClick = (number) => {
     setCurrentEpisode(number);
@@ -106,6 +120,16 @@ const StreamingPage = () => {
   const handleServer = (type, server) => {
     setEpisodeType(type);
     setActiveServer(server);
+  };
+
+  const handleTimeUpdate = (event) => {
+    const currentTime = event.currentTime;
+    setCurrentTime(currentTime);
+  };
+
+  const handleDurationChange = (event) => {
+    const duration = event.duration;
+    setEpisodeDuration(duration);
   };
 
   const episodesWithImages =
@@ -117,18 +141,20 @@ const StreamingPage = () => {
 
   return (
     <div className="flex flex-col px-5 gap-3 max-md:px-2">
-      <div className="flex flex-row justify-between h-[600px] max-md:flex-col">
+      <div className="flex flex-row justify-between h-[550px] max-md:flex-col rounded-lg">
         <VideoPlayer
           episodeLoading={episodeLoading}
           episodeSrc={episodeSrc}
           episodesData={episodesWithImages}
           currentEpisode={currentEpisode}
           captionsData={captionsData || []}
+          setProgress={handleTimeUpdate}
+          setDuration={handleDurationChange}
         />
         <EpisodeList
           episodesData={episodesWithImages || []}
           currentEpisode={currentEpisode}
-          icons={icons}
+          icons={[faBars, faTableCells, faImage]}
           handleClick={handleClick}
         />
       </div>
@@ -139,7 +165,7 @@ const StreamingPage = () => {
               onClick={handleServer}
               episodeType={episodeType}
               activeServer={activeServer}
-              Servers={Servers}
+              Servers={["VidStream", "MegaCloud", "StreamSB"]}
               currentEpisode={currentEpisode}
             />
             <BasicDetails data={animeData.anime} page="Streaming" />

@@ -26,7 +26,8 @@ export default function DataProvider({ children }) {
     episodeImage,
     currentEpisode,
     totalEpisodes,
-    currentProgress
+    currentProgress,
+    totalProgress
   ) => {
     const newEpisode = {
       animeId,
@@ -36,14 +37,11 @@ export default function DataProvider({ children }) {
       currentEpisode,
       totalEpisodes,
       currentProgress,
+      totalProgress,
     };
 
     const updatedWatching = currentlyWatching.map((anime) =>
-      anime.animeId === animeId
-        ? currentEpisode > anime.currentEpisode
-          ? newEpisode
-          : anime
-        : anime
+      anime.animeId === animeId ? newEpisode : anime
     );
 
     const isAlreadyWatching = updatedWatching.some(
