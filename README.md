@@ -93,8 +93,8 @@ If you have any questions or want to connect, feel free to reach out:
 
 ## 📊 GitHub Stats
 
-![GitHub Stars](https://img.shields.io/github/stars/your-username/Anyme-Next?style=social)
-![GitHub Forks](https://img.shields.io/github/forks/your-username/Anyme-Next?style=social)
+![GitHub Stars](https://img.shields.io/github/stars/RyanYuuki/Anyme-Next?style=social)
+![GitHub Forks](https://img.shields.io/github/forks/RyanYuuki/Anyme-Next?style=social)
 
 ---
 
