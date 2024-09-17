@@ -83,7 +83,7 @@ const EpisodeList = ({
                 </div>
                 <img
                   className="object-cover h-full w-[40%] rounded-l-md"
-                  src={data.image}
+                  src={`https://anymey-proxy.vercel.app/cors?url=${data.image}`}
                   alt={data.number}
                 />
                 <div className="flex flex-col w-[60%] h-full justify-center text-left pl-3 gap-1">

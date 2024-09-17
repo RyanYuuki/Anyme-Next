@@ -22,7 +22,7 @@ const BasicDetails = ({ data, id }) => {
         <div className="flex flex-col gap-1 p-5 max-md:p-2">
           <img
             className="w-[170px] h-[250px] max-md:w-[170px] rounded-xl"
-            src={data.imageUrl}
+            src={'https://anymey-proxy.vercel.app/cors?url=' + data.imageUrl}
             alt={data.title}
           />
           <Link

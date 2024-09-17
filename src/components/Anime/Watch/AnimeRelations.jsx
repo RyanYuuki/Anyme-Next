@@ -13,7 +13,7 @@ const AnimeRelations = ({ relations }) => {
           >
             <img
               className="w-full h-full object-cover rounded-lg transition-transform duration-300 group-hover:scale-110 brightness-50"
-              src={data.poster}
+              src={`https://anymey-proxy.vercel.app/cors?url=${data.poster}`}
               alt={data.id}
             />
             <h1 className="absolute z-50 text-center" >{data.name}</h1>

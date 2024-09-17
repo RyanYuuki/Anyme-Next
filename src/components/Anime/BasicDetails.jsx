@@ -36,7 +36,7 @@ const BasicDetails = ({ data, page = "Details", className }) => {
         <div className="relative">
           <img
             className="object-cover max-md:h-[150px] w-[250px] rounded-md animated"
-            src={data.info.poster}
+            src={'https://anymey-proxy.vercel.app/cors?url=' + data.info.poster}
             alt={data.info.id}
           />
           <p className="absolute top-1 left-1 px-3 py-1 rounded-md bg-black/70">

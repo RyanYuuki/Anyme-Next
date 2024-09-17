@@ -21,7 +21,6 @@ import { useTheme, ThemeProvider } from "next-themes";
 
 export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState("sources");
-
   return (
     <div className="mx-10 max-md:mx-3 rounded-lg py-6 px-4 md:px-6 lg:px-8 bg-muted/50">
       <h1 className="text-3xl font-bold mb-6">Settings</h1>
@@ -88,6 +87,16 @@ export default function SettingsPage() {
 }
 
 function SourcesTab() {
+  const [currentSource, setCurrentSource] = useState("aniwatch");
+
+  useEffect(() => {
+    setCurrentSource(localStorage.getItem('currentAPI') || 'aniwatch');
+  }, []);
+  const handleSource = (selectedSource) => {
+    setCurrentSource(selectedSource);
+    localStorage.setItem('currentAPI', selectedSource);
+  };
+
   return (
     <div className="space-y-6 px-1">
       <div>
@@ -100,12 +109,12 @@ function SourcesTab() {
       <div className="space-y-6">
         <div className="space-y-2">
           <Label htmlFor="anime-source">Default Anime Source</Label>
-          <Select>
-            <SelectTrigger className="bg-background/50" >
-              <SelectValue placeholder="Aniwatch" />
+          <Select onValueChange={handleSource} >
+            <SelectTrigger className="bg-background/50">
+              <SelectValue placeholder={currentSource == 'aniwatch' ? 'Aniwatch' : 'Consumet'} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="consumet">Consumet</SelectItem>
+              <SelectItem value="consumet" >Consumet</SelectItem>
               <SelectItem value="aniwatch">Aniwatch</SelectItem>
             </SelectContent>
           </Select>
@@ -113,7 +122,7 @@ function SourcesTab() {
         <div className="space-y-2">
           <Label htmlFor="manga-source">Default Manga Source</Label>
           <Select>
-            <SelectTrigger className="bg-background/50" >
+            <SelectTrigger className="bg-background/50">
               <SelectValue placeholder="MangaKakalot" />
             </SelectTrigger>
             <SelectContent>
@@ -132,12 +141,12 @@ function SourcesTab() {
   );
 }
 
-function ThemesTab() {  
+function ThemesTab() {
   const { setTheme, theme } = useTheme();
   const handleTheme = (theme) => {
     setTheme(theme);
-  }
-  
+  };
+
   return (
     <div className="space-y-6 px-1">
       <div>
@@ -150,7 +159,11 @@ function ThemesTab() {
       <div className="space-y-6">
         <div className="space-y-2">
           <Label>Theme</Label>
-          <RadioGroup onValueChange={(value) => handleTheme(value)} defaultValue={theme} value={theme}>
+          <RadioGroup
+            onValueChange={(value) => handleTheme(value)}
+            defaultValue={theme}
+            value={theme}
+          >
             <div className="flex items-center space-x-2">
               <RadioGroupItem value="light" id="light" />
               <Label htmlFor="light">Light</Label>
@@ -202,7 +215,7 @@ function VideoPlayerTab() {
         <div className="space-y-2">
           <Label htmlFor="quality">Default Quality</Label>
           <Select>
-            <SelectTrigger className="bg-background/50" >
+            <SelectTrigger className="bg-background/50">
               <SelectValue placeholder="Select default quality" />
             </SelectTrigger>
             <SelectContent>
@@ -216,7 +229,7 @@ function VideoPlayerTab() {
         <div className="space-y-2">
           <Label htmlFor="playback-speed">Default Playback Speed</Label>
           <Select>
-            <SelectTrigger className="bg-background/50" >
+            <SelectTrigger className="bg-background/50">
               <SelectValue placeholder="Select playback speed" />
             </SelectTrigger>
             <SelectContent>

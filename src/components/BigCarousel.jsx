@@ -53,7 +53,7 @@ export default function BigCarousel({ data }) {
                 </h1>
                 <div className="flex flex-row gap-5 max-md:gap-1 items-center max-md:text-sm">
                   {item.otherInfo.map((info, idx) => (
-                    <Badge variant={'default'} key={idx} style={{ ...disableCopy }}>
+                    <Badge className="bg-white text-black" key={idx} style={{ ...disableCopy }}>
                       <FontAwesomeIcon className="mr-1" icon={faCirclePlay} /> {info}
                     </Badge>
                   ))}
@@ -65,7 +65,7 @@ export default function BigCarousel({ data }) {
                 </p>
                 <div className="flex flex-row gap-5">
                   <Link href={`/pages/Anime/watch/${item.id}`}>
-                    <Button className="flex flex-row gap-1 px-[18px] py-[8px] max-md:py-[0px] max-md:px-[10px] rounded-3xl transition-all duration-500 hover:scale-110 active:scale-75">
+                    <Button className="flex flex-row gap-1 px-[18px] py-[8px] max-md:py-[0px] max-md:px-[10px] rounded-3xl transition-all duration-500 hover:scale-110 active:scale-75 bg-white text-black">
                       <FontAwesomeIcon icon={faPlay} /> Watch Now
                     </Button>
                   </Link>

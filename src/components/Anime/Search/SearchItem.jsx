@@ -12,7 +12,7 @@ const AnimeItem = ({ data, handleCross }) => (
   >
     <img
       className="w-[70px] h-[80px] rounded-lg"
-      src={data.poster || 'https://100x100'}
+      src={`https://anymey-proxy.vercel.app/cors?url=${data.poster}` || 'https://100x100'}
       alt=""
     />
     <div className="flex flex-col w-full gap-2">
@@ -40,7 +40,7 @@ const MangaItem = ({ data, handleCross }) => (
   >
     <img
       className="w-[70px] h-[80px] rounded-lg"
-      src={data.image || 'https://100x100'}
+      src={`https://anymey-proxy.vercel.app/cors?url=${data.image}` || 'https://100x100'}
       alt=""
     />
     <div className="flex flex-col w-full gap-2">

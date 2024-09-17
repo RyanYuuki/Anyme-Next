@@ -244,7 +244,7 @@ export const FetchEpisodeLinksByMappedID = async (
 };
 
 export const FetchAniwatchHomePage = async () => {
-  const response = await fetch(`${ANIWATCH_URL}home/`);
+  const response = await fetch(`${PROXY}${ANIWATCH_URL}home/`);
   const data = await response.json();
   return data;
 };
@@ -260,13 +260,13 @@ export const FetchAnimeByCategories = async (category, page) => {
 };
 
 export const FetchAnimesByGenres = async (genre) => {
-  const resp = await fetch(`${ANIWATCH_URL}genre/${genre}`);
+  const resp = await fetch(`${PROXY}${ANIWATCH_URL}genre/${genre}`);
   const data = await resp.json();
   return data.animes;
 };
 
 export const SearchAniWatch = async (query) => {
-  const queryUrl = `${ANIWATCH_URL}search?q=${query}`;
+  const queryUrl = `${PROXY}${ANIWATCH_URL}search?q=${query}`;
   const resp = await fetch(queryUrl);
   const data = await resp.json();
   return data.animes;
@@ -289,21 +289,21 @@ export const AdvancedSearch = async (
   score = "good"
 ) => {
   const genresParam = genres ? genres : "";
-  const queryUrl = `${ANIWATCH_URL}search?q=${query}&genres=${genresParam}&type=${type}&sort=${sort}&season=${season}&language=${lang}&status=${status}&rated=${rating}&start_date=${y}-${m}-${d}&end_date=${ey}-${em}-${ed}&score=${score}`;
+  const queryUrl = `${PROXY}${ANIWATCH_URL}search?q=${query}&genres=${genresParam}&type=${type}&sort=${sort}&season=${season}&language=${lang}&status=${status}&rated=${rating}&start_date=${y}-${m}-${d}&end_date=${ey}-${em}-${ed}&score=${score}`;
   const resp = await fetch(queryUrl);
   const data = await resp.json();
   return data.animes;
 };
 
 export const FetchAnimeByAniwatchID = async (id) => {
-  const resp = await fetch(`${ANIWATCH_URL}info?id=${id}`);
+  const resp = await fetch(`${PROXY}${ANIWATCH_URL}info?id=${id}`);
   const data = await resp.json();
   return data;
 };
 
 export const FetchEstimatedSchedule = async (year, month, day) => {
   const response = await fetch(
-    `${ANIWATCH_URL}schedule?date=${year}-${month}-${day}`
+    `${PROXY}${ANIWATCH_URL}schedule?date=${year}-${month}-${day}`
   );
   const data = await response.json();
   return data.scheduledAnimes;

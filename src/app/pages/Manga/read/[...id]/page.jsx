@@ -18,7 +18,7 @@ const ReadPage = ({ params }) => {
       setChapterImages(null);
       const data = await FetchMangaChaptersSrc(mangaID, chapterID);
       setChapterData(data);
-      setChapterImages(data.images);
+      setChapterImages(`https://anymey-proxy.vercel.app/cors?url=${data.image}`s);
     };
     loadData();
   }, [params.id, mangaID, chapterID]);
