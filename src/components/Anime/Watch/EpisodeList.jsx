@@ -42,7 +42,7 @@ const EpisodeList = ({
         });
 
   return (
-    <div className="flex flex-col gap-5 w-[26%] max-md:w-full max-md:h-[400px] overflow-y-scroll scroll-smooth custom-scrollbar h-full box-shadow p-2 bg-neutral-700/10 rounded-md">
+    <div className="flex flex-col gap-5 w-[26%] max-md:w-full max-md:h-[400px] max-md:overflow-hidden h-full box-shadow p-2 bg-neutral-700/10 rounded-md">
       <div className="flex flex-row items-center gap-3 w-full">
         <select className="h-[40px] rounded-md px-2 text-[12px] bg-neutral-700/20 ">
           <option
@@ -63,9 +63,9 @@ const EpisodeList = ({
         </Button>
       </div>
       <div
-        className={`flex ${
-          currentListType == 2 ? "flex-wrap" : "flex-col"
-        } gap-2 `}
+        className={`grid ${
+          currentListType == 2 ? "grid-cols-6 max-md:grid-cols-5 grid-rows-auto" : "grid-cols-1"
+        } gap-2 overflow-y-scroll scroll-smooth custom-scrollbar`}
       >
         {currentListType === 0 && filteredData.length > 0
           ? filteredData.map((data, index) => (
@@ -159,7 +159,7 @@ const EpisodeList = ({
           ? filteredData.map((data) => (
               <button
                 key={data.id}
-                className={`group w-[18%] animated h-[40px] text-center  box-shadow rounded-md transition-full hover:bg-indigo-400/70 ${
+                className={`group animated h-[40px] text-center  box-shadow rounded-md transition-full hover:bg-indigo-400/70 ${
                   currentEpisode == data.number ? "bg-indigo-400/95" : "bg-neutral-700/20"
                 }`}
                 onClick={() => handleClick(data.number)}

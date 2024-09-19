@@ -27,7 +27,7 @@ const VideoPlayer = ({
 
   if (episodeLoading || !episodesData) {
     return (
-      <div className="w-[72%] max-md:w-full max-md:h-[200px] max-md:mb-5 flex flex-col gap-4">
+      <div className="w-[72%] max-md:w-full max-md:h-[200px] max-md:mb-5 flex flex-col gap-4 max-md:aspect-video">
         <Skeleton className="flex flex-row items-end p-5 justify-between relative w-full h-full rounded-md">
           <div className="flex flex-row gap-1">
             <Skeleton className="h-[40px] w-[40px] rounded-full" />
@@ -44,7 +44,7 @@ const VideoPlayer = ({
   }
 
   return (
-    <div className="h-full w-[72%] max-md:w-full rounded-3xl">
+    <div className="h-full max-md:h-auto max-md:aspect-video w-[72%] max-md:w-full rounded-3xl">
       <MediaPlayer
         key={currentEpisode}
         className="vds-player animated"
