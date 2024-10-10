@@ -93,7 +93,7 @@ const Top10AnimesTable = ({ data }) => {
               <div className="flex flex-row gap-2">
                 <img
                   className="h-[100px] w-[70px] object-cover rounded-lg group-hover:blur-[3px] transition-full"
-                  src={`https://anymey-proxy.vercel.app/cors?url=${data.poster}`}
+                  src={data.poster}
                   alt=""
                 />
                 <div className="flex flex-col justify-center gap-2">

@@ -31,6 +31,7 @@ const page = () => {
       setCardStackData(data.latestEpisodeAnimes);
       setGenreData(data.genres);
       setUpcomingAnimesData(data.topUpcomingAnimes);
+      console.log(process.env);
     };
     loadData();
   }, []);

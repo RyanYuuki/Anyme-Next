@@ -78,12 +78,12 @@ const EpisodeList = ({
                 }`}
                 onClick={() => handleClick(data.number)}
               >
-                <div className="absolute p-1 left-2 bottom-2 rounded-md text-white bg-indigo-400/50">
+                <div className="absolute p-1 left-2 bottom-2 rounded-md text-white bg-muted">
                   EP {data.number}
                 </div>
                 <img
                   className="object-cover h-full w-[40%] rounded-l-md"
-                  src={`https://anymey-proxy.vercel.app/cors?url=${data.image}`}
+                  src={data.image}
                   alt={data.number}
                 />
                 <div className="flex flex-col w-[60%] h-full justify-center text-left pl-3 gap-1">

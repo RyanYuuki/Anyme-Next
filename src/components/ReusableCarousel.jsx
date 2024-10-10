@@ -75,7 +75,7 @@ export default function ReusableCarousel({ title, data = [], className }) {
                     >
                       <img
                         className="rounded-xl object-cover h-[290px] w-[230px] max-md:h-[250px]"
-                        src={'https://anymey-proxy.vercel.app/cors?url=' + anime.poster || "/path/to/default-image.jpg"}
+                        src={anime.poster || "/path/to/default-image.jpg"}
                         draggable="false"
                         onError={(e) =>
                           (e.target.src = "/path/to/default-image.jpg")

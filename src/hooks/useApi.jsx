@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
 import { jaroWinklerDistance } from "./jaro-winkler";
-const PROXY = "https://anymey-proxy.vercel.app/cors?url=";
-const apiLink = "https://consumet-api-two-nu.vercel.app";
-const BASE_URL = "https://consumet-api-two-nu.vercel.app/meta/anilist/";
-const ANIWATCH_URL = "https://aniwatch-ryan.vercel.app/anime/";
+const PROXY = process.env.PROXY_URL;
+const apiLink = process.env.CONSUMET_URL;
+const BASE_URL = process.env.CONSUMET_URL + "/meta/anilist/";
+const ANIWATCH_URL = process.env.HIANIME_URL + "anime/";
 const API_KEY = "e2f1fb12caa883224a8363dc0329b3bc";
 const BASE_MOVIE_URL = "https://api.themoviedb.org";
-const MANGA_URL = "https://manga-ryan.vercel.app/api/";
+const MANGA_URL = process.env.MANGA_URL + "api/";
 
 // MOVIE
 
@@ -253,7 +253,7 @@ export const FetchAnimeByCategories = async (category, page) => {
   // categories -> "most-favorite", "most-popular", "subbed-anime", "dubbed-anime", "recently-updated", "recently-added", "top-upcoming", "top-airing", "movie", "special", "ova", "ona", "tv", "completed"
 
   const resp = await fetch(
-    `https://anymey-proxy-2q4kopd3u-ryanyuukis-projects.vercel.app/cors?url=${ANIWATCH_URL}/${category}?page=${page}`
+    `${PROXY}${ANIWATCH_URL}/${category}?page=${page}`
   );
   const data = await resp.json();
   return data;
@@ -311,7 +311,7 @@ export const FetchEstimatedSchedule = async (year, month, day) => {
 
 export const FetchMangaList = async (page = 1) => {
   const response = await fetch(
-    "https://anymey-proxy.vercel.app/cors?url=" +
+    PROXY +
       MANGA_URL +
       "mangalist" +
       "?page=" +
